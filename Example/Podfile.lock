@@ -1,0 +1,16 @@
+PODS:
+  - FAPickerView (0.1.0)
+
+DEPENDENCIES:
+  - FAPickerView (from `../`)
+
+EXTERNAL SOURCES:
+  FAPickerView:
+    :path: ../
+
+SPEC CHECKSUMS:
+  FAPickerView: 8d3e3f8fdf3a8ac6d641b74007e0fbbf628980a3
+
+PODFILE CHECKSUM: e1de736a60452e9f76952bd8670b222aef852662
+
+COCOAPODS: 1.0.1

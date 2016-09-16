@@ -7,7 +7,13 @@
 //
 
 @import UIKit;
+#import "FAPickerView.h"
 
 @interface FAViewController : UIViewController
+{
+    NSMutableArray <FAPickerItem*> *selectedItems;
+    FAPickerItem *selectedItem;
+    NSDate *selectedDate;
+}
 
 @end

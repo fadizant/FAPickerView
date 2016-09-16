@@ -21,6 +21,7 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
+		65E532F0850DDBED1F14AC05 /* Pods_FAPickerView_Example_FAPickerView_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71F06739FA61891DB32BCC41 /* Pods_FAPickerView_Example_FAPickerView_Tests.framework */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		E55DE5A5DE7F6D59D093ED66 /* Pods_FAPickerView_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DD8AA9099A4E90EAFE6811 /* Pods_FAPickerView_Example.framework */; };
 /* End PBXBuildFile section */
@@ -59,11 +60,14 @@
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		61D53D1BF93090C18F445F48 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		68DD8AA9099A4E90EAFE6811 /* Pods_FAPickerView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FAPickerView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		71F06739FA61891DB32BCC41 /* Pods_FAPickerView_Example_FAPickerView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FAPickerView_Example_FAPickerView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8650C66630CD7DF0EE8C3C0D /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		A1716149D470701835E722CB /* Pods-FAPickerView_Example-FAPickerView_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FAPickerView_Example-FAPickerView_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FAPickerView_Example-FAPickerView_Tests/Pods-FAPickerView_Example-FAPickerView_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		AB3C747D1DE9A5094B64D43E /* FAPickerView.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = FAPickerView.podspec; path = ../FAPickerView.podspec; sourceTree = "<group>"; };
 		CBFB64F920130DE9A998798C /* Pods-FAPickerView_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FAPickerView_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FAPickerView_Tests/Pods-FAPickerView_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		DE018EE956165B529DAC6050 /* Pods-FAPickerView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FAPickerView_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-FAPickerView_Example/Pods-FAPickerView_Example.release.xcconfig"; sourceTree = "<group>"; };
+		EBBE71E841533FD1DF2D5E7F /* Pods-FAPickerView_Example-FAPickerView_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FAPickerView_Example-FAPickerView_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FAPickerView_Example-FAPickerView_Tests/Pods-FAPickerView_Example-FAPickerView_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		FE13FC328A04A365DAF3A951 /* Pods_FAPickerView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FAPickerView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -87,6 +91,7 @@
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
 				2FCA37BDEC3597724CBE409F /* Pods_FAPickerView_Tests.framework in Frameworks */,
+				65E532F0850DDBED1F14AC05 /* Pods_FAPickerView_Example_FAPickerView_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +105,8 @@
 				DE018EE956165B529DAC6050 /* Pods-FAPickerView_Example.release.xcconfig */,
 				CBFB64F920130DE9A998798C /* Pods-FAPickerView_Tests.debug.xcconfig */,
 				12BBA8DCB4638C04642D6022 /* Pods-FAPickerView_Tests.release.xcconfig */,
+				EBBE71E841533FD1DF2D5E7F /* Pods-FAPickerView_Example-FAPickerView_Tests.debug.xcconfig */,
+				A1716149D470701835E722CB /* Pods-FAPickerView_Example-FAPickerView_Tests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -134,6 +141,7 @@
 				6003F5AF195388D20070C39A /* XCTest.framework */,
 				68DD8AA9099A4E90EAFE6811 /* Pods_FAPickerView_Example.framework */,
 				FE13FC328A04A365DAF3A951 /* Pods_FAPickerView_Tests.framework */,
+				71F06739FA61891DB32BCC41 /* Pods_FAPickerView_Example_FAPickerView_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -335,7 +343,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FAPickerView_Tests/Pods-FAPickerView_Tests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FAPickerView_Example-FAPickerView_Tests/Pods-FAPickerView_Example-FAPickerView_Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A5A93131A3D539CC11F4E302 /* [CP] Check Pods Manifest.lock */ = {
@@ -380,7 +388,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FAPickerView_Tests/Pods-FAPickerView_Tests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FAPickerView_Example-FAPickerView_Tests/Pods-FAPickerView_Example-FAPickerView_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -541,7 +549,7 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CBFB64F920130DE9A998798C /* Pods-FAPickerView_Tests.debug.xcconfig */;
+			baseConfigurationReference = EBBE71E841533FD1DF2D5E7F /* Pods-FAPickerView_Example-FAPickerView_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -565,7 +573,7 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 12BBA8DCB4638C04642D6022 /* Pods-FAPickerView_Tests.release.xcconfig */;
+			baseConfigurationReference = A1716149D470701835E722CB /* Pods-FAPickerView_Example-FAPickerView_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
