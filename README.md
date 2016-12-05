@@ -24,6 +24,8 @@ pod "FAPickerView"
 
 fadizant, fadizant@hotmail.com
 
+source design CZPicker
+
 ## License
 
 FAPickerView is available under the MIT license. See the LICENSE file for more info.

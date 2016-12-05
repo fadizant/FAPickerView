@@ -560,14 +560,10 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     return search;
 }
 #pragma mark - Static
-static FAPickerView *picker;
 
 +(FAPickerView*)picker
 {
-    if (!picker) {
-        picker = [FAPickerView new];
-    }
-    return picker;
+    return [FAPickerView new];
 }
 
 #pragma mark - textfield delegat
