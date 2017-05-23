@@ -39,6 +39,7 @@ typedef void (^CZDismissCompletionCallback)(void);
 @property UITextField *searchTextField;
 @property NSMutableArray <FAPickerItem*> *filterItem;
 @property NSMutableString *searchText;
+@property UILabel *dayLabel;
 @end
 
 @implementation FAPickerView
@@ -113,8 +114,29 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
             [self.containerView addSubview:self.tableView];
             break;
         case FAPickerTypeDate:
+        {
             self.datePicker = [self buildDatePicker];
             [self.containerView addSubview:self.datePicker];
+            //add day name
+            _dayLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,
+                                                            self.datePicker.frame.size.height + self.datePicker.frame.origin.y,
+                                                            self.datePicker.frame.size.width,
+                                                            35)];
+            _dayLabel.textColor = mainColor ? mainColor : mainFAPickerColor;
+            _dayLabel.backgroundColor = [UIColor whiteColor];
+            _dayLabel.textAlignment = NSTextAlignmentCenter;
+            _dayLabel.font = [UIFont systemFontOfSize:20];
+            
+            NSDateFormatter *weekDay = [[NSDateFormatter alloc] init];
+            if (dateTimeLocalized && ![dateTimeLocalized isEqualToString:@""]) {
+                weekDay.locale = [[NSLocale alloc] initWithLocaleIdentifier:dateTimeLocalized];
+            }
+            [weekDay setDateFormat:@"EEEE"];
+            
+            _dayLabel.text = [weekDay stringFromDate:_selectedDate];
+            
+            [self.containerView addSubview:_dayLabel];
+        }
             break;
         case FAPickerTypeAlert:
             self.alertBody = [self buildAlert];
@@ -151,7 +173,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
             self.containerView.frame = CGRectMake(frame.origin.x,
                                                   frame.origin.y,
                                                   frame.size.width,
-                                                  self.headerView.frame.size.height + self.datePicker.frame.size.height + self.footerview.frame.size.height+ (_Filter ? self.searchTextField.frame.size.height : 0));
+                                                  self.headerView.frame.size.height + self.datePicker.frame.size.height + self.footerview.frame.size.height+ (_Filter ? self.searchTextField.frame.size.height : 0) + _dayLabel.frame.size.height);
             break;
         case FAPickerTypeAlert:
             self.containerView.frame = CGRectMake(frame.origin.x,
@@ -363,6 +385,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
             break;
         case FAPickerTypeDate:
             rect = self.datePicker.frame;
+            rect.size.height += _dayLabel.frame.size.height;
             break;
         case FAPickerTypeAlert:
             rect = self.alertBody.frame;
@@ -952,6 +975,13 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
 -(void)dateChanged:(UIDatePicker*)sender
 {
     _selectedDate = sender.date;
+    NSDateFormatter *weekDay = [[NSDateFormatter alloc] init];
+    if (dateTimeLocalized && ![dateTimeLocalized isEqualToString:@""]) {
+        weekDay.locale = [[NSLocale alloc] initWithLocaleIdentifier:dateTimeLocalized];
+    }
+    [weekDay setDateFormat:@"EEEE"];
+    
+    _dayLabel.text = [weekDay stringFromDate:_selectedDate];
 }
 
 #pragma mark - Notification Handler

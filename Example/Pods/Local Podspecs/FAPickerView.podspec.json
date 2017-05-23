@@ -1,7 +1,7 @@
 {
   "name": "FAPickerView",
-  "version": "0.1.0",
-  "summary": "init FAPickerView.",
+  "version": "0.1.1",
+  "summary": "fix bugs.",
   "homepage": "https://github.com/fadizant/FAPickerView",
   "license": {
     "type": "MIT",
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/fadizant/FAPickerView.git",
-    "tag": "0.1.0"
+    "tag": "0.1.1"
   },
   "platforms": {
     "ios": "8.0"
