@@ -79,14 +79,23 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         self.cancelButtonTitle = cancelButtonTitle;
         
         self.headerTitle = headerTitle ? headerTitle : @"";
-        self.headerTitleColor = [UIColor whiteColor];
+        //check if color is dark or light
+        const CGFloat *component = CGColorGetComponents(mainColor.CGColor);
+        CGFloat brightness = ((component[0] * 299) + (component[1] * 587) + (component[2] * 114)) / 1000;
+        
+        self.headerTitleColor = (brightness < 0.75) ? [UIColor whiteColor] : [UIColor blackColor];
+        
+//        self.headerTitleColor = [UIColor whiteColor];
         self.headerBackgroundColor = mainColor ? mainColor : mainFAPickerColor;//[UIColor colorWithRed:56.0/255 green:185.0/255 blue:158.0/255 alpha:1];
         
         self.cancelButtonNormalColor = mainColor ? mainColor : mainFAPickerColor;//[UIColor colorWithRed:59.0/255 green:72/255.0 blue:5.0/255 alpha:1];
         self.cancelButtonHighlightedColor = selectedColor ? selectedColor : selectFAPickerColor;//[UIColor grayColor];
         self.cancelButtonBackgroundColor = [UIColor colorWithRed:236.0/255 green:240/255.0 blue:241.0/255 alpha:1];
         
-        self.confirmButtonNormalColor = [UIColor whiteColor];
+        //check if color is dark or light
+        self.confirmButtonNormalColor = (brightness < 0.75) ? [UIColor whiteColor] : [UIColor blackColor];
+        
+//        self.confirmButtonNormalColor = [UIColor whiteColor];
         self.confirmButtonHighlightedColor = [UIColor colorWithRed:236.0/255 green:240/255.0 blue:241.0/255 alpha:1];
         self.confirmButtonBackgroundColor = mainColor ? mainColor : mainFAPickerColor;//[UIColor colorWithRed:56.0/255 green:185.0/255 blue:158.0/255 alpha:1];
         
@@ -1236,14 +1245,24 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     self.cancelButtonTitle = cancelButtonTitle;
     
     self.headerTitle = headerTitle ? headerTitle : @"";
-    self.headerTitleColor = [UIColor whiteColor];
+    
+    //check if color is dark or light
+    const CGFloat *component = CGColorGetComponents(mainColor.CGColor);
+    CGFloat brightness = ((component[0] * 299) + (component[1] * 587) + (component[2] * 114)) / 1000;
+    
+    self.headerTitleColor = (brightness < 0.75) ? [UIColor whiteColor] : [UIColor blackColor];
+    
+//    self.headerTitleColor = [UIColor whiteColor];
     self.headerBackgroundColor = mainColor ? mainColor : mainFAPickerColor;//[UIColor colorWithRed:56.0/255 green:185.0/255 blue:158.0/255 alpha:1];
     
     self.cancelButtonNormalColor = mainColor ? mainColor : mainFAPickerColor;//[UIColor colorWithRed:59.0/255 green:72/255.0 blue:5.0/255 alpha:1];
     self.cancelButtonHighlightedColor = selectedColor ? selectedColor : selectFAPickerColor;//[UIColor grayColor];
     self.cancelButtonBackgroundColor = [UIColor colorWithRed:236.0/255 green:240/255.0 blue:241.0/255 alpha:1];
     
-    self.confirmButtonNormalColor = [UIColor whiteColor];
+    //check if color is dark or light
+    self.confirmButtonNormalColor = (brightness < 0.75) ? [UIColor whiteColor] : [UIColor blackColor];
+    
+//    self.confirmButtonNormalColor = [UIColor whiteColor];
     self.confirmButtonHighlightedColor = [UIColor colorWithRed:236.0/255 green:240/255.0 blue:241.0/255 alpha:1];
     self.confirmButtonBackgroundColor = mainColor ? mainColor : mainFAPickerColor;//[UIColor colorWithRed:56.0/255 green:185.0/255 blue:158.0/255 alpha:1];
     

@@ -135,7 +135,7 @@
 }
 
 - (IBAction)alert2Button:(UIButton *)sender {
-    [FAPickerView setMainColor:[UIColor colorWithRed:0.875 green:0.357 blue:0.357 alpha:1.00]];
+    [FAPickerView setMainColor:[UIColor colorWithRed:1.000 green:0.800 blue:0.000 alpha:1.00]];
     [[FAPickerView picker] showWithHeaderTitle:@"Alert !"
                                        Message:@"Two Button ......."
                             confirmButtonTitle:@"Confirm"
@@ -146,7 +146,7 @@
 }
 
 - (IBAction)alert3Button:(UIButton *)sender {
-    [FAPickerView setMainColor:[UIColor colorWithRed:0.875 green:0.357 blue:0.357 alpha:1.00]];
+    [FAPickerView setMainColor:[UIColor colorWithRed:0.353 green:0.941 blue:0.980 alpha:1.00]];
     [[FAPickerView picker] showWithHeaderTitle:@"Alert !"
                                        Message:@"Three Button ......."
                             confirmButtonTitle:@"Yes"
