@@ -178,6 +178,12 @@ selectedItemWithTitle:(NSString *)title
      confirmButtonTitle:(NSString *)confirmButtonTitle
          WithCompletion:(completedWithDate)complete cancel:(cancel)cancel;
 
+-(void)showselectedDate:(NSDate *)date
+             DateFormat:(UIDatePickerMode)datePickerMode
+            HeaderTitle:(NSString *)headerTitle
+      cancelButtonTitle:(NSString *)cancelButtonTitle
+     confirmButtonTitle:(NSString *)confirmButtonTitle
+         WithCompletion:(completedWithDate)complete cancel:(cancel)cancel;
 
 -(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
         selectedItem:(FAPickerItem *)item

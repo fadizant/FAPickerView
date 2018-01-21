@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0DE5C1F12015033800718A4A /* FATableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DE5C1F02015033800718A4A /* FATableViewController.m */; };
 		2FCA37BDEC3597724CBE409F /* Pods_FAPickerView_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE13FC328A04A365DAF3A951 /* Pods_FAPickerView_Tests.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -37,6 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0DE5C1EF2015033800718A4A /* FATableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FATableViewController.h; sourceTree = "<group>"; };
+		0DE5C1F02015033800718A4A /* FATableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FATableViewController.m; sourceTree = "<group>"; };
 		12BBA8DCB4638C04642D6022 /* Pods-FAPickerView_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FAPickerView_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-FAPickerView_Tests/Pods-FAPickerView_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		393DDC831D362B53B6A8A985 /* Pods-FAPickerView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FAPickerView_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FAPickerView_Example/Pods-FAPickerView_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* FAPickerView_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FAPickerView_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +157,8 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* FAViewController.h */,
 				6003F5A6195388D20070C39A /* FAViewController.m */,
+				0DE5C1EF2015033800718A4A /* FATableViewController.h */,
+				0DE5C1F02015033800718A4A /* FATableViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -401,6 +406,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DE5C1F12015033800718A4A /* FATableViewController.m in Sources */,
 				6003F59E195388D20070C39A /* FAAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* FAViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,

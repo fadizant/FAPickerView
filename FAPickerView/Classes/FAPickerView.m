@@ -40,6 +40,7 @@ typedef void (^CZDismissCompletionCallback)(void);
 @property NSMutableArray <FAPickerItem*> *filterItem;
 @property NSMutableString *searchText;
 @property UILabel *dayLabel;
+@property UIDatePickerMode datePickerMode;
 @end
 
 @implementation FAPickerView
@@ -80,7 +81,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         
         self.headerTitle = headerTitle ? headerTitle : @"";
         //check if color is dark or light
-        const CGFloat *component = CGColorGetComponents(mainColor.CGColor);
+        const CGFloat *component = CGColorGetComponents(mainColor ? mainColor.CGColor : mainFAPickerColor.CGColor);
         CGFloat brightness = ((component[0] * 299) + (component[1] * 587) + (component[2] * 114)) / 1000;
         
         self.headerTitleColor = (brightness < 0.75) ? [UIColor whiteColor] : [UIColor blackColor];
@@ -126,25 +127,27 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         {
             self.datePicker = [self buildDatePicker];
             [self.containerView addSubview:self.datePicker];
-            //add day name
-            _dayLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,
-                                                            self.datePicker.frame.size.height + self.datePicker.frame.origin.y,
-                                                            self.datePicker.frame.size.width,
-                                                            35)];
-            _dayLabel.textColor = mainColor ? mainColor : mainFAPickerColor;
-            _dayLabel.backgroundColor = [UIColor whiteColor];
-            _dayLabel.textAlignment = NSTextAlignmentCenter;
-            _dayLabel.font = [UIFont systemFontOfSize:20];
-            
-            NSDateFormatter *weekDay = [[NSDateFormatter alloc] init];
-            if (dateTimeLocalized && ![dateTimeLocalized isEqualToString:@""]) {
-                weekDay.locale = [[NSLocale alloc] initWithLocaleIdentifier:dateTimeLocalized];
+            if (_datePickerMode == UIDatePickerModeDate) {
+                //add day name
+                _dayLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,
+                                                                     self.datePicker.frame.size.height + self.datePicker.frame.origin.y,
+                                                                     self.datePicker.frame.size.width,
+                                                                     35)];
+                _dayLabel.textColor = mainColor ? mainColor : mainFAPickerColor;
+                _dayLabel.backgroundColor = [UIColor whiteColor];
+                _dayLabel.textAlignment = NSTextAlignmentCenter;
+                _dayLabel.font = [UIFont systemFontOfSize:20];
+                
+                NSDateFormatter *weekDay = [[NSDateFormatter alloc] init];
+                if (dateTimeLocalized && ![dateTimeLocalized isEqualToString:@""]) {
+                    weekDay.locale = [[NSLocale alloc] initWithLocaleIdentifier:dateTimeLocalized];
+                }
+                [weekDay setDateFormat:@"EEEE"];
+                
+                _dayLabel.text = [weekDay stringFromDate:_selectedDate];
+                
+                [self.containerView addSubview:_dayLabel];
             }
-            [weekDay setDateFormat:@"EEEE"];
-            
-            _dayLabel.text = [weekDay stringFromDate:_selectedDate];
-            
-            [self.containerView addSubview:_dayLabel];
         }
             break;
         case FAPickerTypeAlert:
@@ -182,7 +185,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
             self.containerView.frame = CGRectMake(frame.origin.x,
                                                   frame.origin.y,
                                                   frame.size.width,
-                                                  self.headerView.frame.size.height + self.datePicker.frame.size.height + self.footerview.frame.size.height+ (_Filter ? self.searchTextField.frame.size.height : 0) + _dayLabel.frame.size.height);
+                                                  self.headerView.frame.size.height + self.datePicker.frame.size.height + self.footerview.frame.size.height+ (_Filter ? self.searchTextField.frame.size.height : 0) + (_datePickerMode == UIDatePickerModeDate ? _dayLabel.frame.size.height : 0));
             break;
         case FAPickerTypeAlert:
             self.containerView.frame = CGRectMake(frame.origin.x,
@@ -315,6 +318,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     datepicker.backgroundColor = [UIColor whiteColor];
     datepicker.datePickerMode = UIDatePickerModeDate;
     datepicker.date = _selectedDate;
+    datepicker.datePickerMode = _datePickerMode;
     [datepicker addTarget:self action:@selector(dateChanged:) forControlEvents:UIControlEventValueChanged];
     
     if (dateTimeLocalized && ![dateTimeLocalized isEqualToString:@""]) {
@@ -394,7 +398,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
             break;
         case FAPickerTypeDate:
             rect = self.datePicker.frame;
-            rect.size.height += _dayLabel.frame.size.height;
+            rect.size.height += _datePickerMode == UIDatePickerModeDate ? _dayLabel.frame.size.height : 0;
             break;
         case FAPickerTypeAlert:
             rect = self.alertBody.frame;
@@ -1121,6 +1125,28 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         confirmButtonTitle:confirmButtonTitle];
     _needFooterView = YES;
     self.selectedDate = date ? date : NSDate.date;
+    _datePickerMode = UIDatePickerModeDate;
+    _Filter = NO;
+    
+    _completedWithDate = complete;
+    _cancel = cancel;
+    [self show];
+}
+
+-(void)showselectedDate:(NSDate *)date
+             DateFormat:(UIDatePickerMode)datePickerMode
+            HeaderTitle:(NSString *)headerTitle
+      cancelButtonTitle:(NSString *)cancelButtonTitle
+     confirmButtonTitle:(NSString *)confirmButtonTitle
+         WithCompletion:(completedWithDate)complete cancel:(cancel)cancel
+{
+    [self initViewWithType:FAPickerTypeDate
+               HeaderTitle:headerTitle
+         cancelButtonTitle:cancelButtonTitle
+        confirmButtonTitle:confirmButtonTitle];
+    _needFooterView = YES;
+    self.selectedDate = date ? date : NSDate.date;
+    _datePickerMode = datePickerMode;
     _Filter = NO;
     
     _completedWithDate = complete;
@@ -1247,7 +1273,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     self.headerTitle = headerTitle ? headerTitle : @"";
     
     //check if color is dark or light
-    const CGFloat *component = CGColorGetComponents(mainColor.CGColor);
+    const CGFloat *component = CGColorGetComponents(mainColor ? mainColor.CGColor : mainFAPickerColor.CGColor);
     CGFloat brightness = ((component[0] * 299) + (component[1] * 587) + (component[2] * 114)) / 1000;
     
     self.headerTitleColor = (brightness < 0.75) ? [UIColor whiteColor] : [UIColor blackColor];
