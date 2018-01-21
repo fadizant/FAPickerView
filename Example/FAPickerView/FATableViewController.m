@@ -138,7 +138,7 @@
             break;
             case pickerViewTypeEnumTimepicker:
         {
-            [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.675 blue:0.357 alpha:1.00]];
+            [FAPickerView setMainColor:[UIColor colorWithRed:0.520 green:0.375 blue:0.357 alpha:1.00]];
             [FAPickerView setDateTimeLocalized:@"en_USA"];
             [[FAPickerView picker] showselectedDate:selectedDate
                                          DateFormat:UIDatePickerModeTime
