@@ -185,6 +185,23 @@ selectedItemWithTitle:(NSString *)title
      confirmButtonTitle:(NSString *)confirmButtonTitle
          WithCompletion:(completedWithDate)complete cancel:(cancel)cancel;
 
+-(void)showselectedDate:(NSDate *)date
+            MaximumDate:(NSDate *)maximumDate
+            MinimumDate:(NSDate *)minimumDate
+            HeaderTitle:(NSString *)headerTitle
+      cancelButtonTitle:(NSString *)cancelButtonTitle
+     confirmButtonTitle:(NSString *)confirmButtonTitle
+         WithCompletion:(completedWithDate)complete cancel:(cancel)cancel;
+
+-(void)showselectedDate:(NSDate *)date
+             DateFormat:(UIDatePickerMode)datePickerMode
+            MaximumDate:(NSDate *)maximumDate
+            MinimumDate:(NSDate *)minimumDate
+            HeaderTitle:(NSString *)headerTitle
+      cancelButtonTitle:(NSString *)cancelButtonTitle
+     confirmButtonTitle:(NSString *)confirmButtonTitle
+         WithCompletion:(completedWithDate)complete cancel:(cancel)cancel;
+
 -(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
         selectedItem:(FAPickerItem *)item
          HeaderTitle:(NSString *)headerTitle
@@ -297,7 +314,45 @@ selectedItemWithTitle:(NSString *)title
 
 @property (nonatomic,retain) NSString* Id;
 @property (nonatomic,retain) NSString* title;
+@property (nonatomic,retain) UIColor* titleColor;
+@property (nonatomic,retain) UIColor* imageColor;
 @property (nonatomic,retain) UIImage* image;
+@property (nonatomic,retain) NSString* imageURL;
+@property (nonatomic,retain) UIImage* Thumb;
+@property (nonatomic) BOOL circleImage;
 @property (nonatomic) BOOL selected;
+
+- (instancetype)initWithID:(NSString*)ID
+                     Title:(NSString*)title;
+
+- (instancetype)initWithID:(NSString*)ID
+                     Title:(NSString*)title
+                TitleColor:(UIColor*)titleColor;
+
+- (instancetype)initWithID:(NSString*)ID
+                     Title:(NSString*)title
+                     Image:(UIImage*)image;
+
+- (instancetype)initWithID:(NSString*)ID
+                     Title:(NSString*)title
+                  ImageURL:(NSString*)URL
+                     Thumb:(UIImage*)thumb;
+
+- (instancetype)initWithID:(NSString*)ID
+                     Title:(NSString*)title
+                  ImageURL:(NSString*)URL
+                     Thumb:(UIImage*)thumb
+                    Circle:(BOOL)isCircle;
+
+- (instancetype)initWithID:(NSString*)ID
+                     Title:(NSString*)title
+                ImageColor:(UIColor*)imageColor
+                    Circle:(BOOL)isCircle;
+
+- (instancetype)initWithID:(NSString*)ID
+                     Title:(NSString*)title
+                TitleColor:(UIColor*)titleColor
+                ImageColor:(UIColor*)imageColor
+                    Circle:(BOOL)isCircle;
 
 @end

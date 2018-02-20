@@ -36,22 +36,16 @@
         case pickerViewTypeEnumSingle:
         {
             NSMutableArray <FAPickerItem*> *items = [NSMutableArray new];
-            FAPickerItem *item = [FAPickerItem new];
-            item.title = @"Title 1";
-            item.Id = @"1";
-            [items addObject:item];
-            item = [FAPickerItem new];
-            item.title = @"Title 2";
-            item.Id = @"2";
-            [items addObject:item];
-            item = [FAPickerItem new];
-            item.title = @"Title 3";
-            item.Id = @"3";
-            [items addObject:item];
-            item = [FAPickerItem new];
-            item.title = @"Title 4";
-            item.Id = @"4";
-            [items addObject:item];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"1" Title:@"Title 1"]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"2" Title:@"Title 2"]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"3" Title:@"Title 3"]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"4" Title:@"Title 4"]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"5" Title:@"Title 5"]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"6" Title:@"Title 6"]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"7" Title:@"Title 7"]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"8" Title:@"Title 8"]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"9" Title:@"Title 9"]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"10" Title:@"Title 10"]];
             
             [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.357 blue:0.675 alpha:1.00]];
             [[FAPickerView picker] showWithItems:items
@@ -70,23 +64,18 @@
         {
             NSMutableArray <FAPickerItem*> *items = [NSMutableArray new];
             FAPickerItem *item = [FAPickerItem new];
-            item.title = @"Title 1";
-            item.Id = @"1";
-            [items addObject:item];
-            item = [FAPickerItem new];
-            item.title = @"Title 2";
-            item.Id = @"2";
-            [items addObject:item];
-            item = [FAPickerItem new];
-            item.title = @"Title 3";
-            item.Id = @"3";
-            [items addObject:item];
-            item = [FAPickerItem new];
-            item.title = @"Title 4";
-            item.Id = @"4";
-            [items addObject:item];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"1" Title:@"Title 1"]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"2" Title:@"Title 2"]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"3" Title:@"Title 3"]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"4" Title:@"Title 4"]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"5" Title:@"Title 5"]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"6" Title:@"Title 6"]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"7" Title:@"Title 7"]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"8" Title:@"Title 8"]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"9" Title:@"Title 9"]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"10" Title:@"Title 10"]];
             
-            [FAPickerView setMainColor:[UIColor colorWithRed:0.675 green:0.000 blue:0.357 alpha:1.00]];
+            [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.357 blue:0.675 alpha:1.00]];
             [[FAPickerView picker] showWithItems:items
                                    selectedItems:selectedItems
                                      HeaderTitle:@"Select multi items"
@@ -98,6 +87,100 @@
                                           NSLog(@"selected item = %@",item.title);
                                       }
                                       selectedItems = items;
+                                  } cancel:^{
+                                      NSLog(@"Cancel");
+                                  }];
+        }
+            break;
+        case pickerViewTypeEnumItemsWithURLImags:
+        {
+            NSMutableArray <FAPickerItem*> *items = [NSMutableArray new];
+            FAPickerItem *item = [FAPickerItem new];
+            [items addObject:[[FAPickerItem alloc] initWithID:@"1"
+                                                        Title:@"Facebook"
+                                                     ImageURL:@"https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/facebook-icon_128x128.png"
+                                                        Thumb:nil
+                                                       Circle:YES]];
+            [items addObject:[[FAPickerItem alloc] initWithID:@"2"
+                                                        Title:@"Google"
+                                                     ImageURL:@"https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/googleplus-icon_128x128.png"
+                                                        Thumb:nil
+                                                       Circle:YES]];
+            [items addObject:[[FAPickerItem alloc] initWithID:@"3"
+                                                        Title:@"LinkedIn"
+                                                     ImageURL:@"https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/linkedin-icon_128x128.png"
+                                                        Thumb:nil
+                                                       Circle:YES]];
+            [items addObject:[[FAPickerItem alloc] initWithID:@"4"
+                                                        Title:@"Twitter"
+                                                     ImageURL:@"https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/twitter-icon_128x128.png"
+                                                        Thumb:nil
+                                                       Circle:YES]];
+            [items addObject:[[FAPickerItem alloc] initWithID:@"5"
+                                                        Title:@"Youtube"
+                                                     ImageURL:@"https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/youtube-icon_128x128.png"
+                                                        Thumb:nil
+                                                       Circle:YES]];
+            [items addObject:[[FAPickerItem alloc] initWithID:@"6"
+                                                        Title:@"Skype"
+                                                     ImageURL:@"https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/skype-icon_128x128.png"
+                                                        Thumb:nil
+                                                       Circle:YES]];
+            [items addObject:[[FAPickerItem alloc] initWithID:@"7"
+                                                        Title:@"Pinterest"
+                                                     ImageURL:@"https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/pinterest-icon_128x128.png"
+                                                        Thumb:nil
+                                                       Circle:YES]];
+            [items addObject:[[FAPickerItem alloc] initWithID:@"8"
+                                                        Title:@"Instagram"
+                                                     ImageURL:@"https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/instagram-icon_128x128.png"
+                                                        Thumb:nil
+                                                       Circle:YES]];
+            [items addObject:[[FAPickerItem alloc] initWithID:@"9"
+                                                        Title:@"Vimeo"
+                                                     ImageURL:@"https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/vimeo-icon_128x128.png"
+                                                        Thumb:nil
+                                                       Circle:YES]];
+            [items addObject:[[FAPickerItem alloc] initWithID:@"10"
+                                                        Title:@"Flickr"
+                                                     ImageURL:@"https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/flickr-icon_128x128.png"
+                                                        Thumb:nil
+                                                       Circle:YES]];
+            
+            
+            [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.357 blue:0.675 alpha:1.00]];
+            [[FAPickerView picker] showWithItems:items
+                                   selectedItem:nil
+                                     HeaderTitle:@"Select item with image"
+                               cancelButtonTitle:@"cancle"
+                              confirmButtonTitle:@"confirm"
+                                          filter:YES
+                                  WithCompletion:^(FAPickerItem *item) {
+                                          NSLog(@"selected item = %@",item.title);
+                                  } cancel:^{
+                                      NSLog(@"Cancel");
+                                  }];
+        }
+            break;
+        case pickerViewTypeEnumItemsWithColors:
+        {
+            NSMutableArray <FAPickerItem*> *items = [NSMutableArray new];
+            FAPickerItem *item = [FAPickerItem new];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"1" Title:@"Red" TitleColor:[UIColor redColor] ImageColor:[UIColor redColor] Circle:YES]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"2" Title:@"Blue" TitleColor:[UIColor blueColor] ImageColor:[UIColor blueColor] Circle:YES]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"3" Title:@"Green" TitleColor:[UIColor greenColor] ImageColor:[UIColor greenColor] Circle:NO]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"4" Title:@"Orange" TitleColor:[UIColor orangeColor] ImageColor:[UIColor orangeColor] Circle:YES]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"5" Title:@"Purple" TitleColor:[UIColor purpleColor] ImageColor:[UIColor purpleColor] Circle:YES]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"6" Title:@"Magenta" TitleColor:[UIColor magentaColor] ImageColor:[UIColor magentaColor] Circle:NO]];
+            [items addObject:[[FAPickerItem alloc]initWithID:@"7" Title:@"Brown" TitleColor:[UIColor brownColor] ImageColor:[UIColor brownColor] Circle:YES]];
+            
+            [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.357 blue:0.675 alpha:1.00]];
+            [[FAPickerView picker] showWithItems:items
+                           selectedItemWithTitle:@""
+                                     HeaderTitle:@"Select item with color"
+                                          filter:NO
+                                  WithCompletion:^(FAPickerItem *items) {
+                                        NSLog(@"selected item = %@",item.title);
                                   } cancel:^{
                                       NSLog(@"Cancel");
                                   }];
@@ -138,11 +221,64 @@
             break;
             case pickerViewTypeEnumTimepicker:
         {
-            [FAPickerView setMainColor:[UIColor colorWithRed:0.520 green:0.375 blue:0.357 alpha:1.00]];
+            [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.675 blue:0.357 alpha:1.00]];
             [FAPickerView setDateTimeLocalized:@"en_USA"];
             [[FAPickerView picker] showselectedDate:selectedDate
                                          DateFormat:UIDatePickerModeTime
-                                        HeaderTitle:@"Select Date"
+                                        HeaderTitle:@"Select Time"
+                                  cancelButtonTitle:@"Cancel"
+                                 confirmButtonTitle:@"Confirm"
+                                     WithCompletion:^(NSDate *date) {
+                                         NSLog(@"selected date = %@",date.description);
+                                         selectedDate = date;
+                                     } cancel:^{
+                                         NSLog(@"Cancel");
+                                     }];
+        }
+            break;
+        case pickerViewTypeEnumDatepickerRange:
+        {
+            NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+            NSDate *currentDate = [NSDate date];
+            NSDateComponents *comps = [[NSDateComponents alloc] init];
+            [comps setDay:5];
+            NSDate *maxDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+            [comps setDay:-5];
+            NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+            
+            [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.675 blue:0.357 alpha:1.00]];
+            [FAPickerView setDateTimeLocalized:@"en_USA"];
+            [[FAPickerView picker] showselectedDate:[NSDate date]
+                                        MaximumDate:maxDate
+                                        MinimumDate:minDate
+                                        HeaderTitle:@"Select Date with range"
+                                  cancelButtonTitle:@"Cancel"
+                                 confirmButtonTitle:@"Confirm"
+                                     WithCompletion:^(NSDate *date) {
+                                         NSLog(@"selected date = %@",date.description);
+                                         selectedDate = date;
+                                     } cancel:^{
+                                         NSLog(@"Cancel");
+                                     }];
+        }
+            break;
+        case pickerViewTypeEnumTimepickerRange:
+        {
+            NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+            NSDate *currentDate = [NSDate date];
+            NSDateComponents *comps = [[NSDateComponents alloc] init];
+            [comps setHour:5];
+            NSDate *maxDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+            [comps setHour:-5];
+            NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+            
+            [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.675 blue:0.357 alpha:1.00]];
+            [FAPickerView setDateTimeLocalized:@"en_USA"];
+            [[FAPickerView picker] showselectedDate:[NSDate date]
+                                         DateFormat:UIDatePickerModeDateAndTime
+                                        MaximumDate:maxDate
+                                        MinimumDate:minDate
+                                        HeaderTitle:@"Select Time with range"
                                   cancelButtonTitle:@"Cancel"
                                  confirmButtonTitle:@"Confirm"
                                      WithCompletion:^(NSDate *date) {
@@ -155,7 +291,7 @@
             break;
             case pickerViewTypeEnumAlertOne:
         {
-            [FAPickerView setMainColor:[UIColor colorWithRed:0.875 green:0.357 blue:0.357 alpha:1.00]];
+            [FAPickerView setMainColor:[UIColor colorWithRed:0.675 green:0.000 blue:0.357 alpha:1.00]];
             [[FAPickerView picker] showWithHeaderTitle:@"Alert !"
                                                Message:@"One Button ......."
                                     confirmButtonTitle:@"Done"
@@ -166,7 +302,7 @@
             break;
             case pickerViewTypeEnumAlertTwo:
         {
-            [FAPickerView setMainColor:[UIColor colorWithRed:1.000 green:0.800 blue:0.000 alpha:1.00]];
+            [FAPickerView setMainColor:[UIColor colorWithRed:0.675 green:0.000 blue:0.357 alpha:1.00]];
             [[FAPickerView picker] showWithHeaderTitle:@"Alert !"
                                                Message:@"Two Button ......."
                                     confirmButtonTitle:@"Confirm"
@@ -178,7 +314,7 @@
             break;
             case pickerViewTypeEnumAlertThree:
         {
-            [FAPickerView setMainColor:[UIColor colorWithRed:0.353 green:0.941 blue:0.980 alpha:1.00]];
+            [FAPickerView setMainColor:[UIColor colorWithRed:0.675 green:0.000 blue:0.357 alpha:1.00]];
             [[FAPickerView picker] showWithHeaderTitle:@"Alert !"
                                                Message:@"Three Button ......."
                                     confirmButtonTitle:@"Yes"

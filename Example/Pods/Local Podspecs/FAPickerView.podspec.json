@@ -1,7 +1,7 @@
 {
   "name": "FAPickerView",
-  "version": "0.1.1",
-  "summary": "fix bugs.",
+  "version": "0.1.4",
+  "summary": "Add DatePickerMode (TimePicker) ,Fix main color if not set",
   "homepage": "https://github.com/fadizant/FAPickerView",
   "license": {
     "type": "MIT",
@@ -12,10 +12,15 @@
   },
   "source": {
     "git": "https://github.com/fadizant/FAPickerView.git",
-    "tag": "0.1.1"
+    "tag": "0.1.4"
   },
   "platforms": {
     "ios": "8.0"
   },
-  "source_files": "FAPickerView/Classes/**/*"
+  "source_files": "FAPickerView/Classes/**/*",
+  "dependencies": {
+    "FAImageView": [
+
+    ]
+  }
 }

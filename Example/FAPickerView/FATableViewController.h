@@ -20,9 +20,13 @@
 typedef NS_ENUM(NSInteger, pickerViewTypeEnum) {
     pickerViewTypeEnumSingle,
     pickerViewTypeEnumMulti,
+    pickerViewTypeEnumItemsWithURLImags,
+    pickerViewTypeEnumItemsWithColors,
     pickerViewTypeEnumDatepicker,
     pickerViewTypeEnumDateArabic,
     pickerViewTypeEnumTimepicker,
+    pickerViewTypeEnumDatepickerRange,
+    pickerViewTypeEnumTimepickerRange,
     pickerViewTypeEnumAlertOne,
     pickerViewTypeEnumAlertTwo,
     pickerViewTypeEnumAlertThree

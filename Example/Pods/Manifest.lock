@@ -1,5 +1,7 @@
 PODS:
-  - FAPickerView (0.1.1)
+  - FAImageView (0.1.0)
+  - FAPickerView (0.1.4):
+    - FAImageView
 
 DEPENDENCIES:
   - FAPickerView (from `../`)
@@ -9,8 +11,9 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  FAPickerView: 96e171b204b74bc72b22adc5a62e95aa1eeb17ce
+  FAImageView: 12dd1a574b12ddd66f657c58e0e5d03ae7e68e9f
+  FAPickerView: 301633aa90946e698764784bf823cb941c90695f
 
 PODFILE CHECKSUM: e1de736a60452e9f76952bd8670b222aef852662
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.4.0
