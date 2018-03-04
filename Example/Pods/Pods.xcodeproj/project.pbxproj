@@ -7,28 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00E7049162E45D2B07E4DF089A8A93F4 /* FAPickerView.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 827073D61EE007D9550D546CE066F007 /* FAPickerView.bundle */; };
 		0279BADB14BC5F9289CAEE433C6B3DA2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C53E22AFF472D1E115D0A679E6A8E11 /* Foundation.framework */; };
 		065AEFCB23E971776E7A6D91A228F7FA /* Pods-FAPickerView_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A2700E50164349A079DA12EDB59CD8E /* Pods-FAPickerView_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		07AEF459F5B946ECDF552FECB7778787 /* FAPickerView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 77C2BFADD1840DFB845752DB2CC7AAB6 /* FAPickerView-dummy.m */; };
-		1432023E4F9FAB6B407056FE2E6EBD04 /* FAImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92881EF67F04FBEC9D4EC4059C058FA2 /* FAImageView.framework */; };
+		09BBB70CD97FADDFE16E7153BBFC4E81 /* DRColorPickerStore.h in Headers */ = {isa = PBXBuildFile; fileRef = A6585B9F8A2567500685115E1E0A4B9E /* DRColorPickerStore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0D08F40120473A0800ABB0AB /* FAAssests.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D08F40020473A0800ABB0AB /* FAAssests.xcassets */; };
+		0EBB92D79F3C80017306EC50E922061B /* FAImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92881EF67F04FBEC9D4EC4059C058FA2 /* FAImageView.framework */; };
 		162BCEC3029E9CBA19D45536A96A2BED /* UIImageView+FAImageFromURL.m in Sources */ = {isa = PBXBuildFile; fileRef = F644FDB40E3CF50D835EC3B59305D6DC /* UIImageView+FAImageFromURL.m */; };
+		2645289C5052A721A2F80EDE82337783 /* FAPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0461F81F1482B27E0EDDCD9EF95A7E97 /* FAPickerView.m */; };
+		281FF6ED4B8714D14FCC58EDCF4E57FF /* DRColorPickerWheelView.h in Headers */ = {isa = PBXBuildFile; fileRef = F39C3F8AC1ED1B2D1236BC7B5C4F3FE2 /* DRColorPickerWheelView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2DD4C999E1E0DD42991E87E0288B10CC /* DRColorPickerStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 1161CE71F13A6F7E0358A3BF59279F02 /* DRColorPickerStore.m */; };
 		4A2A0DAF5705915ADB1B513415A38E0C /* FAImageView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EBBF60A28B6C25C79282DC126D35C16E /* FAImageView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		56B09144560995933BE7804702C213DE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C53E22AFF472D1E115D0A679E6A8E11 /* Foundation.framework */; };
 		580CB94D50B72ED1C3FC36198137DA07 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C53E22AFF472D1E115D0A679E6A8E11 /* Foundation.framework */; };
-		5E1CD9C03E43222AC14871984FFAF998 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C53E22AFF472D1E115D0A679E6A8E11 /* Foundation.framework */; };
 		6803313A95292F4CFC4125EC78B2E959 /* FAImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = B6FBF5E9CFC1AA27107CBC0B282B090A /* FAImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6BD2AB6FC514B32CC88E38C1401C6B42 /* Pods-FAPickerView_Example-FAPickerView_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D3319172E7FFDBF3D3E877A6E38DCD /* Pods-FAPickerView_Example-FAPickerView_Tests-dummy.m */; };
-		847D6F2CCB918B0B6106E82857CC5471 /* FAPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 35381D6C8BF918765B2D3CF29FDE8D2F /* FAPickerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		79D1A16DFFDE86FCD03B3A68132EEDC7 /* FAPickerView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B608C5A2970308C47F125E5B0E3F4715 /* FAPickerView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8561532CD0165A0A3A63D046E95FFEDF /* DRColorPicker+UIColor.m in Sources */ = {isa = PBXBuildFile; fileRef = EC3D814991FD4B30C8FFD06AEBF84112 /* DRColorPicker+UIColor.m */; };
+		8DE1ACBBA36A57D75E9CB3000225400B /* DRColorPickerColor.m in Sources */ = {isa = PBXBuildFile; fileRef = C4FD2CFC8960A626566D0E9354047641 /* DRColorPickerColor.m */; };
+		92FF65C20DBA60692327811E2443FD38 /* DRColorPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 839EF63247F590B745EB0544BD6AD793 /* DRColorPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		990410EC6CA2617B4A1AA8011D7D4082 /* DRColorPicker+UIColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 02201D9D7BE07D4A72F981B88891D134 /* DRColorPicker+UIColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9E0E4670330A53DB9D2C813D11AA74C8 /* FACircleUIImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDFEDE9080B8885BD27AEAC24CB428C2 /* FACircleUIImageView.m */; };
-		A36D498CE72D4CDEEDFDFBD9EA6C0374 /* FAPickerView-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E68C74BB8CE723F9459DF8792496E128 /* FAPickerView-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2D41C4D5F82F139D0A5180C1EA4CD31 /* DRColorPickerWheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B351DB49879BAE38DAD6E70A6AD430 /* DRColorPickerWheelView.m */; };
 		A38FA9F052D0575686C78E436A07B119 /* Pods-FAPickerView_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A2F0538254B3AD68E01153487594FA6 /* Pods-FAPickerView_Example-dummy.m */; };
 		A3F1CC40EEEE931D0A3536C34E5B0659 /* UIImage+FAImage.h in Headers */ = {isa = PBXBuildFile; fileRef = FC399623A025E316264B185B3A22A574 /* UIImage+FAImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		BE147C795BD7FFA695C45EC91202292A /* FAPickerView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = FDB5DB5378CB82934031A609330F33B4 /* FAPickerView-dummy.m */; };
 		C55B306A425E7B9CE27525A80679D3DB /* FACircleUIImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F483041E0DC8126161CA8B724852260 /* FACircleUIImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C9009D83E86A65BDF693273B77AF91A2 /* FAImageView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 50E0A25E3C34FE183D7B5FBA87D2883F /* FAImageView-dummy.m */; };
-		D28F70571E88EC66A1637BA43C4EFB37 /* FAPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFFEC6BBF1781448110B0249C0A4334 /* FAPickerView.m */; };
+		D4B455C36F366DE2063CA3DBAA4D1F0F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C53E22AFF472D1E115D0A679E6A8E11 /* Foundation.framework */; };
+		DC697BEE3F82CF5D5FECF68ADAF41350 /* FAPickerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 369D0469D34765DA1C44AED0FBCACDB8 /* FAPickerView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E15B559448DA131ACC77BADBDF5C8EBE /* Pods-FAPickerView_Example-FAPickerView_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E2D9FB2B549ADD7E0818F0B2DF5B785 /* Pods-FAPickerView_Example-FAPickerView_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EBC86DB289A07B53B53CCC352E59C2E6 /* UIImageView+FAImageFromURL.h in Headers */ = {isa = PBXBuildFile; fileRef = 975F661246B0ED512D18D052F7453932 /* UIImageView+FAImageFromURL.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EFD44AA5191805511BC57008BC4FF55C /* DRColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 912D55D2170D7D6651D340D6265EC8F8 /* DRColorPicker.m */; };
 		F379F51A1D8B1DFD6C2900B3C62D9610 /* UIImage+FAImage.m in Sources */ = {isa = PBXBuildFile; fileRef = F3E456F32719F1FBC9B4D699756AC604 /* UIImage+FAImage.m */; };
+		FFF59E9CFBB2CDEB6BAD5EF1310DBE8E /* DRColorPickerColor.h in Headers */ = {isa = PBXBuildFile; fileRef = E91121CF074736C46DB81635F568E358 /* DRColorPickerColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,17 +55,24 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D191A5EF63D0AE1663AD1D4FB68C3AEF;
+			remoteGlobalIDString = 96FE140551EAF0E6586F3CA0A5AAA1FA;
 			remoteInfo = FAPickerView;
 		};
-		3E8FDEE5B3AFF36A14CF8BBF7D69307F /* PBXContainerItemProxy */ = {
+		37D06B62C48A7C4EFF913C26C2CF0841 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BFC321AF0543444BC88203FAD454052F;
+			remoteInfo = "FAPickerView-FAPickerView";
+		};
+		B74BC7496DCC9A89DF02B3DFF2CA4CAA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = BFA69D62F581FF8A159A110BCAF14512;
 			remoteInfo = FAImageView;
 		};
-		B74BC7496DCC9A89DF02B3DFF2CA4CAA /* PBXContainerItemProxy */ = {
+		C5A40CCFBFE9738052209F2573BB2334 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
@@ -64,72 +83,92 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = D191A5EF63D0AE1663AD1D4FB68C3AEF;
+			remoteGlobalIDString = 96FE140551EAF0E6586F3CA0A5AAA1FA;
 			remoteInfo = FAPickerView;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		0147315C35196491BBCB603D67845D32 /* FAImageView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FAImageView.modulemap; sourceTree = "<group>"; };
+		02201D9D7BE07D4A72F981B88891D134 /* DRColorPicker+UIColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "DRColorPicker+UIColor.h"; sourceTree = "<group>"; };
+		0461F81F1482B27E0EDDCD9EF95A7E97 /* FAPickerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FAPickerView.m; path = FAPickerView/Classes/FAPickerView.m; sourceTree = "<group>"; };
 		0858C1B82C0C7E72E0F06BFAF4902D2C /* FAImageView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FAImageView.xcconfig; sourceTree = "<group>"; };
 		0A2700E50164349A079DA12EDB59CD8E /* Pods-FAPickerView_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FAPickerView_Example-umbrella.h"; sourceTree = "<group>"; };
-		13BEEF415C754A9DDE90D2B6A48C8995 /* FAImageView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FAImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1553A8C87DE93E7172349EC6E8319EEE /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		0C41866E4124E5D4F66F92B71683DD13 /* FAPickerView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FAPickerView-prefix.pch"; sourceTree = "<group>"; };
+		0D08F40020473A0800ABB0AB /* FAAssests.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = FAAssests.xcassets; sourceTree = "<group>"; };
+		1161CE71F13A6F7E0358A3BF59279F02 /* DRColorPickerStore.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = DRColorPickerStore.m; sourceTree = "<group>"; };
 		1926C7E957F1C7A43E2F96B0B98A3AAC /* Pods-FAPickerView_Example-FAPickerView_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FAPickerView_Example-FAPickerView_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		2295CF03DDE650188AE34F89D541F549 /* FAPickerView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FAPickerView-prefix.pch"; sourceTree = "<group>"; };
-		288B3F7BFE9C3F1D8A139A7EE7DE144B /* FAPickerView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FAPickerView.modulemap; sourceTree = "<group>"; };
-		35381D6C8BF918765B2D3CF29FDE8D2F /* FAPickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FAPickerView.h; path = FAPickerView/Classes/FAPickerView.h; sourceTree = "<group>"; };
-		3CFFEC6BBF1781448110B0249C0A4334 /* FAPickerView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FAPickerView.m; path = FAPickerView/Classes/FAPickerView.m; sourceTree = "<group>"; };
+		2C80656087AFEC5B8C755FF3DFEB4EE3 /* Pods_FAPickerView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FAPickerView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		337946F4982A729589CAD77A9EFCB50D /* FAPickerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FAPickerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		369D0469D34765DA1C44AED0FBCACDB8 /* FAPickerView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FAPickerView.h; path = FAPickerView/Classes/FAPickerView.h; sourceTree = "<group>"; };
 		3E2D9FB2B549ADD7E0818F0B2DF5B785 /* Pods-FAPickerView_Example-FAPickerView_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FAPickerView_Example-FAPickerView_Tests-umbrella.h"; sourceTree = "<group>"; };
-		464A19671BA044442CF9C4A8DBCF2EF9 /* Pods_FAPickerView_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FAPickerView_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50E0A25E3C34FE183D7B5FBA87D2883F /* FAImageView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FAImageView-dummy.m"; sourceTree = "<group>"; };
-		527769C804C856DD136A6DBF29BB741A /* Pods_FAPickerView_Example_FAPickerView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FAPickerView_Example_FAPickerView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		54EA39ADE1B9A14FF97A1003FC30BEAC /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5595E2036301311B7C18F0DB594414D6 /* Pods_FAPickerView_Example_FAPickerView_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FAPickerView_Example_FAPickerView_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C53E22AFF472D1E115D0A679E6A8E11 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		68DAC57895434C21ACFFCB2C9BF00BC8 /* Pods-FAPickerView_Example-FAPickerView_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FAPickerView_Example-FAPickerView_Tests.modulemap"; sourceTree = "<group>"; };
 		6A2F0538254B3AD68E01153487594FA6 /* Pods-FAPickerView_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FAPickerView_Example-dummy.m"; sourceTree = "<group>"; };
 		6D7EDE3F96E93EBD7A80F5F14E4F791E /* Pods-FAPickerView_Example-FAPickerView_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FAPickerView_Example-FAPickerView_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		77C2BFADD1840DFB845752DB2CC7AAB6 /* FAPickerView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FAPickerView-dummy.m"; sourceTree = "<group>"; };
+		749795B9AFFD26D1C9BA04AAFDC23EEF /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		827073D61EE007D9550D546CE066F007 /* FAPickerView.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FAPickerView.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		839EF63247F590B745EB0544BD6AD793 /* DRColorPicker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DRColorPicker.h; sourceTree = "<group>"; };
+		83F369497C66CC8A5DE28771D317F012 /* FAImageView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FAImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D3319172E7FFDBF3D3E877A6E38DCD /* Pods-FAPickerView_Example-FAPickerView_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FAPickerView_Example-FAPickerView_Tests-dummy.m"; sourceTree = "<group>"; };
 		8EF586E3260FFBE3670B9B5AB02D6D12 /* Pods-FAPickerView_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FAPickerView_Example.release.xcconfig"; sourceTree = "<group>"; };
 		8F483041E0DC8126161CA8B724852260 /* FACircleUIImageView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FACircleUIImageView.h; path = FAImageView/Classes/FACircleUIImageView.h; sourceTree = "<group>"; };
 		903756BDEE65F49FE0FCA1E0A667489B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		912D55D2170D7D6651D340D6265EC8F8 /* DRColorPicker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = DRColorPicker.m; sourceTree = "<group>"; };
 		92881EF67F04FBEC9D4EC4059C058FA2 /* FAImageView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FAImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		929803573CFBFC745C8609B166A7580E /* Pods-FAPickerView_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FAPickerView_Example.modulemap"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		94B5DD225078FF1B365C66C5DBA22CB2 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		95D926893FC15FAB823E7599DA14DD19 /* Pods-FAPickerView_Example-FAPickerView_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FAPickerView_Example-FAPickerView_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		975F661246B0ED512D18D052F7453932 /* UIImageView+FAImageFromURL.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+FAImageFromURL.h"; path = "FAImageView/Classes/UIImageView+FAImageFromURL.h"; sourceTree = "<group>"; };
-		9B07A46D243FE6D8844C34881E965E6D /* FAPickerView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = FAPickerView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FC05F48D0ACA0D65E4037950E4AA113 /* ResourceBundle-FAPickerView-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-FAPickerView-Info.plist"; sourceTree = "<group>"; };
 		A1146903A6B267AE99236CEFA9510A5A /* Pods-FAPickerView_Example-FAPickerView_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FAPickerView_Example-FAPickerView_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		A3111EA7B7E804E0A4349E571F6A4E33 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A6585B9F8A2567500685115E1E0A4B9E /* DRColorPickerStore.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DRColorPickerStore.h; sourceTree = "<group>"; };
 		A9CC682AD0DC1962BA73BCA5C6FC745B /* Pods-FAPickerView_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FAPickerView_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		AA4FB3A8CDC9B6A73593575BBFF775FD /* Pods-FAPickerView_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FAPickerView_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		AA6C6AB688F39DA310139843A2395717 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B123D9188993B8AD09A5AAB3C0F57DDF /* FAPickerView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = FAPickerView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		B608C5A2970308C47F125E5B0E3F4715 /* FAPickerView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FAPickerView-umbrella.h"; sourceTree = "<group>"; };
 		B6FBF5E9CFC1AA27107CBC0B282B090A /* FAImageView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FAImageView.h; path = FAImageView/Classes/FAImageView.h; sourceTree = "<group>"; };
-		B8CFFB7444CA16A25A9464BC69366080 /* FAPickerView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FAPickerView.xcconfig; sourceTree = "<group>"; };
+		C4FD2CFC8960A626566D0E9354047641 /* DRColorPickerColor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = DRColorPickerColor.m; sourceTree = "<group>"; };
+		CAE68A64D806B9ECB16B5ACB672093A1 /* FAPickerView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FAPickerView.xcconfig; sourceTree = "<group>"; };
 		CEF3CC55343BF94F4E09C24294DEDC2F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D19BBE23229B81E10089F88025387577 /* Pods-FAPickerView_Example-FAPickerView_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FAPickerView_Example-FAPickerView_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		DD92459F2BB35C654F4F1F67B21E9E7D /* FAPickerView.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = FAPickerView.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		DDFEDE9080B8885BD27AEAC24CB428C2 /* FACircleUIImageView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = FACircleUIImageView.m; path = FAImageView/Classes/FACircleUIImageView.m; sourceTree = "<group>"; };
 		DEEDC314F660B41A7670BBD8112907DD /* Pods-FAPickerView_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FAPickerView_Example-resources.sh"; sourceTree = "<group>"; };
 		E31EC91A5CE121DAC573E514F7EE6711 /* Pods-FAPickerView_Example-FAPickerView_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FAPickerView_Example-FAPickerView_Tests-resources.sh"; sourceTree = "<group>"; };
-		E43C84C6B32250813EB49143248C65AC /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		E68C74BB8CE723F9459DF8792496E128 /* FAPickerView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FAPickerView-umbrella.h"; sourceTree = "<group>"; };
+		E5B351DB49879BAE38DAD6E70A6AD430 /* DRColorPickerWheelView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = DRColorPickerWheelView.m; sourceTree = "<group>"; };
+		E91121CF074736C46DB81635F568E358 /* DRColorPickerColor.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DRColorPickerColor.h; sourceTree = "<group>"; };
+		E9EB9A06B444F0C37CB9744299C5C5E0 /* FAPickerView.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FAPickerView.modulemap; sourceTree = "<group>"; };
 		EAF2DFA59412BDEBBB980CAA124E4836 /* FAImageView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FAImageView-prefix.pch"; sourceTree = "<group>"; };
 		EBBF60A28B6C25C79282DC126D35C16E /* FAImageView-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FAImageView-umbrella.h"; sourceTree = "<group>"; };
+		EC3D814991FD4B30C8FFD06AEBF84112 /* DRColorPicker+UIColor.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "DRColorPicker+UIColor.m"; sourceTree = "<group>"; };
 		F244354DD35DE1FCB91A0CFED3DDDB91 /* Pods-FAPickerView_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FAPickerView_Example-frameworks.sh"; sourceTree = "<group>"; };
+		F39C3F8AC1ED1B2D1236BC7B5C4F3FE2 /* DRColorPickerWheelView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = DRColorPickerWheelView.h; sourceTree = "<group>"; };
 		F3E456F32719F1FBC9B4D699756AC604 /* UIImage+FAImage.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImage+FAImage.m"; path = "FAImageView/Classes/UIImage+FAImage.m"; sourceTree = "<group>"; };
 		F644FDB40E3CF50D835EC3B59305D6DC /* UIImageView+FAImageFromURL.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+FAImageFromURL.m"; path = "FAImageView/Classes/UIImageView+FAImageFromURL.m"; sourceTree = "<group>"; };
 		FC399623A025E316264B185B3A22A574 /* UIImage+FAImage.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+FAImage.h"; path = "FAImageView/Classes/UIImage+FAImage.h"; sourceTree = "<group>"; };
 		FC82E76F88C96C258DC13B4BD4D102B3 /* Pods-FAPickerView_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FAPickerView_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		FDB5DB5378CB82934031A609330F33B4 /* FAPickerView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FAPickerView-dummy.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4DD3D00782EB3B9BCD35F073999A2F7B /* Frameworks */ = {
+		5C410F4475FC26E8706C9B50731F87C5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1432023E4F9FAB6B407056FE2E6EBD04 /* FAImageView.framework in Frameworks */,
-				5E1CD9C03E43222AC14871984FFAF998 /* Foundation.framework in Frameworks */,
+				0EBB92D79F3C80017306EC50E922061B /* FAImageView.framework in Frameworks */,
+				D4B455C36F366DE2063CA3DBAA4D1F0F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6DC4C924B211885B5E4B717AB75C4AC9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,6 +199,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		062F4140325EB7BD898DAA2619852C2F /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				E9EB9A06B444F0C37CB9744299C5C5E0 /* FAPickerView.modulemap */,
+				CAE68A64D806B9ECB16B5ACB672093A1 /* FAPickerView.xcconfig */,
+				FDB5DB5378CB82934031A609330F33B4 /* FAPickerView-dummy.m */,
+				0C41866E4124E5D4F66F92B71683DD13 /* FAPickerView-prefix.pch */,
+				B608C5A2970308C47F125E5B0E3F4715 /* FAPickerView-umbrella.h */,
+				A3111EA7B7E804E0A4349E571F6A4E33 /* Info.plist */,
+				9FC05F48D0ACA0D65E4037950E4AA113 /* ResourceBundle-FAPickerView-Info.plist */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/FAPickerView";
+			sourceTree = "<group>";
+		};
+		0D08F3FF20473A0800ABB0AB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0D08F40020473A0800ABB0AB /* FAAssests.xcassets */,
+			);
+			name = Resources;
+			path = FAPickerView/Assets/Resources;
+			sourceTree = "<group>";
+		};
+		11C02453170433ADB06092EC27822F2F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				83F369497C66CC8A5DE28771D317F012 /* FAImageView.framework */,
+				827073D61EE007D9550D546CE066F007 /* FAPickerView.bundle */,
+				337946F4982A729589CAD77A9EFCB50D /* FAPickerView.framework */,
+				2C80656087AFEC5B8C755FF3DFEB4EE3 /* Pods_FAPickerView_Example.framework */,
+				5595E2036301311B7C18F0DB594414D6 /* Pods_FAPickerView_Example_FAPickerView_Tests.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3787C74A556DEC5DF389C1CE74B13438 /* Pods-FAPickerView_Example-FAPickerView_Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +253,24 @@
 			path = "Target Support Files/Pods-FAPickerView_Example-FAPickerView_Tests";
 			sourceTree = "<group>";
 		};
+		3E9C44E3146DC50C17563612D1DD45F2 /* colorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				839EF63247F590B745EB0544BD6AD793 /* DRColorPicker.h */,
+				912D55D2170D7D6651D340D6265EC8F8 /* DRColorPicker.m */,
+				02201D9D7BE07D4A72F981B88891D134 /* DRColorPicker+UIColor.h */,
+				EC3D814991FD4B30C8FFD06AEBF84112 /* DRColorPicker+UIColor.m */,
+				E91121CF074736C46DB81635F568E358 /* DRColorPickerColor.h */,
+				C4FD2CFC8960A626566D0E9354047641 /* DRColorPickerColor.m */,
+				A6585B9F8A2567500685115E1E0A4B9E /* DRColorPickerStore.h */,
+				1161CE71F13A6F7E0358A3BF59279F02 /* DRColorPickerStore.m */,
+				F39C3F8AC1ED1B2D1236BC7B5C4F3FE2 /* DRColorPickerWheelView.h */,
+				E5B351DB49879BAE38DAD6E70A6AD430 /* DRColorPickerWheelView.m */,
+			);
+			name = colorPicker;
+			path = FAPickerView/Classes/colorPicker;
+			sourceTree = "<group>";
+		};
 		4C3C8170DC413CB6D79B1B95A78422B1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +278,14 @@
 				DF61C1D2A652A97E35B6A4500BE90FD5 /* iOS */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5B24272D636B6CBF3022D29EE330AB5B /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				665898E532D4FFDC965CA2540F06A4E7 /* FAPickerView */,
+			);
+			name = "Development Pods";
 			sourceTree = "<group>";
 		};
 		5C23B111E2DEF82830052BCA89CFB01E /* Targets Support Files */ = {
@@ -196,22 +297,28 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		7884BB9BB5C7623AC5D3A4DB6CC5D99E /* Development Pods */ = {
+		665898E532D4FFDC965CA2540F06A4E7 /* FAPickerView */ = {
 			isa = PBXGroup;
 			children = (
-				F4D229654786DA9C8DD4C22D966F27B7 /* FAPickerView */,
+				369D0469D34765DA1C44AED0FBCACDB8 /* FAPickerView.h */,
+				0461F81F1482B27E0EDDCD9EF95A7E97 /* FAPickerView.m */,
+				0D08F3FF20473A0800ABB0AB /* Resources */,
+				3E9C44E3146DC50C17563612D1DD45F2 /* colorPicker */,
+				D42CA9FB5385862C14768E8A65705171 /* Pod */,
+				062F4140325EB7BD898DAA2619852C2F /* Support Files */,
 			);
-			name = "Development Pods";
+			name = FAPickerView;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				7884BB9BB5C7623AC5D3A4DB6CC5D99E /* Development Pods */,
+				5B24272D636B6CBF3022D29EE330AB5B /* Development Pods */,
 				4C3C8170DC413CB6D79B1B95A78422B1 /* Frameworks */,
 				C281623D37DD7E08FAEE4541312C8ECE /* Pods */,
-				C00EB20743D86C7FD396662CA4BDFFC5 /* Products */,
+				11C02453170433ADB06092EC27822F2F /* Products */,
 				5C23B111E2DEF82830052BCA89CFB01E /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -234,37 +341,22 @@
 			path = "Target Support Files/Pods-FAPickerView_Example";
 			sourceTree = "<group>";
 		};
-		B5D7A4ABB5C987B6488A5EC7FC133DBE /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				288B3F7BFE9C3F1D8A139A7EE7DE144B /* FAPickerView.modulemap */,
-				B8CFFB7444CA16A25A9464BC69366080 /* FAPickerView.xcconfig */,
-				77C2BFADD1840DFB845752DB2CC7AAB6 /* FAPickerView-dummy.m */,
-				2295CF03DDE650188AE34F89D541F549 /* FAPickerView-prefix.pch */,
-				E68C74BB8CE723F9459DF8792496E128 /* FAPickerView-umbrella.h */,
-				AA6C6AB688F39DA310139843A2395717 /* Info.plist */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/FAPickerView";
-			sourceTree = "<group>";
-		};
-		C00EB20743D86C7FD396662CA4BDFFC5 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				13BEEF415C754A9DDE90D2B6A48C8995 /* FAImageView.framework */,
-				9B07A46D243FE6D8844C34881E965E6D /* FAPickerView.framework */,
-				464A19671BA044442CF9C4A8DBCF2EF9 /* Pods_FAPickerView_Example.framework */,
-				527769C804C856DD136A6DBF29BB741A /* Pods_FAPickerView_Example_FAPickerView_Tests.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		C281623D37DD7E08FAEE4541312C8ECE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
 				D53D7FEA8FA10AD7BC30D6776084C332 /* FAImageView */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		D42CA9FB5385862C14768E8A65705171 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				B123D9188993B8AD09A5AAB3C0F57DDF /* FAPickerView.podspec */,
+				94B5DD225078FF1B365C66C5DBA22CB2 /* LICENSE */,
+				749795B9AFFD26D1C9BA04AAFDC23EEF /* README.md */,
+			);
+			name = Pod;
 			sourceTree = "<group>";
 		};
 		D53D7FEA8FA10AD7BC30D6776084C332 /* FAImageView */ = {
@@ -304,31 +396,23 @@
 			path = "../Target Support Files/FAImageView";
 			sourceTree = "<group>";
 		};
-		F4D229654786DA9C8DD4C22D966F27B7 /* FAPickerView */ = {
-			isa = PBXGroup;
-			children = (
-				35381D6C8BF918765B2D3CF29FDE8D2F /* FAPickerView.h */,
-				3CFFEC6BBF1781448110B0249C0A4334 /* FAPickerView.m */,
-				FC7EF0614065AB4399AAEE0D2992575E /* Pod */,
-				B5D7A4ABB5C987B6488A5EC7FC133DBE /* Support Files */,
-			);
-			name = FAPickerView;
-			path = ../..;
-			sourceTree = "<group>";
-		};
-		FC7EF0614065AB4399AAEE0D2992575E /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				DD92459F2BB35C654F4F1F67B21E9E7D /* FAPickerView.podspec */,
-				1553A8C87DE93E7172349EC6E8319EEE /* LICENSE */,
-				E43C84C6B32250813EB49143248C65AC /* README.md */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		1EA8892107AE43A78A07781BA8B141EB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				990410EC6CA2617B4A1AA8011D7D4082 /* DRColorPicker+UIColor.h in Headers */,
+				92FF65C20DBA60692327811E2443FD38 /* DRColorPicker.h in Headers */,
+				FFF59E9CFBB2CDEB6BAD5EF1310DBE8E /* DRColorPickerColor.h in Headers */,
+				09BBB70CD97FADDFE16E7153BBFC4E81 /* DRColorPickerStore.h in Headers */,
+				281FF6ED4B8714D14FCC58EDCF4E57FF /* DRColorPickerWheelView.h in Headers */,
+				79D1A16DFFDE86FCD03B3A68132EEDC7 /* FAPickerView-umbrella.h in Headers */,
+				DC697BEE3F82CF5D5FECF68ADAF41350 /* FAPickerView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CC5C1D537E7307A97B4CAF265008C35B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -346,15 +430,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E15B559448DA131ACC77BADBDF5C8EBE /* Pods-FAPickerView_Example-FAPickerView_Tests-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F0C2BD81B28B684D19290FB9817A9084 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A36D498CE72D4CDEEDFDFBD9EA6C0374 /* FAPickerView-umbrella.h in Headers */,
-				847D6F2CCB918B0B6106E82857CC5471 /* FAPickerView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -385,7 +460,27 @@
 			);
 			name = "Pods-FAPickerView_Example-FAPickerView_Tests";
 			productName = "Pods-FAPickerView_Example-FAPickerView_Tests";
-			productReference = 527769C804C856DD136A6DBF29BB741A /* Pods_FAPickerView_Example_FAPickerView_Tests.framework */;
+			productReference = 5595E2036301311B7C18F0DB594414D6 /* Pods_FAPickerView_Example_FAPickerView_Tests.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		96FE140551EAF0E6586F3CA0A5AAA1FA /* FAPickerView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8952090EB4E2C18C249B0BD79C043A1A /* Build configuration list for PBXNativeTarget "FAPickerView" */;
+			buildPhases = (
+				06E543CC5E6F54DAE1D90440AC930FF2 /* Sources */,
+				5C410F4475FC26E8706C9B50731F87C5 /* Frameworks */,
+				889653C2E05DB1BAC5666A3983092952 /* Resources */,
+				1EA8892107AE43A78A07781BA8B141EB /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CB4D486E9777A8237D44C31BA249556D /* PBXTargetDependency */,
+				91D6B88F94FBD98A503CAB670214FCBE /* PBXTargetDependency */,
+			);
+			name = FAPickerView;
+			productName = FAPickerView;
+			productReference = 337946F4982A729589CAD77A9EFCB50D /* FAPickerView.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		BFA69D62F581FF8A159A110BCAF14512 /* FAImageView */ = {
@@ -402,26 +497,25 @@
 			);
 			name = FAImageView;
 			productName = FAImageView;
-			productReference = 13BEEF415C754A9DDE90D2B6A48C8995 /* FAImageView.framework */;
+			productReference = 83F369497C66CC8A5DE28771D317F012 /* FAImageView.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		D191A5EF63D0AE1663AD1D4FB68C3AEF /* FAPickerView */ = {
+		BFC321AF0543444BC88203FAD454052F /* FAPickerView-FAPickerView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3CD74EF7A8304EAA770D8783C0A2E7F8 /* Build configuration list for PBXNativeTarget "FAPickerView" */;
+			buildConfigurationList = F5A0D4B3316591094A7E7FF7D91C3C4A /* Build configuration list for PBXNativeTarget "FAPickerView-FAPickerView" */;
 			buildPhases = (
-				009462027AD0B943DE27D3FF88E80184 /* Sources */,
-				4DD3D00782EB3B9BCD35F073999A2F7B /* Frameworks */,
-				F0C2BD81B28B684D19290FB9817A9084 /* Headers */,
+				EDDEB834423270D22ACA08AC29C8728C /* Sources */,
+				6DC4C924B211885B5E4B717AB75C4AC9 /* Frameworks */,
+				47A8FE49EC39D8748E1CD4488BFCC980 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				F770DD5F2F14CF76112829D3DC9C2D78 /* PBXTargetDependency */,
 			);
-			name = FAPickerView;
-			productName = FAPickerView;
-			productReference = 9B07A46D243FE6D8844C34881E965E6D /* FAPickerView.framework */;
-			productType = "com.apple.product-type.framework";
+			name = "FAPickerView-FAPickerView";
+			productName = "FAPickerView-FAPickerView";
+			productReference = 827073D61EE007D9550D546CE066F007 /* FAPickerView.bundle */;
+			productType = "com.apple.product-type.bundle";
 		};
 		F3D0557FDB4E6C93EEFCB0FED04249F7 /* Pods-FAPickerView_Example */ = {
 			isa = PBXNativeTarget;
@@ -439,7 +533,7 @@
 			);
 			name = "Pods-FAPickerView_Example";
 			productName = "Pods-FAPickerView_Example";
-			productReference = 464A19671BA044442CF9C4A8DBCF2EF9 /* Pods_FAPickerView_Example.framework */;
+			productReference = 2C80656087AFEC5B8C755FF3DFEB4EE3 /* Pods_FAPickerView_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -459,25 +553,50 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = C00EB20743D86C7FD396662CA4BDFFC5 /* Products */;
+			productRefGroup = 11C02453170433ADB06092EC27822F2F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				BFA69D62F581FF8A159A110BCAF14512 /* FAImageView */,
-				D191A5EF63D0AE1663AD1D4FB68C3AEF /* FAPickerView */,
+				96FE140551EAF0E6586F3CA0A5AAA1FA /* FAPickerView */,
+				BFC321AF0543444BC88203FAD454052F /* FAPickerView-FAPickerView */,
 				F3D0557FDB4E6C93EEFCB0FED04249F7 /* Pods-FAPickerView_Example */,
 				4CDC91FE5B1E256A80EA79217BB6C5AB /* Pods-FAPickerView_Example-FAPickerView_Tests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		47A8FE49EC39D8748E1CD4488BFCC980 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0D08F40120473A0800ABB0AB /* FAAssests.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		889653C2E05DB1BAC5666A3983092952 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00E7049162E45D2B07E4DF089A8A93F4 /* FAPickerView.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		009462027AD0B943DE27D3FF88E80184 /* Sources */ = {
+		06E543CC5E6F54DAE1D90440AC930FF2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07AEF459F5B946ECDF552FECB7778787 /* FAPickerView-dummy.m in Sources */,
-				D28F70571E88EC66A1637BA43C4EFB37 /* FAPickerView.m in Sources */,
+				8561532CD0165A0A3A63D046E95FFEDF /* DRColorPicker+UIColor.m in Sources */,
+				EFD44AA5191805511BC57008BC4FF55C /* DRColorPicker.m in Sources */,
+				8DE1ACBBA36A57D75E9CB3000225400B /* DRColorPickerColor.m in Sources */,
+				2DD4C999E1E0DD42991E87E0288B10CC /* DRColorPickerStore.m in Sources */,
+				A2D41C4D5F82F139D0A5180C1EA4CD31 /* DRColorPickerWheelView.m in Sources */,
+				BE147C795BD7FFA695C45EC91202292A /* FAPickerView-dummy.m in Sources */,
+				2645289C5052A721A2F80EDE82337783 /* FAPickerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -508,32 +627,45 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		EDDEB834423270D22ACA08AC29C8728C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
 		2AABB40DF665F808D58300BDCC71D70B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FAPickerView;
-			target = D191A5EF63D0AE1663AD1D4FB68C3AEF /* FAPickerView */;
+			target = 96FE140551EAF0E6586F3CA0A5AAA1FA /* FAPickerView */;
 			targetProxy = F1DE028C52F24B205E7713916995F005 /* PBXContainerItemProxy */;
 		};
 		464BE2841DF9D6357C29274B7946029E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FAPickerView;
-			target = D191A5EF63D0AE1663AD1D4FB68C3AEF /* FAPickerView */;
+			target = 96FE140551EAF0E6586F3CA0A5AAA1FA /* FAPickerView */;
 			targetProxy = 29205F5702ADAD179E27B72BD6AF206B /* PBXContainerItemProxy */;
+		};
+		91D6B88F94FBD98A503CAB670214FCBE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "FAPickerView-FAPickerView";
+			target = BFC321AF0543444BC88203FAD454052F /* FAPickerView-FAPickerView */;
+			targetProxy = 37D06B62C48A7C4EFF913C26C2CF0841 /* PBXContainerItemProxy */;
+		};
+		CB4D486E9777A8237D44C31BA249556D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = FAImageView;
+			target = BFA69D62F581FF8A159A110BCAF14512 /* FAImageView */;
+			targetProxy = C5A40CCFBFE9738052209F2573BB2334 /* PBXContainerItemProxy */;
 		};
 		D8A978C525A60A25BBF23E0062A55BE8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FAImageView;
 			target = BFA69D62F581FF8A159A110BCAF14512 /* FAImageView */;
 			targetProxy = 0B61BF609D148CAF87BD9E7A11398672 /* PBXContainerItemProxy */;
-		};
-		F770DD5F2F14CF76112829D3DC9C2D78 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = FAImageView;
-			target = BFA69D62F581FF8A159A110BCAF14512 /* FAImageView */;
-			targetProxy = 3E8FDEE5B3AFF36A14CF8BBF7D69307F /* PBXContainerItemProxy */;
 		};
 		FB28BA806C0C200F5ECC0594376ADCA9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -609,35 +741,6 @@
 			};
 			name = Release;
 		};
-		1309416F9525DC0177721AC6CE7A683B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B8CFFB7444CA16A25A9464BC69366080 /* FAPickerView.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/FAPickerView/FAPickerView-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/FAPickerView/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/FAPickerView/FAPickerView.modulemap";
-				PRODUCT_NAME = FAPickerView;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 		1C3ED16E144B9A188CC88F2343EB3B4F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -696,9 +799,9 @@
 			};
 			name = Release;
 		};
-		2307858B7860A1689EE837402825C150 /* Release */ = {
+		3DBEBF80093F38C1054B21DBC71D03E4 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B8CFFB7444CA16A25A9464BC69366080 /* FAPickerView.xcconfig */;
+			baseConfigurationReference = CAE68A64D806B9ECB16B5ACB672093A1 /* FAPickerView.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -725,6 +828,35 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		42D850A615FF1854CB0E581ADE6B49E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAE68A64D806B9ECB16B5ACB672093A1 /* FAPickerView.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FAPickerView/FAPickerView-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FAPickerView/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/FAPickerView/FAPickerView.modulemap";
+				PRODUCT_NAME = FAPickerView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		488CD1DC0F0DCDB7605CC19BACB56950 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -881,6 +1013,38 @@
 			};
 			name = Release;
 		};
+		B88EAA8956D6E65674737638BF0DAC44 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAE68A64D806B9ECB16B5ACB672093A1 /* FAPickerView.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/FAPickerView";
+				INFOPLIST_FILE = "Target Support Files/FAPickerView/ResourceBundle-FAPickerView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = FAPickerView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		BB8A804C40CE321E531D131C9723D11C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CAE68A64D806B9ECB16B5ACB672093A1 /* FAPickerView.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/FAPickerView";
+				INFOPLIST_FILE = "Target Support Files/FAPickerView/ResourceBundle-FAPickerView-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = FAPickerView;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 		F8596517D28DA34CDE7A3DE74257B594 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1926C7E957F1C7A43E2F96B0B98A3AAC /* Pods-FAPickerView_Example-FAPickerView_Tests.debug.xcconfig */;
@@ -934,15 +1098,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3CD74EF7A8304EAA770D8783C0A2E7F8 /* Build configuration list for PBXNativeTarget "FAPickerView" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				1309416F9525DC0177721AC6CE7A683B /* Debug */,
-				2307858B7860A1689EE837402825C150 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		4DBA81131597F5DCE957A8E462B62269 /* Build configuration list for PBXNativeTarget "FAImageView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -957,6 +1112,24 @@
 			buildConfigurations = (
 				F8596517D28DA34CDE7A3DE74257B594 /* Debug */,
 				08F72B8AC510E377F909A332061F4B23 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8952090EB4E2C18C249B0BD79C043A1A /* Build configuration list for PBXNativeTarget "FAPickerView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				42D850A615FF1854CB0E581ADE6B49E8 /* Debug */,
+				3DBEBF80093F38C1054B21DBC71D03E4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F5A0D4B3316591094A7E7FF7D91C3C4A /* Build configuration list for PBXNativeTarget "FAPickerView-FAPickerView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B88EAA8956D6E65674737638BF0DAC44 /* Debug */,
+				BB8A804C40CE321E531D131C9723D11C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

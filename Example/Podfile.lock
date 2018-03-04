@@ -1,6 +1,6 @@
 PODS:
   - FAImageView (0.1.0)
-  - FAPickerView (0.1.4):
+  - FAPickerView (0.1.5):
     - FAImageView
 
 DEPENDENCIES:
@@ -12,7 +12,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FAImageView: 12dd1a574b12ddd66f657c58e0e5d03ae7e68e9f
-  FAPickerView: 301633aa90946e698764784bf823cb941c90695f
+  FAPickerView: a77a61031ae38caf5036513df08f1c2cad55de87
 
 PODFILE CHECKSUM: e1de736a60452e9f76952bd8670b222aef852662
 

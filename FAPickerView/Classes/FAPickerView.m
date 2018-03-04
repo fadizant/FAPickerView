@@ -1,8 +1,8 @@
 //
 //  FAPickerView.h
 //
-//  Created by Fadi Abuzant on 9/6/15.
-//  Copyright (c) 2015 Fadi Abuzant. All rights reserved.
+//  Created by Fadi Abuzant on 3/4/18.
+//  Copyright © 2018 fadizant. All rights reserved.
 //
 
 #import "FAPickerView.h"
@@ -36,7 +36,7 @@ typedef void (^CZDismissCompletionCallback)(void);
 @property NSMutableArray *selectedIndexPaths;
 @property CGRect previousBounds;
 @property UIDatePicker *datePicker;
-@property UILabel *alertBody;
+@property UIView *alertBody;
 @property UITextField *searchTextField;
 @property NSMutableArray <FAPickerItem*> *filterItem;
 @property NSMutableString *searchText;
@@ -44,6 +44,9 @@ typedef void (^CZDismissCompletionCallback)(void);
 @property UIDatePickerMode datePickerMode;
 @property NSDate* minimumDate;
 @property NSDate* maximumDate;
+@property UIView *colorPickerView;
+@property UIScrollView *customViewContainer;
+@property UIScrollView *customPickerViewContainer;
 @end
 
 @implementation FAPickerView
@@ -157,6 +160,18 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
             self.alertBody = [self buildAlert];
             [self.containerView addSubview:self.alertBody];
             break;
+        case FAPickerTypeColor:
+            self.colorPickerView = [self buildColorPicker];
+            [self.containerView addSubview:self.colorPickerView];
+            break;
+        case FAPickerTypeCustomView:
+            self.customViewContainer = [self buildCustomViewContainer];
+            [self.containerView addSubview:self.customViewContainer];
+            break;
+        case FAPickerTypeCustomPicker:
+            self.customPickerViewContainer = [self buildCustomPickerViewContainer];
+            [self.containerView addSubview:self.customPickerViewContainer];
+            break;
         default:
             break;
     }
@@ -195,6 +210,25 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
                                                   frame.origin.y,
                                                   frame.size.width,
                                                   self.headerView.frame.size.height + self.alertBody.frame.size.height + self.footerview.frame.size.height+ (_Filter ? self.searchTextField.frame.size.height : 0));
+            break;
+        case FAPickerTypeColor:
+            self.containerView.frame = CGRectMake(frame.origin.x,
+                                                  frame.origin.y,
+                                                  frame.size.width,
+                                                  self.headerView.frame.size.height + self.colorPickerView.frame.size.height + self.footerview.frame.size.height+ (_Filter ? self.searchTextField.frame.size.height : 0));
+            [self changeHeaderAndFooterColors:self.selectedColorPicker];
+            break;
+        case FAPickerTypeCustomView:
+            self.containerView.frame = CGRectMake(frame.origin.x,
+                                                  frame.origin.y,
+                                                  frame.size.width,
+                                                  self.headerView.frame.size.height + self.customViewContainer.frame.size.height + self.footerview.frame.size.height+ (_Filter ? self.searchTextField.frame.size.height : 0));
+            break;
+        case FAPickerTypeCustomPicker:
+            self.containerView.frame = CGRectMake(frame.origin.x,
+                                                  frame.origin.y,
+                                                  frame.size.width,
+                                                  self.customPickerViewContainer.frame.size.height);
             break;
         default:
             break;
@@ -270,6 +304,23 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     }];
 }
 
+-(void) changeHeaderAndFooterColors:(UIColor*)color{
+    self.headerView.backgroundColor = color;
+    //check if color is dark or light
+    const CGFloat *component = CGColorGetComponents(color.CGColor);
+    CGFloat brightness = ((component[0] * 299) + (component[1] * 587) + (component[2] * 114)) / 1000;
+    
+    ((UILabel*)[self.headerView viewWithTag:100]).textColor = (brightness < 0.75) ? [UIColor whiteColor] : [UIColor blackColor];
+    
+    [((UIButton*)[self.footerview viewWithTag:100]) setTitleColor: (brightness < 0.75) ? color : [UIColor blackColor] forState:UIControlStateNormal];
+    [((UIButton*)[self.footerview viewWithTag:100]) setTitleColor: (brightness < 0.75) ? [color colorWithAlphaComponent:0.5] : [UIColor blackColor] forState:UIControlStateHighlighted];
+    
+    [((UIButton*)[self.footerview viewWithTag:200]) setTitleColor:(brightness < 0.75) ? [UIColor whiteColor] : [UIColor blackColor] forState:UIControlStateNormal];
+    [((UIButton*)[self.footerview viewWithTag:200]) setTitleColor:(brightness < 0.75) ? [UIColor whiteColor] : [UIColor blackColor] forState:UIControlStateHighlighted];
+    ((UIButton*)[self.footerview viewWithTag:200]).backgroundColor = color;
+}
+
+#pragma mark- Build Views
 - (UIView *)buildContainerView {
     CGFloat widthRatio = _pickerWidth ? _pickerWidth / [UIScreen mainScreen].bounds.size.width : 0.8;
     CGAffineTransform transform = CGAffineTransformMake(widthRatio, 0, 0, 0.8, 0, 0);
@@ -357,7 +408,123 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     return datepicker;
 }
 
-- (UILabel *)buildAlert{
+- (UIView *)buildColorPicker{
+    CGFloat widthRatio = _pickerWidth ? _pickerWidth / [UIScreen mainScreen].bounds.size.width : 0.8;
+    CGAffineTransform transform = CGAffineTransformMake(widthRatio, 0, 0, 0.8, 0, 0);
+    CGRect newRect = CGRectApplyAffineTransform(self.frame, transform);
+    CGRect tableRect;
+    float heightOffset = CZP_HEADER_HEIGHT + CZP_FOOTER_HEIGHT;
+    float height = ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft ||
+                    [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) ? 180 : 260;
+    height = height > newRect.size.height - heightOffset ? newRect.size.height -heightOffset : height;
+    tableRect = CGRectMake(0, 44.0, newRect.size.width, height);
+    
+    UIView *view = [[UIView alloc]initWithFrame:tableRect];
+    view.backgroundColor = UIColor.whiteColor;
+    CGRect frame = CGRectMake(10, 10, newRect.size.width - 20, height - 20);
+    self.wheelView = [[DRColorPickerWheelView alloc] initWithFrame:frame];
+    if (self.selectedColorPicker)
+        self.wheelView.color = self.selectedColorPicker;
+    self.wheelView.hideColorInfo = YES;
+    [view addSubview:self.wheelView];
+    
+    __weak FAPickerView *weakSelf = self;
+    self.wheelView.colorChangedBlock = ^(UIColor *color) {
+        weakSelf.selectedColorPicker = color;
+        
+        [weakSelf changeHeaderAndFooterColors:color];
+    };
+    
+    return view;
+}
+
+- (UIScrollView *)buildCustomViewContainer{
+    
+    float getHeight = _customContainerViewHeight;
+    if (!getHeight) {
+        for (UIView* view in _customView.view.subviews) {
+            getHeight = getHeight < (view.frame.origin.y + view.frame.size.height) ? (view.frame.origin.y + view.frame.size.height) : getHeight ;
+        }
+        _customContainerViewHeight = getHeight;
+    }
+    if (!_customViewHeight){
+        _customViewHeight = _customContainerViewHeight;
+    }
+    
+    CGFloat widthRatio = _pickerWidth ? _pickerWidth / [UIScreen mainScreen].bounds.size.width : 0.8;
+    CGAffineTransform transform = CGAffineTransformMake(widthRatio, 0, 0, 0.8, 0, 0);
+    CGRect newRect = CGRectApplyAffineTransform(self.frame, transform);
+    CGRect tableRect;
+    float heightOffset = CZP_HEADER_HEIGHT + CZP_FOOTER_HEIGHT;
+    float height = _customViewHeight + 10;
+    height = height > newRect.size.height - heightOffset ? newRect.size.height -heightOffset : height;
+    tableRect = CGRectMake(0, 44.0, newRect.size.width, height);
+    CGRect customRect = CGRectMake(0, 0, newRect.size.width, (height > getHeight + 10) ? height : (getHeight + 10)  ) ;
+    
+//    UIView *view = [[UIView alloc]initWithFrame:tableRect];
+    UIScrollView *view = [[UIScrollView alloc]initWithFrame:tableRect];
+    _customView.view.clipsToBounds = YES;
+    _customView.view.frame = customRect;
+    [view addSubview:_customView.view];
+    [_customView didMoveToParentViewController:self];
+    view.bounces = NO;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        float getHeight = 0;
+        for (UIView* view in _customView.view.subviews) {
+            getHeight = getHeight < (view.frame.origin.y + view.frame.size.height) ? (view.frame.origin.y + view.frame.size.height) : getHeight ;
+        }
+        self.customViewContainer.contentSize = CGSizeMake(newRect.size.width, getHeight);
+        _customView.view.frame = customRect;
+    });
+    
+    return view;
+}
+
+- (UIScrollView *)buildCustomPickerViewContainer{
+    
+    float getHeight = _customContainerViewHeight;
+    if (!getHeight) {
+        for (UIView* view in _customView.view.subviews) {
+            getHeight = getHeight < (view.frame.origin.y + view.frame.size.height) ? (view.frame.origin.y + view.frame.size.height) : getHeight ;
+        }
+        _customContainerViewHeight = getHeight;
+    }
+    if (!_customViewHeight){
+        _customViewHeight = _customContainerViewHeight;
+    }
+    
+    CGFloat widthRatio = _pickerWidth ? _pickerWidth / [UIScreen mainScreen].bounds.size.width : 0.8;
+    CGAffineTransform transform = CGAffineTransformMake(widthRatio, 0, 0, 0.8, 0, 0);
+    CGRect newRect = CGRectApplyAffineTransform(self.frame, transform);
+    CGRect tableRect;
+    float heightOffset = 0;
+    float height = _customViewHeight + 10;
+    height = height > newRect.size.height - heightOffset ? newRect.size.height -heightOffset : height;
+    tableRect = CGRectMake(0, 0, newRect.size.width, height);
+    CGRect customRect = CGRectMake(0, 0, newRect.size.width, (height > getHeight + 10) ? height : (getHeight + 10));
+    
+    //    UIView *view = [[UIView alloc]initWithFrame:tableRect];
+    UIScrollView *view = [[UIScrollView alloc]initWithFrame:tableRect];
+    _customView.view.clipsToBounds = YES;
+    _customView.view.frame = customRect;
+    [view addSubview:_customView.view];
+    [_customView didMoveToParentViewController:self];
+    view.bounces = NO;
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        float getHeight = 0;
+        for (UIView* view in _customView.view.subviews) {
+            getHeight = getHeight < (view.frame.origin.y + view.frame.size.height) ? (view.frame.origin.y + view.frame.size.height) : getHeight ;
+        }
+        self.customPickerViewContainer.contentSize = CGSizeMake(newRect.size.width, getHeight);
+    });
+    
+    return view;
+}
+
+
+- (UIView *)buildAlert{
     CGFloat widthRatio = _pickerWidth ? _pickerWidth / [UIScreen mainScreen].bounds.size.width : 0.8;
     CGAffineTransform transform = CGAffineTransformMake(widthRatio, 0, 0, 0.8, 0, 0);
     CGRect newRect = CGRectApplyAffineTransform(self.frame, transform);
@@ -377,7 +544,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     
     float height = requiredHeight.size.height + 10;
     height = height < CZP_HEADER_HEIGHT * 2 ? CZP_HEADER_HEIGHT * 2 : height;
-    tableRect = CGRectMake(0, 44.0, newRect.size.width, height);
+    tableRect = CGRectMake(5, 0, newRect.size.width-10, height);
     
     UILabel *body = [[UILabel alloc] initWithFrame:tableRect];
     body.textColor = mainColor ? mainColor : mainFAPickerColor;
@@ -386,7 +553,11 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     body.text = _message;
     body.numberOfLines = 0;
     body.font = [UIFont systemFontOfSize:16];
-    return body;
+    
+    UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, 44.0, newRect.size.width, height)];
+    view.backgroundColor = [UIColor whiteColor];
+    [view addSubview:body];
+    return view;
 }
 
 
@@ -433,6 +604,16 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
             rect = self.alertBody.frame;
             isAlert= YES;
             break;
+        case FAPickerTypeColor:
+            rect = self.colorPickerView.frame;
+            break;
+        case FAPickerTypeCustomView:
+            rect = self.customViewContainer.frame;
+            isAlert= YES;
+            break;
+        case FAPickerTypeCustomPicker:
+            return [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+            break;
         default:
             break;
     }
@@ -453,6 +634,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         cancelButton.titleLabel.font = [UIFont boldSystemFontOfSize:16];
         cancelButton.backgroundColor = self.cancelButtonBackgroundColor;
         [cancelButton addTarget:self action:@selector(cancelButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        cancelButton.tag = 100;
         [view addSubview:cancelButton];
         
         UIButton *confirmButton = [[UIButton alloc] initWithFrame:rightRect];
@@ -462,6 +644,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         confirmButton.titleLabel.font = [UIFont systemFontOfSize:16];
         confirmButton.backgroundColor = self.confirmButtonBackgroundColor;
         [confirmButton addTarget:self action:@selector(confirmButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+        confirmButton.tag = 200;
         [view addSubview:confirmButton];
         return view;
     } else {
@@ -571,6 +754,15 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         case FAPickerTypeAlert:
             view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.alertBody.frame.size.width, CZP_HEADER_HEIGHT)];
             break;
+        case FAPickerTypeColor:
+            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.colorPickerView.frame.size.width, CZP_HEADER_HEIGHT)];
+            break;
+        case FAPickerTypeCustomView:
+            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.customViewContainer.frame.size.width, CZP_HEADER_HEIGHT)];
+            break;
+        case FAPickerTypeCustomPicker:
+            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
+            break;
         default:
             break;
     }
@@ -588,6 +780,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     UILabel *label = [[UILabel alloc] initWithFrame:view.frame];
     label.attributedText = at;
     [label sizeToFit];
+    label.tag = 100;
     [view addSubview:label];
     label.center = view.center;
     
@@ -629,6 +822,23 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
 +(FAPickerView*)picker
 {
     return [FAPickerView new];
+}
+
++(FAPickerView*)currentPicker
+{
+    
+    UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
+    for (UIView *picker in mainWindow.subviews) {
+        if ([picker isKindOfClass:[FAPickerView class]]) {
+            return (FAPickerView*)picker;
+        }
+    }
+    return [FAPickerView new];
+}
+
+#pragma mark Close
++(void)ClosePicker{
+    [[self currentPicker] dismissPicker:nil];
 }
 
 #pragma mark - textfield delegat
@@ -675,6 +885,14 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         return;
     }
     
+    if (_pickerType == FAPickerTypeColor && [sender isKindOfClass:[UITapGestureRecognizer class]]) {
+        return;
+    }
+    
+    if (_pickerType == FAPickerTypeCustomView && [sender isKindOfClass:[UITapGestureRecognizer class]]) {
+        return;
+    }
+    
     [self dismissPicker:^{
         if([self.delegate respondsToSelector:@selector(fapickerViewDidClickCancelButton:)]){
             [self.delegate fapickerViewDidClickCancelButton:self];
@@ -686,6 +904,10 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     
     if (_completeWithAlert) {
         _completeWithAlert(FAPickerAlertButtonCancel);
+    }
+    
+    if (_completedWithCustomView) {
+        _completedWithCustomView(FAPickerCustomViewButtonCancel);
     }
 }
 
@@ -746,6 +968,20 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
             {
                 if (_completeWithAlert) {
                     _completeWithAlert(FAPickerAlertButtonConfirm);
+                }
+            }
+                break;
+                case FAPickerTypeColor:
+            {
+                if (_completedWithColor){
+                    _completedWithColor(_selectedColorPicker);
+                }
+            }
+                break;
+                case FAPickerTypeCustomView:
+            {
+                if (_completedWithCustomView) {
+                    _completedWithCustomView(FAPickerCustomViewButtonConfirm);
                 }
             }
                 break;
@@ -1168,11 +1404,11 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
 #pragma mark Items with single selctor
 -(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
         selectedItem:(FAPickerItem *)item
-        HeaderTitle:(NSString *)headerTitle
-  cancelButtonTitle:(NSString *)cancelButtonTitle
-  confirmButtonTitle:(NSString *)confirmButtonTitle
               filter:(BOOL)filter
-     WithCompletion:(completedWithItem)complete cancel:(cancel)cancel
+         HeaderTitle:(NSString *)headerTitle
+   cancelButtonTitle:(NSString *)cancelButtonTitle
+  confirmButtonTitle:(NSString *)confirmButtonTitle
+      WithCompletion:(completedWithItem)complete cancel:(cancel)cancel
 {
     [self initViewWithType:FAPickerTypeItems
                HeaderTitle:headerTitle
@@ -1189,11 +1425,11 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
 }
 
 -(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
-        selectedItemWithTitle:(NSString *)title
+selectedItemWithTitle:(NSString *)title
+              filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
    cancelButtonTitle:(NSString *)cancelButtonTitle
   confirmButtonTitle:(NSString *)confirmButtonTitle
-              filter:(BOOL)filter
       WithCompletion:(completedWithItem)complete cancel:(cancel)cancel
 {
     [self initViewWithType:FAPickerTypeItems
@@ -1212,11 +1448,11 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
 
 #pragma mark Items with multi selctor
 -(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
-        selectedItems:(NSMutableArray<FAPickerItem *>*)selectedItems
+       selectedItems:(NSMutableArray<FAPickerItem *>*)selectedItems
+              filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
    cancelButtonTitle:(NSString *)cancelButtonTitle
   confirmButtonTitle:(NSString *)confirmButtonTitle
-              filter:(BOOL)filter
       WithCompletion:(completedWithItemsAtItems)complete cancel:(cancel)cancel
 {
     [self initViewWithType:FAPickerTypeItems
@@ -1237,8 +1473,8 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
 #pragma mark Items with single selctor Without footer
 -(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
         selectedItem:(FAPickerItem *)item
-         HeaderTitle:(NSString *)headerTitle
               filter:(BOOL)filter
+         HeaderTitle:(NSString *)headerTitle
       WithCompletion:(completedWithItem)complete cancel:(cancel)cancel
 {
     [self initViewWithType:FAPickerTypeItems
@@ -1256,9 +1492,9 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
 }
 
 -(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
-        selectedItemWithTitle:(NSString *)title
-         HeaderTitle:(NSString *)headerTitle
               filter:(BOOL)filter
+selectedItemWithTitle:(NSString *)title
+         HeaderTitle:(NSString *)headerTitle
       WithCompletion:(completedWithItem)complete cancel:(cancel)cancel
 {
     [self initViewWithType:FAPickerTypeItems
@@ -1277,11 +1513,11 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
 
 #pragma mark Date and Time
 
--(void)showselectedDate:(NSDate *)date
-            HeaderTitle:(NSString *)headerTitle
-      cancelButtonTitle:(NSString *)cancelButtonTitle
-     confirmButtonTitle:(NSString *)confirmButtonTitle
-         WithCompletion:(completedWithDate)complete cancel:(cancel)cancel
+-(void)showWithSelectedDate:(NSDate *)date
+                HeaderTitle:(NSString *)headerTitle
+          cancelButtonTitle:(NSString *)cancelButtonTitle
+         confirmButtonTitle:(NSString *)confirmButtonTitle
+             WithCompletion:(completedWithDate)complete cancel:(cancel)cancel
 {
     [self initViewWithType:FAPickerTypeDate
                HeaderTitle:headerTitle
@@ -1297,12 +1533,12 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     [self show];
 }
 
--(void)showselectedDate:(NSDate *)date
-             DateFormat:(UIDatePickerMode)datePickerMode
-            HeaderTitle:(NSString *)headerTitle
-      cancelButtonTitle:(NSString *)cancelButtonTitle
-     confirmButtonTitle:(NSString *)confirmButtonTitle
-         WithCompletion:(completedWithDate)complete cancel:(cancel)cancel
+-(void)showWithSelectedDate:(NSDate *)date
+                 DateFormat:(UIDatePickerMode)datePickerMode
+                HeaderTitle:(NSString *)headerTitle
+          cancelButtonTitle:(NSString *)cancelButtonTitle
+         confirmButtonTitle:(NSString *)confirmButtonTitle
+             WithCompletion:(completedWithDate)complete cancel:(cancel)cancel
 {
     [self initViewWithType:FAPickerTypeDate
                HeaderTitle:headerTitle
@@ -1320,13 +1556,13 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
 
 #pragma mark Date and Time With Range
 
--(void)showselectedDate:(NSDate *)date
-            MaximumDate:(NSDate *)maximumDate
-            MinimumDate:(NSDate *)minimumDate
-            HeaderTitle:(NSString *)headerTitle
-      cancelButtonTitle:(NSString *)cancelButtonTitle
-     confirmButtonTitle:(NSString *)confirmButtonTitle
-         WithCompletion:(completedWithDate)complete cancel:(cancel)cancel
+-(void)showWithSelectedDate:(NSDate *)date
+                MaximumDate:(NSDate *)maximumDate
+                MinimumDate:(NSDate *)minimumDate
+                HeaderTitle:(NSString *)headerTitle
+          cancelButtonTitle:(NSString *)cancelButtonTitle
+         confirmButtonTitle:(NSString *)confirmButtonTitle
+             WithCompletion:(completedWithDate)complete cancel:(cancel)cancel
 {
     [self initViewWithType:FAPickerTypeDate
                HeaderTitle:headerTitle
@@ -1344,14 +1580,14 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     [self show];
 }
 
--(void)showselectedDate:(NSDate *)date
-             DateFormat:(UIDatePickerMode)datePickerMode
-            MaximumDate:(NSDate *)maximumDate
-            MinimumDate:(NSDate *)minimumDate
-            HeaderTitle:(NSString *)headerTitle
-      cancelButtonTitle:(NSString *)cancelButtonTitle
-     confirmButtonTitle:(NSString *)confirmButtonTitle
-         WithCompletion:(completedWithDate)complete cancel:(cancel)cancel
+-(void)showWithSelectedDate:(NSDate *)date
+                 DateFormat:(UIDatePickerMode)datePickerMode
+                MaximumDate:(NSDate *)maximumDate
+                MinimumDate:(NSDate *)minimumDate
+                HeaderTitle:(NSString *)headerTitle
+          cancelButtonTitle:(NSString *)cancelButtonTitle
+         confirmButtonTitle:(NSString *)confirmButtonTitle
+             WithCompletion:(completedWithDate)complete cancel:(cancel)cancel
 {
     [self initViewWithType:FAPickerTypeDate
                HeaderTitle:headerTitle
@@ -1369,11 +1605,29 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     [self show];
 }
 
+#pragma mark color picker
+-(void)showWithSelectedColor:(UIColor *)color
+                 HeaderTitle:(NSString *)headerTitle
+           cancelButtonTitle:(NSString *)cancelButtonTitle
+          confirmButtonTitle:(NSString *)confirmButtonTitle
+              WithCompletion:(completedWithColor)complete cancel:(cancel)cancel{
+    [self initViewWithType:FAPickerTypeColor
+               HeaderTitle:headerTitle
+         cancelButtonTitle:cancelButtonTitle
+        confirmButtonTitle:confirmButtonTitle];
+    _selectedColorPicker = color ? color : [UIColor whiteColor];
+    _needFooterView = YES;
+    _Filter = NO;
+    _completedWithColor = complete;
+    _cancel = cancel;
+    [self show];
+}
+
 #pragma mark Alert view
--(void)showWithHeaderTitle:(NSString *)headerTitle
-                   Message:(NSString *)message
-        confirmButtonTitle:(NSString *)confirmButtonTitle
-            WithCompletion:(completedWithAlert)complete
+-(void)showWithMessage:(NSString *)message
+           headerTitle:(NSString *)headerTitle
+    confirmButtonTitle:(NSString *)confirmButtonTitle
+        WithCompletion:(completedWithAlert)complete
 {
     [self initViewWithType:FAPickerTypeAlert
                HeaderTitle:headerTitle
@@ -1386,11 +1640,11 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     [self show];
 }
 
--(void)showWithHeaderTitle:(NSString *)headerTitle
-                   Message:(NSString *)message
-        confirmButtonTitle:(NSString *)confirmButtonTitle
-         cancelButtonTitle:(NSString *)cancelButtonTitle
-            WithCompletion:(completedWithAlert)complete
+-(void)showWithMessage:(NSString *)message
+           headerTitle:(NSString *)headerTitle
+    confirmButtonTitle:(NSString *)confirmButtonTitle
+     cancelButtonTitle:(NSString *)cancelButtonTitle
+        WithCompletion:(completedWithAlert)complete
 {
     [self initViewWithType:FAPickerTypeAlert
                HeaderTitle:headerTitle
@@ -1403,12 +1657,12 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     [self show];
 }
 
--(void)showWithHeaderTitle:(NSString *)headerTitle
-                   Message:(NSString *)message
-        confirmButtonTitle:(NSString *)confirmButtonTitle
-         cancelButtonTitle:(NSString *)cancelButtonTitle
-          thirdButtonTitle:(NSString *)thirdButtonTitle
-            WithCompletion:(completedWithAlert)complete
+-(void)showWithMessage:(NSString *)message
+           headerTitle:(NSString *)headerTitle
+    confirmButtonTitle:(NSString *)confirmButtonTitle
+     cancelButtonTitle:(NSString *)cancelButtonTitle
+      thirdButtonTitle:(NSString *)thirdButtonTitle
+        WithCompletion:(completedWithAlert)complete
 {
     [self initViewWithType:FAPickerTypeAlert
                HeaderTitle:headerTitle
@@ -1422,6 +1676,102 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     [self show];
 }
 
+#pragma mark Custom view
+
+-(void)showWithCustomView:(UIViewController *)view
+              headerTitle:(NSString *)headerTitle
+       confirmButtonTitle:(NSString *)confirmButtonTitle
+           WithCompletion:(completedWithCustomView)complete{
+    [self initViewWithType:FAPickerTypeCustomView
+               HeaderTitle:headerTitle
+         cancelButtonTitle:@""
+        confirmButtonTitle:confirmButtonTitle];
+    _customView = view;
+    _customViewHeight = 0;
+    _needFooterView = YES;
+    _Filter = NO;
+    _completedWithCustomView = complete;
+    [self show];
+}
+
+-(void)showWithCustomView:(UIViewController *)view
+              headerTitle:(NSString *)headerTitle
+       confirmButtonTitle:(NSString *)confirmButtonTitle
+        cancelButtonTitle:(NSString *)cancelButtonTitle
+           WithCompletion:(completedWithCustomView)complete{
+    [self initViewWithType:FAPickerTypeCustomView
+               HeaderTitle:headerTitle
+         cancelButtonTitle:cancelButtonTitle
+        confirmButtonTitle:confirmButtonTitle];
+    _customView = view;
+    _customViewHeight = 0;
+    _needFooterView = YES;
+    _Filter = NO;
+    _completedWithCustomView = complete;
+    [self show];
+}
+
+-(void)showWithCustomView:(UIViewController *)view
+CustomViewContainerHeight:(float)height
+              headerTitle:(NSString *)headerTitle
+       confirmButtonTitle:(NSString *)confirmButtonTitle
+           WithCompletion:(completedWithCustomView)complete{
+    [self initViewWithType:FAPickerTypeCustomView
+               HeaderTitle:headerTitle
+         cancelButtonTitle:@""
+        confirmButtonTitle:confirmButtonTitle];
+    _customView = view;
+    _customViewHeight = height < 0 ? 0 : height;
+    _needFooterView = YES;
+    _Filter = NO;
+    _completedWithCustomView = complete;
+    [self show];
+}
+
+-(void)showWithCustomView:(UIViewController *)view
+CustomViewContainerHeight:(float)height
+              headerTitle:(NSString *)headerTitle
+       confirmButtonTitle:(NSString *)confirmButtonTitle
+        cancelButtonTitle:(NSString *)cancelButtonTitle
+           WithCompletion:(completedWithCustomView)complete{
+    [self initViewWithType:FAPickerTypeCustomView
+               HeaderTitle:headerTitle
+         cancelButtonTitle:cancelButtonTitle
+        confirmButtonTitle:confirmButtonTitle];
+    _customView = view;
+    _customViewHeight = height < 0 ? 0 : height;
+    _needFooterView = YES;
+    _Filter = NO;
+    _completedWithCustomView = complete;
+    [self show];
+}
+
+#pragma mark Custom Picker
+
+-(void)showWithCustomPickerView:(UIViewController *)view{
+    [self initViewWithType:FAPickerTypeCustomPicker
+               HeaderTitle:@""
+         cancelButtonTitle:@""
+        confirmButtonTitle:@""];
+    _customView = view;
+    _customViewHeight = 0;
+    _needFooterView = NO;
+    _Filter = NO;
+    [self show];
+}
+
+-(void)showWithCustomPickerView:(UIViewController *)view
+      CustomViewContainerHeight:(float)height{
+    [self initViewWithType:FAPickerTypeCustomPicker
+               HeaderTitle:@""
+         cancelButtonTitle:@""
+        confirmButtonTitle:@""];
+    _customView = view;
+    _customViewHeight = height < 0 ? 0 : height;
+    _needFooterView = NO;
+    _Filter = NO;
+    [self show];
+}
 
 #pragma mark init View
 
@@ -1438,6 +1788,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     }
     self.pickerType = pickerType;
     self.selectedDate = [NSDate date];
+    self.selectedColorPicker = UIColor.whiteColor;
     self.tapBackgroundToDismiss = YES;
     self.needFooterView = NO;
     self.allowMultipleSelection = NO;

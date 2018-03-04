@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'FAPickerView'
-  s.version          = '0.1.5'
-  s.summary          = 'Add Image with url, color items, date and time with range (Dependency - FAImageView)'
+  s.version          = '0.1.6'
+  s.summary          = 'Custom view + add swift 4 sample + show color hex + add padding in alert view'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -30,9 +30,9 @@ Pod::Spec.new do |s|
 
   s.source_files = 'FAPickerView/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'FAPickerView' => ['FAPickerView/Assets/*.xcassets']
-  # }
+  s.resource_bundles = {
+    'FAPickerView' => ['FAPickerView/Assets/*.xcassets']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'

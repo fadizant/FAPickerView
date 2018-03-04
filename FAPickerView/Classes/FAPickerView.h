@@ -1,12 +1,15 @@
 //
 //  FAPickerView.h
 //
-//  Created by chenzeyu on 9/6/15.
-//  Copyright (c) 2015 chenzeyu. All rights reserved.
+//  Created by Fadi Abuzant on 3/4/18.
+//  Copyright © 2018 fadizant. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-
+#import "DRColorPickerWheelView.h"
+#import "DRColorPicker.h"
+#import "DRColorPickerColor.h"
+#import "DRColorPicker+UIColor.h"
 
 @class FAPickerView;
 @class FAPickerItem;
@@ -23,15 +26,15 @@
  Implement at least one of the following method,
  FAPickerView:(FAPickerView *)pickerView
  attributedTitleForRow:(NSInteger)row has higer priority
-*/
+ */
 
 /* attributed picker item title for each row */
 - (NSAttributedString *)fapickerView:(FAPickerView *)pickerView
-                            attributedTitleForRow:(NSInteger)row;
+               attributedTitleForRow:(NSInteger)row;
 
 /* picker item title for each row */
 - (NSString *)fapickerView:(FAPickerView *)pickerView
-                            titleForRow:(NSInteger)row;
+               titleForRow:(NSInteger)row;
 
 /* picker item image for each row */
 - (UIImage *)fapickerView:(FAPickerView *)pickerView imageForRow:(NSInteger)row;
@@ -44,10 +47,10 @@
 
 /** delegate method for picking one item */
 - (void)fapickerView:(FAPickerView *)pickerView
-          didConfirmWithItemAtRow:(NSInteger)row;
+didConfirmWithItemAtRow:(NSInteger)row;
 
 - (void)fapickerView:(FAPickerView *)pickerView
-    didConfirmWithItem:(FAPickerItem*)item;
+  didConfirmWithItem:(FAPickerItem*)item;
 
 - (void)fapickerView:(FAPickerView *)pickerView
   didConfirmWithDate:(NSDate*)date;
@@ -58,10 +61,10 @@
  rows is an array of NSNumbers
  */
 - (void)fapickerView:(FAPickerView *)pickerView
-          didConfirmWithItemsAtRows:(NSArray *)rows;
+didConfirmWithItemsAtRows:(NSArray *)rows;
 
 - (void)fapickerView:(FAPickerView *)pickerView
-    didConfirmWithItemsAtItems:(NSMutableArray <FAPickerItem*> *)items;
+didConfirmWithItemsAtItems:(NSMutableArray <FAPickerItem*> *)items;
 
 /** delegate method for canceling */
 - (void)fapickerViewDidClickCancelButton:(FAPickerView *)pickerView;
@@ -81,17 +84,25 @@
 @end
 
 #pragma mark - Block declear
-//Block
+//Alert
 typedef NS_ENUM(NSInteger, FAPickerAlertButton) {
     FAPickerAlertButtonCancel,
     FAPickerAlertButtonConfirm,
     FAPickerAlertButtonThird,
 };
 
+//Custom View
+typedef NS_ENUM(NSInteger, FAPickerCustomViewButton) {
+    FAPickerCustomViewButtonCancel,
+    FAPickerCustomViewButtonConfirm,
+};
+
 typedef void (^completedWithItem)(FAPickerItem* item);
 typedef void (^completedWithDate)(NSDate* date);
 typedef void (^completedWithItemsAtItems)(NSMutableArray <FAPickerItem*> *items);
 typedef void (^completedWithAlert)(FAPickerAlertButton button);
+typedef void (^completedWithColor)(UIColor* color);
+typedef void (^completedWithCustomView)(FAPickerCustomViewButton button);
 typedef void (^cancel)();
 
 @interface FAPickerView : UIView<UITableViewDataSource, UITableViewDelegate,UITextFieldDelegate>
@@ -99,6 +110,10 @@ typedef void (^cancel)();
 #pragma mark - Static
 
 +(FAPickerView*)picker;
++(FAPickerView*)currentPicker;
+
+#pragma mark Close
++(void)ClosePicker;
 
 #pragma mark - Initialize and methods the picker view
 /** picker type enum */
@@ -106,6 +121,9 @@ typedef NS_ENUM(NSInteger, FAPickerType) {
     FAPickerTypeItems,
     FAPickerTypeDate,
     FAPickerTypeAlert,
+    FAPickerTypeColor,
+    FAPickerTypeCustomView,
+    FAPickerTypeCustomPicker,
 };
 
 +(UIColor*)mainColor;
@@ -123,8 +141,8 @@ typedef NS_ENUM(NSInteger, FAPickerType) {
 confirmButtonTitle:(NSString *)confirmButtonTitle;
 
 /** show the picker */
-- (void)show;
-- (void)showInContainer:(id)container;
+//- (void)show;
+//- (void)showInContainer:(id)container;
 
 /** reload the picker */
 - (void)reloadData;
@@ -148,89 +166,138 @@ confirmButtonTitle:(NSString *)confirmButtonTitle;
 - (void)unselectAll;
 
 #pragma mark - block methods
+#pragma mark Items with single selctor
 -(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
         selectedItem:(FAPickerItem *)item
+              filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
    cancelButtonTitle:(NSString *)cancelButtonTitle
   confirmButtonTitle:(NSString *)confirmButtonTitle
-              filter:(BOOL)filter
       WithCompletion:(completedWithItem)complete cancel:(cancel)cancel;
 
 -(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
 selectedItemWithTitle:(NSString *)title
+              filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
    cancelButtonTitle:(NSString *)cancelButtonTitle
   confirmButtonTitle:(NSString *)confirmButtonTitle
-              filter:(BOOL)filter
       WithCompletion:(completedWithItem)complete cancel:(cancel)cancel;
 
+#pragma mark Items with multi selctor
 -(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
        selectedItems:(NSMutableArray<FAPickerItem *>*)selectedItems
+              filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
    cancelButtonTitle:(NSString *)cancelButtonTitle
   confirmButtonTitle:(NSString *)confirmButtonTitle
-              filter:(BOOL)filter
       WithCompletion:(completedWithItemsAtItems)complete cancel:(cancel)cancel;
 
--(void)showselectedDate:(NSDate *)date
-            HeaderTitle:(NSString *)headerTitle
-      cancelButtonTitle:(NSString *)cancelButtonTitle
-     confirmButtonTitle:(NSString *)confirmButtonTitle
-         WithCompletion:(completedWithDate)complete cancel:(cancel)cancel;
-
--(void)showselectedDate:(NSDate *)date
-             DateFormat:(UIDatePickerMode)datePickerMode
-            HeaderTitle:(NSString *)headerTitle
-      cancelButtonTitle:(NSString *)cancelButtonTitle
-     confirmButtonTitle:(NSString *)confirmButtonTitle
-         WithCompletion:(completedWithDate)complete cancel:(cancel)cancel;
-
--(void)showselectedDate:(NSDate *)date
-            MaximumDate:(NSDate *)maximumDate
-            MinimumDate:(NSDate *)minimumDate
-            HeaderTitle:(NSString *)headerTitle
-      cancelButtonTitle:(NSString *)cancelButtonTitle
-     confirmButtonTitle:(NSString *)confirmButtonTitle
-         WithCompletion:(completedWithDate)complete cancel:(cancel)cancel;
-
--(void)showselectedDate:(NSDate *)date
-             DateFormat:(UIDatePickerMode)datePickerMode
-            MaximumDate:(NSDate *)maximumDate
-            MinimumDate:(NSDate *)minimumDate
-            HeaderTitle:(NSString *)headerTitle
-      cancelButtonTitle:(NSString *)cancelButtonTitle
-     confirmButtonTitle:(NSString *)confirmButtonTitle
-         WithCompletion:(completedWithDate)complete cancel:(cancel)cancel;
-
+#pragma mark Items with single selctor Without footer
 -(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
         selectedItem:(FAPickerItem *)item
-         HeaderTitle:(NSString *)headerTitle
               filter:(BOOL)filter
+         HeaderTitle:(NSString *)headerTitle
       WithCompletion:(completedWithItem)complete cancel:(cancel)cancel;
 
 -(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
+              filter:(BOOL)filter
 selectedItemWithTitle:(NSString *)title
          HeaderTitle:(NSString *)headerTitle
-              filter:(BOOL)filter
       WithCompletion:(completedWithItem)complete cancel:(cancel)cancel;
 
--(void)showWithHeaderTitle:(NSString *)headerTitle
-                   Message:(NSString *)message
-        confirmButtonTitle:(NSString *)confirmButtonTitle
-            WithCompletion:(completedWithAlert)complete;
+#pragma mark Date
 
--(void)showWithHeaderTitle:(NSString *)headerTitle
-                   Message:(NSString *)message
-        confirmButtonTitle:(NSString *)confirmButtonTitle
-         cancelButtonTitle:(NSString *)cancelButtonTitle
-            WithCompletion:(completedWithAlert)complete;
+-(void)showWithSelectedDate:(NSDate *)date
+                HeaderTitle:(NSString *)headerTitle
+          cancelButtonTitle:(NSString *)cancelButtonTitle
+         confirmButtonTitle:(NSString *)confirmButtonTitle
+             WithCompletion:(completedWithDate)complete cancel:(cancel)cancel;
 
--(void)showWithHeaderTitle:(NSString *)headerTitle
-                   Message:(NSString *)message
-        confirmButtonTitle:(NSString *)confirmButtonTitle
-         cancelButtonTitle:(NSString *)cancelButtonTitle
-          thirdButtonTitle:(NSString *)thirdButtonTitle
-            WithCompletion:(completedWithAlert)complete;
+-(void)showWithSelectedDate:(NSDate *)date
+                 DateFormat:(UIDatePickerMode)datePickerMode
+                HeaderTitle:(NSString *)headerTitle
+          cancelButtonTitle:(NSString *)cancelButtonTitle
+         confirmButtonTitle:(NSString *)confirmButtonTitle
+             WithCompletion:(completedWithDate)complete cancel:(cancel)cancel;
+
+#pragma mark Date and Time With Range
+-(void)showWithSelectedDate:(NSDate *)date
+                MaximumDate:(NSDate *)maximumDate
+                MinimumDate:(NSDate *)minimumDate
+                HeaderTitle:(NSString *)headerTitle
+          cancelButtonTitle:(NSString *)cancelButtonTitle
+         confirmButtonTitle:(NSString *)confirmButtonTitle
+             WithCompletion:(completedWithDate)complete cancel:(cancel)cancel;
+
+-(void)showWithSelectedDate:(NSDate *)date
+                 DateFormat:(UIDatePickerMode)datePickerMode
+                MaximumDate:(NSDate *)maximumDate
+                MinimumDate:(NSDate *)minimumDate
+                HeaderTitle:(NSString *)headerTitle
+          cancelButtonTitle:(NSString *)cancelButtonTitle
+         confirmButtonTitle:(NSString *)confirmButtonTitle
+             WithCompletion:(completedWithDate)complete cancel:(cancel)cancel;
+
+#pragma mark Color
+
+-(void)showWithSelectedColor:(UIColor *)color
+                 HeaderTitle:(NSString *)headerTitle
+           cancelButtonTitle:(NSString *)cancelButtonTitle
+          confirmButtonTitle:(NSString *)confirmButtonTitle
+              WithCompletion:(completedWithColor)complete cancel:(cancel)cancel;
+
+#pragma mark Alert
+
+-(void)showWithMessage:(NSString *)message
+           headerTitle:(NSString *)headerTitle
+    confirmButtonTitle:(NSString *)confirmButtonTitle
+        WithCompletion:(completedWithAlert)complete;
+
+-(void)showWithMessage:(NSString *)message
+           headerTitle:(NSString *)headerTitle
+    confirmButtonTitle:(NSString *)confirmButtonTitle
+     cancelButtonTitle:(NSString *)cancelButtonTitle
+        WithCompletion:(completedWithAlert)complete;
+
+-(void)showWithMessage:(NSString *)message
+           headerTitle:(NSString *)headerTitle
+    confirmButtonTitle:(NSString *)confirmButtonTitle
+     cancelButtonTitle:(NSString *)cancelButtonTitle
+      thirdButtonTitle:(NSString *)thirdButtonTitle
+        WithCompletion:(completedWithAlert)complete;
+
+#pragma mark Custom View
+
+-(void)showWithCustomView:(UIViewController *)view
+              headerTitle:(NSString *)headerTitle
+       confirmButtonTitle:(NSString *)confirmButtonTitle
+           WithCompletion:(completedWithCustomView)complete;
+
+-(void)showWithCustomView:(UIViewController *)view
+              headerTitle:(NSString *)headerTitle
+       confirmButtonTitle:(NSString *)confirmButtonTitle
+        cancelButtonTitle:(NSString *)cancelButtonTitle
+           WithCompletion:(completedWithCustomView)complete;
+
+-(void)showWithCustomView:(UIViewController *)view
+CustomViewContainerHeight:(float)height
+              headerTitle:(NSString *)headerTitle
+       confirmButtonTitle:(NSString *)confirmButtonTitle
+           WithCompletion:(completedWithCustomView)complete;
+
+-(void)showWithCustomView:(UIViewController *)view
+CustomViewContainerHeight:(float)height
+              headerTitle:(NSString *)headerTitle
+       confirmButtonTitle:(NSString *)confirmButtonTitle
+        cancelButtonTitle:(NSString *)cancelButtonTitle
+           WithCompletion:(completedWithCustomView)complete;
+
+#pragma mark Custom Picker
+
+-(void)showWithCustomPickerView:(UIViewController *)view;
+
+-(void)showWithCustomPickerView:(UIViewController *)view
+      CustomViewContainerHeight:(float)height;
 
 #pragma mark - delegate
 
@@ -302,11 +369,23 @@ selectedItemWithTitle:(NSString *)title
 /** Alert Message */
 @property NSString *message;
 
+/** Defualt color */
+@property UIColor *selectedColorPicker;
+@property (nonatomic, strong) DRColorPickerWheelView* wheelView;
+
+/** Custom View */
+@property UIViewController *customView;
+@property (nonatomic) float customViewHeight;
+@property (nonatomic) float customContainerViewHeight;
+
+
 #pragma mark - block value
 @property completedWithItem completeWithItem;
 @property completedWithDate completedWithDate;
 @property completedWithItemsAtItems completedWithItemsAtItems;
 @property completedWithAlert completeWithAlert;
+@property completedWithColor completedWithColor;
+@property completedWithCustomView completedWithCustomView;
 @property cancel cancel;
 @end
 
