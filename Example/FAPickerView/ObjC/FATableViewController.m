@@ -50,7 +50,6 @@
         case pickerViewTypeEnumMulti:
         {
             NSMutableArray <FAPickerItem*> *items = [NSMutableArray new];
-            FAPickerItem *item = [FAPickerItem new];
             [items addObject:[[FAPickerItem alloc]initWithID:@"1" Title:@"Title 1"]];
             [items addObject:[[FAPickerItem alloc]initWithID:@"2" Title:@"Title 2"]];
             [items addObject:[[FAPickerItem alloc]initWithID:@"3" Title:@"Title 3"]];
@@ -82,12 +81,11 @@
         case pickerViewTypeEnumItemsWithURLImags:
         {
             NSMutableArray <FAPickerItem*> *items = [NSMutableArray new];
-            FAPickerItem *item = [FAPickerItem new];
             [items addObject:[[FAPickerItem alloc] initWithID:@"1"
                                                         Title:@"Facebook"
                                                      ImageURL:@"https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/facebook-icon_128x128.png"
                                                         Thumb:[UIImage imageNamed:@"Thumb"]
-                                                       Circle:YES]];
+                                                       WidthRatio:1.3]];
             [items addObject:[[FAPickerItem alloc] initWithID:@"2"
                                                         Title:@"Google"
                                                      ImageURL:@"https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/googleplus-icon_128x128.png"
@@ -307,7 +305,8 @@
             [FAPickerView setMainColor:[UIColor colorWithRed:0.99 green:0.49 blue:0.32 alpha:1.0]];
             FACustomViewController * view = [self.storyboard instantiateViewControllerWithIdentifier:@"FACustomViewController"];
             view.isCustomPicker = YES;
-            [[FAPickerView picker] showWithCustomPickerView:view];
+            [[FAPickerView picker] showWithCustomPickerView:view
+                                              CancelGesture:NO];
         }
             break;
             case pickerViewTypeEnumAlertOne:

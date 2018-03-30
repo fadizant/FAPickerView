@@ -103,7 +103,7 @@ typedef void (^completedWithItemsAtItems)(NSMutableArray <FAPickerItem*> *items)
 typedef void (^completedWithAlert)(FAPickerAlertButton button);
 typedef void (^completedWithColor)(UIColor* color);
 typedef void (^completedWithCustomView)(FAPickerCustomViewButton button);
-typedef void (^cancel)();
+typedef void (^cancel)(void);
 
 @interface FAPickerView : UIView<UITableViewDataSource, UITableViewDelegate,UITextFieldDelegate>
 
@@ -297,7 +297,14 @@ CustomViewContainerHeight:(float)height
 -(void)showWithCustomPickerView:(UIViewController *)view;
 
 -(void)showWithCustomPickerView:(UIViewController *)view
+                  CancelGesture:(BOOL)cancelGesture;
+
+-(void)showWithCustomPickerView:(UIViewController *)view
       CustomViewContainerHeight:(float)height;
+
+-(void)showWithCustomPickerView:(UIViewController *)view
+      CustomViewContainerHeight:(float)height
+                  CancelGesture:(BOOL)cancelGesture;
 
 #pragma mark - delegate
 
@@ -398,6 +405,7 @@ CustomViewContainerHeight:(float)height
 @property (nonatomic,retain) UIImage* image;
 @property (nonatomic,retain) NSString* imageURL;
 @property (nonatomic,retain) UIImage* Thumb;
+@property (nonatomic) float widthRatio;
 @property (nonatomic) BOOL circleImage;
 @property (nonatomic) BOOL selected;
 
@@ -416,6 +424,12 @@ CustomViewContainerHeight:(float)height
                      Title:(NSString*)title
                   ImageURL:(NSString*)URL
                      Thumb:(UIImage*)thumb;
+
+- (instancetype)initWithID:(NSString*)ID
+                     Title:(NSString*)title
+                  ImageURL:(NSString*)URL
+                     Thumb:(UIImage*)thumb
+                WidthRatio:(float)widthRatio;
 
 - (instancetype)initWithID:(NSString*)ID
                      Title:(NSString*)title

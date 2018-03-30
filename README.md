@@ -14,7 +14,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 ## How to use
 ### Items
 
-<img src="http://www.m5zn.com/newuploads/2018/03/04/gif//49b6b6d39e17a97.gif"/>
+<img src="http://www.m5zn.com/newuploads/2018/03/04/gif//9a5aecbb16247e0.gif" height="400"/>
 
 ##### ObjC
 
@@ -219,7 +219,7 @@ withCompletion: { (item) in
 
 ### Date
 
-<img src="http://www.m5zn.com/newuploads/2018/03/04/gif//60668cc80da759b.gif"/>
+<img src="http://www.m5zn.com/newuploads/2018/03/04/gif//60668cc80da759b.gif" height="400"/>
 
 ##### ObjC
 
@@ -413,7 +413,7 @@ self.selectedDate = date! as NSDate
 
 ### Color
 
-<img src="http://www.m5zn.com/newuploads/2018/03/04/gif//cf44d7698bde5f2.gif"/>
+<img src="http://www.m5zn.com/newuploads/2018/03/04/gif//cf44d7698bde5f2.gif" height="400"/>
 
 ##### ObjC
 
@@ -445,7 +445,7 @@ tableView.cellForRow(at: indexPath)?.detailTextLabel?.text = color?.hexStringFro
 
 ### Custom View
 
-<img src="http://www.m5zn.com/newuploads/2018/03/04/gif//a18bf99a2105d33.gif"/>
+<img src="http://www.m5zn.com/newuploads/2018/03/04/gif//a18bf99a2105d33.gif" height="400"/>
 
 ##### ObjC
 
@@ -490,7 +490,7 @@ FAPickerView.picker().show(withCustomPickerView: view)
 
 ### Alert View
 
-<img src="http://www.m5zn.com/newuploads/2018/03/04/gif//1ce8f03713c2651.gif"/>
+<img src="http://www.m5zn.com/newuploads/2018/03/04/gif//1ce8f03713c2651.gif" height="400"/>
 
 ##### ObjC
 

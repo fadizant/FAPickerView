@@ -359,10 +359,10 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         dispatch_async(dispatch_get_main_queue(), ^{
             // update in main thread
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"selected == %i", YES];
-            NSArray *filteredArray = [_items filteredArrayUsingPredicate:predicate];
+            NSArray *filteredArray = [self->_items filteredArrayUsingPredicate:predicate];
             
             if (filteredArray.count) {
-                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[_items indexOfObject:filteredArray.firstObject]
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self->_items indexOfObject:filteredArray.firstObject]
                                                             inSection:0];
                 [tableView scrollToRowAtIndexPath:indexPath
                                  atScrollPosition:UITableViewScrollPositionNone animated:YES];
@@ -471,11 +471,11 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         float getHeight = 0;
-        for (UIView* view in _customView.view.subviews) {
+        for (UIView* view in self->_customView.view.subviews) {
             getHeight = getHeight < (view.frame.origin.y + view.frame.size.height) ? (view.frame.origin.y + view.frame.size.height) : getHeight ;
         }
         self.customViewContainer.contentSize = CGSizeMake(newRect.size.width, getHeight);
-        _customView.view.frame = customRect;
+        self->_customView.view.frame = customRect;
     });
     
     return view;
@@ -514,7 +514,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         float getHeight = 0;
-        for (UIView* view in _customView.view.subviews) {
+        for (UIView* view in self->_customView.view.subviews) {
             getHeight = getHeight < (view.frame.origin.y + view.frame.size.height) ? (view.frame.origin.y + view.frame.size.height) : getHeight ;
         }
         self.customPickerViewContainer.contentSize = CGSizeMake(newRect.size.width, getHeight);
@@ -914,7 +914,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
 - (IBAction)confirmButtonPressed:(id)sender{
     [self dismissPicker:^{
         
-        switch (_pickerType) {
+        switch (self->_pickerType) {
             case FAPickerTypeItems:
             {
                 if(self.allowMultipleSelection && [self.delegate respondsToSelector:@selector(fapickerView:didConfirmWithItemsAtRows:)]){
@@ -927,7 +927,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
                     }
                 }
                 
-                if(self.allowMultipleSelection && [self.delegate respondsToSelector:@selector(fapickerView:didConfirmWithItemsAtItems:)] && _items){
+                if(self.allowMultipleSelection && [self.delegate respondsToSelector:@selector(fapickerView:didConfirmWithItemsAtItems:)] && self->_items){
 //                    NSMutableArray<FAPickerItem*>* selectedItems = [NSMutableArray new];
 //                    for (NSIndexPath *ip in self.selectedRows) {
 //                        [selectedItems addObject:[_items objectAtIndex:ip.row]];
@@ -935,7 +935,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
                     
                     [self.delegate fapickerView:self didConfirmWithItemsAtItems:self.selectedItems];
                 }
-                else if(!self.allowMultipleSelection && [self.delegate respondsToSelector:@selector(fapickerView:didConfirmWithItem:)] && _items){
+                else if(!self.allowMultipleSelection && [self.delegate respondsToSelector:@selector(fapickerView:didConfirmWithItem:)] && self->_items){
 //                    if (self.selectedIndexPaths.count > 0){
 //                        NSInteger row = ((NSIndexPath *)self.selectedIndexPaths[0]).row;
 //                        [self.delegate fapickerView:self didConfirmWithItem:[_items objectAtIndex:row]];
@@ -944,44 +944,44 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
                     
                 }
                 
-                if (_completeWithItem) {
-                    _completeWithItem(self.selectedItem);
+                if (self->_completeWithItem) {
+                    self->_completeWithItem(self.selectedItem);
                 }
                 
-                if (_completedWithItemsAtItems) {
-                    _completedWithItemsAtItems(self.selectedItems);
+                if (self->_completedWithItemsAtItems) {
+                    self->_completedWithItemsAtItems(self.selectedItems);
                 }
             }
                 break;
             case FAPickerTypeDate:
             {
                 if([self.delegate respondsToSelector:@selector(fapickerView:didConfirmWithDate:)]){
-                    [self.delegate fapickerView:self didConfirmWithDate:_selectedDate];
+                    [self.delegate fapickerView:self didConfirmWithDate:self->_selectedDate];
                 }
                 
-                if (_completedWithDate) {
-                    _completedWithDate(_selectedDate);
+                if (self->_completedWithDate) {
+                    self->_completedWithDate(self->_selectedDate);
                 }
             }
                 break;
                 case FAPickerTypeAlert:
             {
-                if (_completeWithAlert) {
-                    _completeWithAlert(FAPickerAlertButtonConfirm);
+                if (self->_completeWithAlert) {
+                    self->_completeWithAlert(FAPickerAlertButtonConfirm);
                 }
             }
                 break;
                 case FAPickerTypeColor:
             {
-                if (_completedWithColor){
-                    _completedWithColor(_selectedColorPicker);
+                if (self->_completedWithColor){
+                    self->_completedWithColor(self->_selectedColorPicker);
                 }
             }
                 break;
                 case FAPickerTypeCustomView:
             {
-                if (_completedWithCustomView) {
-                    _completedWithCustomView(FAPickerCustomViewButtonConfirm);
+                if (self->_completedWithCustomView) {
+                    self->_completedWithCustomView(FAPickerCustomViewButtonConfirm);
                 }
             }
                 break;
@@ -998,8 +998,8 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
 - (IBAction)thirdButtonPressed:(id)sender{
     
     [self dismissPicker:^{
-        if (_completeWithAlert) {
-            _completeWithAlert(FAPickerAlertButtonThird);
+        if (self->_completeWithAlert) {
+            self->_completeWithAlert(FAPickerAlertButtonThird);
         }
     }];
 
@@ -1147,7 +1147,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         // image url
         if (_filterItem && [_filterItem objectAtIndex:indexPath.row].imageURL && ![[_filterItem objectAtIndex:indexPath.row].imageURL isEqualToString:@""]) {
             
-            CGSize size = CGSizeMake(30, 30);
+            CGSize size = [_filterItem objectAtIndex:indexPath.row].widthRatio ? CGSizeMake(30*[_filterItem objectAtIndex:indexPath.row].widthRatio, 30) : CGSizeMake(30, 30);
             [cell.imageView setImage:[FAPickerView imageWithColor:[UIColor clearColor] andSize:size]];
             
             FACircleUIImageView *circleImage = [FACircleUIImageView new];
@@ -1157,6 +1157,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
                 [cell addSubview:circleImage];
             }else{
                 circleImage = (FACircleUIImageView*)[cell viewWithTag:100];
+                circleImage.frame = CGRectMake(15, 8, size.width, size.height);
             }
             
             [circleImage setImageWithURL:[_filterItem objectAtIndex:indexPath.row].imageURL ThumbImage:[_filterItem objectAtIndex:indexPath.row].Thumb];
@@ -1164,7 +1165,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
             
         }else if (_items && [_items objectAtIndex:indexPath.row].imageURL && ![[_items objectAtIndex:indexPath.row].imageURL isEqualToString:@""]) {
             
-            CGSize size = CGSizeMake(30, 30);
+            CGSize size = [_items objectAtIndex:indexPath.row].widthRatio ? CGSizeMake(30*[_items objectAtIndex:indexPath.row].widthRatio, 30) : CGSizeMake(30, 30);
             [cell.imageView setImage:[FAPickerView imageWithColor:[UIColor clearColor] andSize:size]];
             
             FACircleUIImageView *circleImage = [FACircleUIImageView new];
@@ -1174,6 +1175,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
                 [cell addSubview:circleImage];
             }else{
                 circleImage = (FACircleUIImageView*)[cell viewWithTag:100];
+                circleImage.frame = CGRectMake(15, 8, size.width, size.height);
             }
             
             [circleImage setImageWithURL:[_items objectAtIndex:indexPath.row].imageURL ThumbImage:[_items objectAtIndex:indexPath.row].Thumb];
@@ -1333,7 +1335,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         
         if (!self.needFooterView && _completeWithItem) {
             [self dismissPicker:^{
-                _completeWithItem(self.selectedItem);
+                self->_completeWithItem(self.selectedItem);
             }];
         }
     }
@@ -1760,6 +1762,22 @@ CustomViewContainerHeight:(float)height
     [self show];
 }
 
+
+-(void)showWithCustomPickerView:(UIViewController *)view
+                  CancelGesture:(BOOL)cancelGesture{
+    [self initViewWithType:FAPickerTypeCustomPicker
+               HeaderTitle:@""
+         cancelButtonTitle:@""
+        confirmButtonTitle:@""];
+    _customView = view;
+    _customViewHeight = 0;
+    _needFooterView = NO;
+    _Filter = NO;
+    _tapBackgroundToDismiss = cancelGesture;
+    [self show];
+}
+
+
 -(void)showWithCustomPickerView:(UIViewController *)view
       CustomViewContainerHeight:(float)height{
     [self initViewWithType:FAPickerTypeCustomPicker
@@ -1770,6 +1788,21 @@ CustomViewContainerHeight:(float)height
     _customViewHeight = height < 0 ? 0 : height;
     _needFooterView = NO;
     _Filter = NO;
+    [self show];
+}
+
+-(void)showWithCustomPickerView:(UIViewController *)view
+      CustomViewContainerHeight:(float)height
+                  CancelGesture:(BOOL)cancelGesture{
+    [self initViewWithType:FAPickerTypeCustomPicker
+               HeaderTitle:@""
+         cancelButtonTitle:@""
+        confirmButtonTitle:@""];
+    _customView = view;
+    _customViewHeight = height < 0 ? 0 : height;
+    _needFooterView = NO;
+    _Filter = NO;
+    _tapBackgroundToDismiss = cancelGesture;
     [self show];
 }
 
@@ -1878,6 +1911,23 @@ CustomViewContainerHeight:(float)height
         _title = title;
         _imageURL = URL;
         _Thumb = thumb;
+    }
+    return self;
+}
+
+- (instancetype)initWithID:(NSString*)ID
+                     Title:(NSString*)title
+                  ImageURL:(NSString*)URL
+                     Thumb:(UIImage*)thumb
+                WidthRatio:(float)widthRatio
+{
+    self = [super init];
+    if (self) {
+        _Id = ID;
+        _title = title;
+        _imageURL = URL;
+        _Thumb = thumb;
+        _widthRatio = widthRatio;
     }
     return self;
 }
