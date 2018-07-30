@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'FAPickerView'
-  s.version          = '0.1.7'
-  s.summary          = 'add width ratio for Items image'
+  s.version          = '0.1.8'
+  s.summary          = 'replace FAImageView to SDWebImage'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -37,5 +37,5 @@ Pod::Spec.new do |s|
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
-    s.dependency 'FAImageView'
+    s.dependency 'SDWebImage'
 end

@@ -7,7 +7,7 @@
 //
 
 #import "FACustomViewController.h"
-#import "FAImageView.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 #import "FAPickerView.h"
 
 @interface FACustomViewController ()
@@ -20,7 +20,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [_customViewImageView setImageWithURL:@"https://cdn.pixabay.com/photo/2017/08/20/10/30/facebook-2661207_960_720.jpg" ThumbImage:[UIImage imageNamed:@"Thumb"]];
+//    [_customViewImageView setImageWithURL:@"https://cdn.pixabay.com/photo/2017/08/20/10/30/facebook-2661207_960_720.jpg" ThumbImage:[UIImage imageNamed:@"Thumb"]];
+    [_customViewImageView sd_setImageWithURL:[NSURL URLWithString:@"https://cdn.pixabay.com/photo/2017/08/20/10/30/facebook-2661207_960_720.jpg"]
+                 placeholderImage:[UIImage imageNamed:@"Thumb"]];
     
     [_closeButton setHidden:!_isCustomPicker];
 }
@@ -33,10 +35,14 @@
 - (IBAction)SwitchImage:(UISegmentedControl *)sender {
     switch (sender.selectedSegmentIndex) {
         case 0://Facebook
-            [_customViewImageView setImageWithURL:@"https://cdn.pixabay.com/photo/2017/08/20/10/30/facebook-2661207_960_720.jpg" ThumbImage:[UIImage imageNamed:@"Thumb"]];
+//            [_customViewImageView setImageWithURL:@"https://cdn.pixabay.com/photo/2017/08/20/10/30/facebook-2661207_960_720.jpg" ThumbImage:[UIImage imageNamed:@"Thumb"]];
+            [_customViewImageView sd_setImageWithURL:[NSURL URLWithString:@"https://cdn.pixabay.com/photo/2017/08/20/10/30/facebook-2661207_960_720.jpg"]
+                                    placeholderImage:[UIImage imageNamed:@"Thumb"]];
             break;
         case 1://Twitter
-            [_customViewImageView setImageWithURL:@"https://cdn.pixabay.com/photo/2017/08/23/11/30/twitter-2672572_960_720.jpg" ThumbImage:[UIImage imageNamed:@"Thumb"]];
+//            [_customViewImageView setImageWithURL:@"https://cdn.pixabay.com/photo/2017/08/23/11/30/twitter-2672572_960_720.jpg" ThumbImage:[UIImage imageNamed:@"Thumb"]];
+            [_customViewImageView sd_setImageWithURL:[NSURL URLWithString:@"https://cdn.pixabay.com/photo/2017/08/23/11/30/twitter-2672572_960_720.jpg"]
+                                    placeholderImage:[UIImage imageNamed:@"Thumb"]];
             break;
         default:
             break;

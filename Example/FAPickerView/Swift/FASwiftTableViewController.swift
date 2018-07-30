@@ -185,7 +185,7 @@ class FASwiftTableViewController: UITableViewController {
         case .datepicker:
             FAPickerView.setMainColor(UIColor.init(red: 0.000, green: 0.675, blue: 0.357, alpha: 1.00))
             FAPickerView.setDateTimeLocalized("en_USA")
-            FAPickerView.picker().show(withSelectedDate: selectedDate as Date!,
+            FAPickerView.picker().show(withSelectedDate: selectedDate as Date?,
                                        headerTitle: "Select Date",
                                        cancelButtonTitle: "Cancel",
                                        confirmButtonTitle: "Confirm",
@@ -198,7 +198,7 @@ class FASwiftTableViewController: UITableViewController {
         case .dateArabic:
             FAPickerView.setMainColor(UIColor.init(red: 0.000, green: 0.675, blue: 0.357, alpha: 1.00))
             FAPickerView.setDateTimeLocalized("ar_KSA")
-            FAPickerView.picker().show(withSelectedDate: selectedDate as Date!,
+            FAPickerView.picker().show(withSelectedDate: selectedDate as Date?,
                                        headerTitle: "اختر التاريخ",
                                        cancelButtonTitle: "الغاء",
                                        confirmButtonTitle: "موافق",
@@ -211,7 +211,7 @@ class FASwiftTableViewController: UITableViewController {
         case .timepicker:
             FAPickerView.setMainColor(UIColor.init(red: 0.000, green: 0.675, blue: 0.357, alpha: 1.00))
             FAPickerView.setDateTimeLocalized("en_USA")
-            FAPickerView.picker().show(withSelectedDate: selectedDate as Date!,
+            FAPickerView.picker().show(withSelectedDate: selectedDate as Date?,
                                        dateFormat:.time,
                                        headerTitle: "Select Date",
                                        cancelButtonTitle: "Cancel",
@@ -233,7 +233,7 @@ class FASwiftTableViewController: UITableViewController {
             
             FAPickerView.setMainColor(UIColor.init(red: 0.000, green: 0.675, blue: 0.357, alpha: 1.00))
             FAPickerView.setDateTimeLocalized("en_USA")
-            FAPickerView.picker().show(withSelectedDate: selectedDate as Date!,
+            FAPickerView.picker().show(withSelectedDate: selectedDate as Date?,
                                        maximumDate: maxDate,
                                        minimumDate: minDate,
                                        headerTitle: "Select Date with range",
@@ -256,7 +256,7 @@ class FASwiftTableViewController: UITableViewController {
             
             FAPickerView.setMainColor(UIColor.init(red: 0.000, green: 0.675, blue: 0.357, alpha: 1.00))
             FAPickerView.setDateTimeLocalized("en_USA")
-            FAPickerView.picker().show(withSelectedDate: selectedDate as Date!,
+            FAPickerView.picker().show(withSelectedDate: selectedDate as Date?,
                                        dateFormat:.dateAndTime,
                                        maximumDate: maxDate,
                                        minimumDate: minDate,

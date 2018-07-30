@@ -1,7 +1,7 @@
 {
   "name": "FAPickerView",
-  "version": "0.1.5",
-  "summary": "Add Image with url, color items, date and time with range (Dependency - FAImageView)",
+  "version": "0.1.7",
+  "summary": "add width ratio for Items image",
   "homepage": "https://github.com/fadizant/FAPickerView",
   "license": {
     "type": "MIT",
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/fadizant/FAPickerView.git",
-    "tag": "0.1.5"
+    "tag": "0.1.7"
   },
   "platforms": {
     "ios": "8.0"
@@ -20,11 +20,11 @@
   "source_files": "FAPickerView/Classes/**/*",
   "resource_bundles": {
     "FAPickerView": [
-      "FAPickerView/Assets/*.xcassets"
+      "FAPickerView/Assets/Resources/*.xcassets"
     ]
   },
   "dependencies": {
-    "FAImageView": [
+    "SDWebImage": [
 
     ]
   }

@@ -85,7 +85,7 @@
                                                         Title:@"Facebook"
                                                      ImageURL:@"https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/facebook-icon_128x128.png"
                                                         Thumb:[UIImage imageNamed:@"Thumb"]
-                                                       WidthRatio:1.3]];
+                                                       Circle:YES]];
             [items addObject:[[FAPickerItem alloc] initWithID:@"2"
                                                         Title:@"Google"
                                                      ImageURL:@"https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/googleplus-icon_128x128.png"

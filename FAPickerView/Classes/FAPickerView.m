@@ -6,7 +6,7 @@
 //
 
 #import "FAPickerView.h"
-#import "FAImageView.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #define CZP_FOOTER_HEIGHT 44.0
 #define CZP_HEADER_HEIGHT 44.0
@@ -466,7 +466,8 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     _customView.view.clipsToBounds = YES;
     _customView.view.frame = customRect;
     [view addSubview:_customView.view];
-    [_customView didMoveToParentViewController:self];
+    UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
+    [_customView didMoveToParentViewController:mainWindow.rootViewController];
     view.bounces = NO;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
@@ -509,7 +510,8 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     _customView.view.clipsToBounds = YES;
     _customView.view.frame = customRect;
     [view addSubview:_customView.view];
-    [_customView didMoveToParentViewController:self];
+    UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
+    [_customView didMoveToParentViewController:mainWindow.rootViewController];
     view.bounces = NO;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
@@ -1150,36 +1152,53 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
             CGSize size = [_filterItem objectAtIndex:indexPath.row].widthRatio ? CGSizeMake(30*[_filterItem objectAtIndex:indexPath.row].widthRatio, 30) : CGSizeMake(30, 30);
             [cell.imageView setImage:[FAPickerView imageWithColor:[UIColor clearColor] andSize:size]];
             
-            FACircleUIImageView *circleImage = [FACircleUIImageView new];
+            UIImageView *circleImage = [UIImageView new];
             if (![cell viewWithTag:100]) {
                 circleImage.frame = CGRectMake(15, 8, size.width, size.height);
                 circleImage.tag = 100;
                 [cell addSubview:circleImage];
             }else{
-                circleImage = (FACircleUIImageView*)[cell viewWithTag:100];
+                circleImage = (UIImageView*)[cell viewWithTag:100];
                 circleImage.frame = CGRectMake(15, 8, size.width, size.height);
             }
             
-            [circleImage setImageWithURL:[_filterItem objectAtIndex:indexPath.row].imageURL ThumbImage:[_filterItem objectAtIndex:indexPath.row].Thumb];
-            circleImage.isCircle = [_filterItem objectAtIndex:indexPath.row].circleImage;
+//            [circleImage setImageWithURL:[_filterItem objectAtIndex:indexPath.row].imageURL ThumbImage:[_filterItem objectAtIndex:indexPath.row].Thumb];
+//            circleImage.isCircle = [_filterItem objectAtIndex:indexPath.row].circleImage;
+            [circleImage sd_setImageWithURL:[NSURL URLWithString:[_filterItem objectAtIndex:indexPath.row].imageURL]
+                         placeholderImage:[_filterItem objectAtIndex:indexPath.row].Thumb];
+            if ([_filterItem objectAtIndex:indexPath.row].circleImage){
+                circleImage.layer.cornerRadius = size.height/2;
+                circleImage.layer.masksToBounds = YES;
+            }else {
+                circleImage.layer.cornerRadius = 0;
+            }
             
         }else if (_items && [_items objectAtIndex:indexPath.row].imageURL && ![[_items objectAtIndex:indexPath.row].imageURL isEqualToString:@""]) {
             
             CGSize size = [_items objectAtIndex:indexPath.row].widthRatio ? CGSizeMake(30*[_items objectAtIndex:indexPath.row].widthRatio, 30) : CGSizeMake(30, 30);
             [cell.imageView setImage:[FAPickerView imageWithColor:[UIColor clearColor] andSize:size]];
             
-            FACircleUIImageView *circleImage = [FACircleUIImageView new];
+            UIImageView *circleImage = [UIImageView new];
             if (![cell viewWithTag:100]) {
                 circleImage.frame = CGRectMake(15, 8, size.width, size.height);
                 circleImage.tag = 100;
                 [cell addSubview:circleImage];
             }else{
-                circleImage = (FACircleUIImageView*)[cell viewWithTag:100];
+                circleImage = (UIImageView*)[cell viewWithTag:100];
                 circleImage.frame = CGRectMake(15, 8, size.width, size.height);
             }
             
-            [circleImage setImageWithURL:[_items objectAtIndex:indexPath.row].imageURL ThumbImage:[_items objectAtIndex:indexPath.row].Thumb];
-            circleImage.isCircle = [_items objectAtIndex:indexPath.row].circleImage;
+//            [circleImage setImageWithURL:[_items objectAtIndex:indexPath.row].imageURL ThumbImage:[_items objectAtIndex:indexPath.row].Thumb];
+//            circleImage.isCircle = [_items objectAtIndex:indexPath.row].circleImage;
+            
+            [circleImage sd_setImageWithURL:[NSURL URLWithString:[_items objectAtIndex:indexPath.row].imageURL]
+                           placeholderImage:[_items objectAtIndex:indexPath.row].Thumb];
+            if ([_items objectAtIndex:indexPath.row].circleImage){
+                circleImage.layer.cornerRadius = size.height/2;
+                circleImage.layer.masksToBounds = YES;
+            }else {
+                circleImage.layer.cornerRadius = 0;
+            }
         }
         
         // image color
@@ -1188,34 +1207,46 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
             CGSize size = CGSizeMake(30, 30);
             [cell.imageView setImage:[FAPickerView imageWithColor:[UIColor clearColor] andSize:size]];
             
-            FACircleUIImageView *circleImage = [FACircleUIImageView new];
+            UIImageView *circleImage = [UIImageView new];
             if (![cell viewWithTag:100]) {
                 circleImage.frame = CGRectMake(15, 8, size.width, size.height);
                 circleImage.tag = 100;
                 [cell addSubview:circleImage];
             }else{
-                circleImage = (FACircleUIImageView*)[cell viewWithTag:100];
+                circleImage = (UIImageView*)[cell viewWithTag:100];
             }
             
             [circleImage setImage:[FAPickerView imageWithColor:[_filterItem objectAtIndex:indexPath.row].imageColor andSize:size]];
-            circleImage.isCircle = [_filterItem objectAtIndex:indexPath.row].circleImage;
+//            circleImage.isCircle = [_filterItem objectAtIndex:indexPath.row].circleImage;
+            if ([_filterItem objectAtIndex:indexPath.row].circleImage){
+                circleImage.layer.cornerRadius = size.height/2;
+                circleImage.layer.masksToBounds = YES;
+            }else {
+                circleImage.layer.cornerRadius = 0;
+            }
             
         }else if (_items && [_items objectAtIndex:indexPath.row].imageColor) {
             
             CGSize size = CGSizeMake(30, 30);
             [cell.imageView setImage:[FAPickerView imageWithColor:[UIColor clearColor] andSize:size]];
             
-            FACircleUIImageView *circleImage = [FACircleUIImageView new];
+            UIImageView *circleImage = [UIImageView new];
             if (![cell viewWithTag:100]) {
                 circleImage.frame = CGRectMake(15, 8, size.width, size.height);
                 circleImage.tag = 100;
                 [cell addSubview:circleImage];
             }else{
-                circleImage = (FACircleUIImageView*)[cell viewWithTag:100];
+                circleImage = (UIImageView*)[cell viewWithTag:100];
             }
             
             [circleImage setImage:[FAPickerView imageWithColor:[_items objectAtIndex:indexPath.row].imageColor andSize:size]];
-            circleImage.isCircle = [_items objectAtIndex:indexPath.row].circleImage;
+//            circleImage.isCircle = [_items objectAtIndex:indexPath.row].circleImage;
+            if ([_items objectAtIndex:indexPath.row].circleImage){
+                circleImage.layer.cornerRadius = size.height/2;
+                circleImage.layer.masksToBounds = YES;
+            }else {
+                circleImage.layer.cornerRadius = 0;
+            }
         }
     }
     
