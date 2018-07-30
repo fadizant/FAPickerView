@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.homepage         = 'https://github.com/fadizant/FAPickerView'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'fadizant' => 'fadizant@hotmail.com' }
+  s.author           = { 'fadizant' => 'fadizant@gmail.com' }
   s.source           = { :git => 'https://github.com/fadizant/FAPickerView.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
