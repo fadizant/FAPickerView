@@ -41,7 +41,7 @@
                                      HeaderTitle:@"Select one item"
                                   WithCompletion:^(FAPickerItem *item) {
                                       NSLog(@"selected item = %@",item.title);
-                                      selectedItem = item;
+                                      self->selectedItem = item;
                                   } cancel:^{
                                       NSLog(@"Cancel");
                                   }];
@@ -72,7 +72,7 @@
                                       for (FAPickerItem* item in items) {
                                           NSLog(@"selected item = %@",item.title);
                                       }
-                                      selectedItems = items;
+                                      self->selectedItems = items;
                                   } cancel:^{
                                       NSLog(@"Cancel");
                                   }];
@@ -181,7 +181,7 @@
                                  confirmButtonTitle:@"Confirm"
                                      WithCompletion:^(NSDate *date) {
                                          NSLog(@"selected date = %@",date.description);
-                                         selectedDate = date;
+                                         self->selectedDate = date;
                                      } cancel:^{
                                          NSLog(@"Cancel");
                                      }];
@@ -197,7 +197,7 @@
                                  confirmButtonTitle:@"موافق"
                                      WithCompletion:^(NSDate *date) {
                                          NSLog(@"selected date = %@",date.description);
-                                         selectedDate = date;
+                                         self->selectedDate = date;
                                      } cancel:^{
                                          NSLog(@"Cancel");
                                      }];
@@ -215,7 +215,7 @@
                                  confirmButtonTitle:@"Confirm"
                                      WithCompletion:^(NSDate *date) {
                                          NSLog(@"selected date = %@",date.description);
-                                         selectedDate = date;
+                                         self->selectedDate = date;
                                      } cancel:^{
                                          NSLog(@"Cancel");
                                      }];
@@ -241,7 +241,7 @@
                                  confirmButtonTitle:@"Confirm"
                                      WithCompletion:^(NSDate *date) {
                                          NSLog(@"selected date = %@",date.description);
-                                         selectedDate = date;
+                                         self->selectedDate = date;
                                      } cancel:^{
                                          NSLog(@"Cancel");
                                      }];
@@ -268,7 +268,7 @@
                                  confirmButtonTitle:@"Confirm"
                                      WithCompletion:^(NSDate *date) {
                                          NSLog(@"selected date = %@",date.description);
-                                         selectedDate = date;
+                                         self->selectedDate = date;
                                      } cancel:^{
                                          NSLog(@"Cancel");
                                      }];

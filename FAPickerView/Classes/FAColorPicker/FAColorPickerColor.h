@@ -1,5 +1,5 @@
 //
-//  DRColorPickerColor.h
+//  FAColorPickerColor.h
 //
 //  Created by Fadi Abuzant on 3/4/18.
 //  Copyright © 2018 fadizant. All rights reserved.
@@ -7,7 +7,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface DRColorPickerColor : NSObject
+@interface FAColorPickerColor : NSObject
 
 // init with a rgb color, identifier is created from color rgba
 - (instancetype) initWithColor:(UIColor*)color;
@@ -19,7 +19,7 @@
 - (instancetype) initWithDictionary:(NSDictionary*)dictionary;
 
 // init with a color (clone)
-- (instancetype) initWithClone:(DRColorPickerColor*)color;
+- (instancetype) initWithClone:(FAColorPickerColor*)color;
 
 // a dictionary for serialization
 - (NSDictionary*) dictionary;

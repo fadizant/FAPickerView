@@ -10,11 +10,11 @@
 #endif
 #endif
 
-#import "DRColorPicker+UIColor.h"
-#import "DRColorPicker.h"
-#import "DRColorPickerColor.h"
-#import "DRColorPickerStore.h"
-#import "DRColorPickerWheelView.h"
+#import "FAColorPicker+UIColor.h"
+#import "FAColorPicker.h"
+#import "FAColorPickerColor.h"
+#import "FAColorPickerStore.h"
+#import "FAColorPickerWheelView.h"
 #import "FAPickerView.h"
 
 FOUNDATION_EXPORT double FAPickerViewVersionNumber;

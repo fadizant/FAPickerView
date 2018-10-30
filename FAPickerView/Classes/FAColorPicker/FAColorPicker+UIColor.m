@@ -1,12 +1,12 @@
 //
-//  DRColorPicker+UIColor.m
+//  FAColorPicker+UIColor.m
 //
 //  Created by Fadi Abuzant on 3/4/18.
 //  Copyright © 2018 fadizant. All rights reserved.
 
-#import "DRColorPicker+UIColor.h"
+#import "FAColorPicker+UIColor.h"
 
-@implementation UIColor (DRColorPicker)
+@implementation UIColor (FAColorPicker)
 
 - (NSString*) hexStringFromColor
 {

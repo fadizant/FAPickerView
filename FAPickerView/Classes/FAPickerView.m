@@ -8,20 +8,14 @@
 #import "FAPickerView.h"
 #import <SDWebImage/UIImageView+WebCache.h>
 
-#define CZP_FOOTER_HEIGHT 44.0
-#define CZP_HEADER_HEIGHT 44.0
-#if __IPHONE_OS_VERSION_MAX_ALLOWED > __IPHONE_7_1 
-#define CZP_BACKGROUND_ALPHA 0.9
-#else
-#define CZP_BACKGROUND_ALPHA 0.3
-
-
-#endif
-
 #define mainFAPickerColor [UIColor colorWithRed:0.000 green:0.357 blue:0.675 alpha:1.00]
 #define selectFAPickerColor [UIColor colorWithRed:0.000 green:0.357 blue:0.675 alpha:0.50]
 
-typedef void (^CZDismissCompletionCallback)(void);
+#define FA_FOOTER_HEIGHT 44.0
+#define FA_HEADER_HEIGHT 44.0
+#define FA_BACKGROUND_ALPHA 0.9
+
+typedef void (^CompletionCallback)(void);
 
 @interface FAPickerView ()
 @property NSString *headerTitle;
@@ -45,8 +39,10 @@ typedef void (^CZDismissCompletionCallback)(void);
 @property NSDate* minimumDate;
 @property NSDate* maximumDate;
 @property UIView *colorPickerView;
-@property UIScrollView *customViewContainer;
-@property UIScrollView *customPickerViewContainer;
+@property UIView *customViewContainer;
+@property UIView *customPickerViewContainer;
+//@property UIScrollView *customViewContainer;
+//@property UIScrollView *customPickerViewContainer;
 @end
 
 @implementation FAPickerView
@@ -270,7 +266,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         [self performContainerAnimation];
         
         [UIView animateWithDuration:self.animationDuration animations:^{
-            self.backgroundDimmingView.alpha = CZP_BACKGROUND_ALPHA;
+            self.backgroundDimmingView.alpha = FA_BACKGROUND_ALPHA;
         }];
     }
 }
@@ -279,7 +275,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     [self.tableView reloadData];
 }
 
-- (void)dismissPicker:(CZDismissCompletionCallback)completion{
+- (void)dismissPicker:(CompletionCallback)completion{
     
     if([self.delegate respondsToSelector:@selector(fapickerViewWillDismiss:)]){
         [self.delegate fapickerViewWillDismiss:self];
@@ -341,13 +337,13 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         n = [self.dataSource numberOfRowsInPickerView:self];
     }
     CGRect tableRect;
-    float heightOffset = (_Filter ? 35 + CZP_HEADER_HEIGHT : CZP_HEADER_HEIGHT) + CZP_FOOTER_HEIGHT;
+    float heightOffset = (_Filter ? 35 + FA_HEADER_HEIGHT : FA_HEADER_HEIGHT) + FA_FOOTER_HEIGHT;
     if(n > 0){
         float height = n * 44.0;
         height = height > newRect.size.height - heightOffset ? newRect.size.height -heightOffset : height;
-        tableRect = CGRectMake(0, (_Filter ? 35 + CZP_HEADER_HEIGHT : CZP_HEADER_HEIGHT), newRect.size.width, height);
+        tableRect = CGRectMake(0, (_Filter ? 35 + FA_HEADER_HEIGHT : FA_HEADER_HEIGHT), newRect.size.width, height);
     } else {
-        tableRect = CGRectMake(0, (_Filter ? 35 + CZP_HEADER_HEIGHT : CZP_HEADER_HEIGHT), newRect.size.width, newRect.size.height - heightOffset);
+        tableRect = CGRectMake(0, (_Filter ? 35 + FA_HEADER_HEIGHT : FA_HEADER_HEIGHT), newRect.size.width, newRect.size.height - heightOffset);
     }
     UITableView *tableView = [[UITableView alloc] initWithFrame:tableRect style:UITableViewStylePlain];
     tableView.delegate = self;
@@ -379,7 +375,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     CGAffineTransform transform = CGAffineTransformMake(widthRatio, 0, 0, 0.8, 0, 0);
     CGRect newRect = CGRectApplyAffineTransform(self.frame, transform);
     CGRect tableRect;
-    float heightOffset = CZP_HEADER_HEIGHT + CZP_FOOTER_HEIGHT;
+    float heightOffset = FA_HEADER_HEIGHT + FA_FOOTER_HEIGHT;
     float height = 162;
     height = height > newRect.size.height - heightOffset ? newRect.size.height -heightOffset : height;
     tableRect = CGRectMake(0, 44.0, newRect.size.width, height);
@@ -413,7 +409,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     CGAffineTransform transform = CGAffineTransformMake(widthRatio, 0, 0, 0.8, 0, 0);
     CGRect newRect = CGRectApplyAffineTransform(self.frame, transform);
     CGRect tableRect;
-    float heightOffset = CZP_HEADER_HEIGHT + CZP_FOOTER_HEIGHT;
+    float heightOffset = FA_HEADER_HEIGHT + FA_FOOTER_HEIGHT;
     float height = ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft ||
                     [[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight) ? 180 : 260;
     height = height > newRect.size.height - heightOffset ? newRect.size.height -heightOffset : height;
@@ -422,7 +418,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     UIView *view = [[UIView alloc]initWithFrame:tableRect];
     view.backgroundColor = UIColor.whiteColor;
     CGRect frame = CGRectMake(10, 10, newRect.size.width - 20, height - 20);
-    self.wheelView = [[DRColorPickerWheelView alloc] initWithFrame:frame];
+    self.wheelView = [[FAColorPickerWheelView alloc] initWithFrame:frame];
     if (self.selectedColorPicker)
         self.wheelView.color = self.selectedColorPicker;
     self.wheelView.hideColorInfo = YES;
@@ -438,7 +434,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     return view;
 }
 
-- (UIScrollView *)buildCustomViewContainer{
+- (UIView *)buildCustomViewContainer{
     
     float getHeight = _customContainerViewHeight;
     if (!getHeight) {
@@ -455,34 +451,34 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     CGAffineTransform transform = CGAffineTransformMake(widthRatio, 0, 0, 0.8, 0, 0);
     CGRect newRect = CGRectApplyAffineTransform(self.frame, transform);
     CGRect tableRect;
-    float heightOffset = CZP_HEADER_HEIGHT + CZP_FOOTER_HEIGHT;
+    float heightOffset = FA_HEADER_HEIGHT + FA_FOOTER_HEIGHT;
     float height = _customViewHeight + 10;
     height = height > newRect.size.height - heightOffset ? newRect.size.height -heightOffset : height;
     tableRect = CGRectMake(0, 44.0, newRect.size.width, height);
     CGRect customRect = CGRectMake(0, 0, newRect.size.width, (height > getHeight + 10) ? height : (getHeight + 10)  ) ;
     
-//    UIView *view = [[UIView alloc]initWithFrame:tableRect];
-    UIScrollView *view = [[UIScrollView alloc]initWithFrame:tableRect];
+    UIView *view = [[UIView alloc]initWithFrame:tableRect];
+//    UIScrollView *view = [[UIScrollView alloc]initWithFrame:tableRect];
     _customView.view.clipsToBounds = YES;
     _customView.view.frame = customRect;
     [view addSubview:_customView.view];
     UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
     [_customView didMoveToParentViewController:mainWindow.rootViewController];
-    view.bounces = NO;
+//    view.bounces = NO;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         float getHeight = 0;
         for (UIView* view in self->_customView.view.subviews) {
             getHeight = getHeight < (view.frame.origin.y + view.frame.size.height) ? (view.frame.origin.y + view.frame.size.height) : getHeight ;
         }
-        self.customViewContainer.contentSize = CGSizeMake(newRect.size.width, getHeight);
+//        self.customViewContainer.contentSize = CGSizeMake(newRect.size.width, getHeight);
         self->_customView.view.frame = customRect;
     });
     
     return view;
 }
 
-- (UIScrollView *)buildCustomPickerViewContainer{
+- (UIView *)buildCustomPickerViewContainer{
     
     float getHeight = _customContainerViewHeight;
     if (!getHeight) {
@@ -505,21 +501,21 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     tableRect = CGRectMake(0, 0, newRect.size.width, height);
     CGRect customRect = CGRectMake(0, 0, newRect.size.width, (height > getHeight + 10) ? height : (getHeight + 10));
     
-    //    UIView *view = [[UIView alloc]initWithFrame:tableRect];
-    UIScrollView *view = [[UIScrollView alloc]initWithFrame:tableRect];
+        UIView *view = [[UIView alloc]initWithFrame:tableRect];
+//    UIScrollView *view = [[UIScrollView alloc]initWithFrame:tableRect];
     _customView.view.clipsToBounds = YES;
     _customView.view.frame = customRect;
     [view addSubview:_customView.view];
     UIWindow *mainWindow = [[[UIApplication sharedApplication] delegate] window];
     [_customView didMoveToParentViewController:mainWindow.rootViewController];
-    view.bounces = NO;
+//    view.bounces = NO;
     
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         float getHeight = 0;
         for (UIView* view in self->_customView.view.subviews) {
             getHeight = getHeight < (view.frame.origin.y + view.frame.size.height) ? (view.frame.origin.y + view.frame.size.height) : getHeight ;
         }
-        self.customPickerViewContainer.contentSize = CGSizeMake(newRect.size.width, getHeight);
+//        self.customPickerViewContainer.contentSize = CGSizeMake(newRect.size.width, getHeight);
     });
     
     return view;
@@ -531,7 +527,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     CGAffineTransform transform = CGAffineTransformMake(widthRatio, 0, 0, 0.8, 0, 0);
     CGRect newRect = CGRectApplyAffineTransform(self.frame, transform);
     CGRect tableRect;
-//    float heightOffset = CZP_HEADER_HEIGHT + CZP_FOOTER_HEIGHT;
+//    float heightOffset = FA_HEADER_HEIGHT + FA_FOOTER_HEIGHT;
     
     //get height from string
     CGSize constrainedSize = CGSizeMake(newRect.size.width - 10 , 9999);
@@ -545,7 +541,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     CGRect requiredHeight = [string boundingRectWithSize:constrainedSize options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     
     float height = requiredHeight.size.height + 10;
-    height = height < CZP_HEADER_HEIGHT * 2 ? CZP_HEADER_HEIGHT * 2 : height;
+    height = height < FA_HEADER_HEIGHT * 2 ? FA_HEADER_HEIGHT * 2 : height;
     tableRect = CGRectMake(5, 0, newRect.size.width-10, height);
     
     UILabel *body = [[UILabel alloc] initWithFrame:tableRect];
@@ -624,9 +620,9 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         CGRect newRect = CGRectMake(0,
                                     rect.origin.y + rect.size.height,
                                     rect.size.width,
-                                    CZP_FOOTER_HEIGHT);
-        CGRect leftRect = CGRectMake(0,0, newRect.size.width /2, CZP_FOOTER_HEIGHT);
-        CGRect rightRect = CGRectMake(newRect.size.width /2,0, newRect.size.width /2, CZP_FOOTER_HEIGHT);
+                                    FA_FOOTER_HEIGHT);
+        CGRect leftRect = CGRectMake(0,0, newRect.size.width /2, FA_FOOTER_HEIGHT);
+        CGRect rightRect = CGRectMake(newRect.size.width /2,0, newRect.size.width /2, FA_FOOTER_HEIGHT);
         
         UIView *view = [[UIView alloc] initWithFrame:newRect];
         UIButton *cancelButton = [[UIButton alloc] initWithFrame:leftRect];
@@ -658,12 +654,12 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         CGRect newRect = CGRectMake(0,
                                     rect.origin.y + rect.size.height,
                                     rect.size.width,
-                                    numberOfButtons > 2 ? CZP_FOOTER_HEIGHT * 2: CZP_FOOTER_HEIGHT);
-        CGRect leftRect = CGRectMake(0,0, newRect.size.width /2, CZP_FOOTER_HEIGHT);
-        CGRect rightRect = CGRectMake(newRect.size.width /2,0, newRect.size.width /2, CZP_FOOTER_HEIGHT);
-        CGRect bottom = CGRectMake(0,CZP_FOOTER_HEIGHT, newRect.size.width , CZP_FOOTER_HEIGHT);
-        CGRect fill = CGRectMake(0,0, newRect.size.width , CZP_FOOTER_HEIGHT);
-        CGRect spliter = CGRectMake(newRect.size.width /2,0, 1 , CZP_FOOTER_HEIGHT);
+                                    numberOfButtons > 2 ? FA_FOOTER_HEIGHT * 2: FA_FOOTER_HEIGHT);
+        CGRect leftRect = CGRectMake(0,0, newRect.size.width /2, FA_FOOTER_HEIGHT);
+        CGRect rightRect = CGRectMake(newRect.size.width /2,0, newRect.size.width /2, FA_FOOTER_HEIGHT);
+        CGRect bottom = CGRectMake(0,FA_FOOTER_HEIGHT, newRect.size.width , FA_FOOTER_HEIGHT);
+        CGRect fill = CGRectMake(0,0, newRect.size.width , FA_FOOTER_HEIGHT);
+        CGRect spliter = CGRectMake(newRect.size.width /2,0, 1 , FA_FOOTER_HEIGHT);
         
         UIView *view = [[UIView alloc] initWithFrame:newRect];
         
@@ -744,23 +740,23 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
 }
 
 - (UIView *)buildHeaderView{
-    UIView *view ;//= [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, CZP_HEADER_HEIGHT)];
+    UIView *view ;//= [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width, FA_HEADER_HEIGHT)];
     
     switch (_pickerType) {
         case FAPickerTypeItems:
-            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width,  CZP_HEADER_HEIGHT)];
+            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width,  FA_HEADER_HEIGHT)];
             break;
         case FAPickerTypeDate:
-            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.datePicker.frame.size.width, CZP_HEADER_HEIGHT)];
+            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.datePicker.frame.size.width, FA_HEADER_HEIGHT)];
             break;
         case FAPickerTypeAlert:
-            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.alertBody.frame.size.width, CZP_HEADER_HEIGHT)];
+            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.alertBody.frame.size.width, FA_HEADER_HEIGHT)];
             break;
         case FAPickerTypeColor:
-            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.colorPickerView.frame.size.width, CZP_HEADER_HEIGHT)];
+            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.colorPickerView.frame.size.width, FA_HEADER_HEIGHT)];
             break;
         case FAPickerTypeCustomView:
-            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.customViewContainer.frame.size.width, CZP_HEADER_HEIGHT)];
+            view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.customViewContainer.frame.size.width, FA_HEADER_HEIGHT)];
             break;
         case FAPickerTypeCustomPicker:
             view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
@@ -792,7 +788,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
 
 -(UITextField*)buildSearchView
 {
-    UITextField *search = [[UITextField alloc] initWithFrame:CGRectMake(0, CZP_HEADER_HEIGHT, self.tableView.frame.size.width,  35)];
+    UITextField *search = [[UITextField alloc] initWithFrame:CGRectMake(0, FA_HEADER_HEIGHT, self.tableView.frame.size.width,  35)];
     search.backgroundColor = [UIColor colorWithRed:236.0/255 green:240/255.0 blue:241.0/255 alpha:1];
     search.placeholder = NSLocalizedString(@"Search", @"");
     search.font = [UIFont systemFontOfSize:16];
@@ -1122,6 +1118,10 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
             cell.accessoryType = UITableViewCellAccessoryCheckmark;
         }
     }
+    
+    BOOL isRTL = self.semanticContentAttribute == UISemanticContentAttributeForceRightToLeft ||
+    [UIApplication sharedApplication].userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft;
+    
     if([self.dataSource respondsToSelector:@selector(fapickerView:titleForRow:)] && [self.dataSource respondsToSelector:@selector(fapickerView:imageForRow:)]){
         cell.textLabel.text = [self.dataSource fapickerView:self titleForRow:indexPath.row];
         cell.imageView.image = [self.dataSource fapickerView:self imageForRow:indexPath.row];
@@ -1145,21 +1145,22 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         }else if (_items && [_items objectAtIndex:indexPath.row].titleColor ) {
             cell.textLabel.textColor = [_items objectAtIndex:indexPath.row].titleColor;
         }
-            
+        
         // image url
         if (_filterItem && [_filterItem objectAtIndex:indexPath.row].imageURL && ![[_filterItem objectAtIndex:indexPath.row].imageURL isEqualToString:@""]) {
             
             CGSize size = [_filterItem objectAtIndex:indexPath.row].widthRatio ? CGSizeMake(30*[_filterItem objectAtIndex:indexPath.row].widthRatio, 30) : CGSizeMake(30, 30);
+            int x_Axis = isRTL ? tableView.frame.size.width - size.width - 15 : 15;
             [cell.imageView setImage:[FAPickerView imageWithColor:[UIColor clearColor] andSize:size]];
             
             UIImageView *circleImage = [UIImageView new];
             if (![cell viewWithTag:100]) {
-                circleImage.frame = CGRectMake(15, 8, size.width, size.height);
+                circleImage.frame = CGRectMake(x_Axis/*15*/, 8, size.width, size.height);
                 circleImage.tag = 100;
                 [cell addSubview:circleImage];
             }else{
                 circleImage = (UIImageView*)[cell viewWithTag:100];
-                circleImage.frame = CGRectMake(15, 8, size.width, size.height);
+                circleImage.frame = CGRectMake(x_Axis/*15*/, 8, size.width, size.height);
             }
             
 //            [circleImage setImageWithURL:[_filterItem objectAtIndex:indexPath.row].imageURL ThumbImage:[_filterItem objectAtIndex:indexPath.row].Thumb];
@@ -1176,16 +1177,17 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         }else if (_items && [_items objectAtIndex:indexPath.row].imageURL && ![[_items objectAtIndex:indexPath.row].imageURL isEqualToString:@""]) {
             
             CGSize size = [_items objectAtIndex:indexPath.row].widthRatio ? CGSizeMake(30*[_items objectAtIndex:indexPath.row].widthRatio, 30) : CGSizeMake(30, 30);
+            int x_Axis = isRTL ? tableView.frame.size.width - size.width - 15 : 15;
             [cell.imageView setImage:[FAPickerView imageWithColor:[UIColor clearColor] andSize:size]];
             
             UIImageView *circleImage = [UIImageView new];
             if (![cell viewWithTag:100]) {
-                circleImage.frame = CGRectMake(15, 8, size.width, size.height);
+                circleImage.frame = CGRectMake(x_Axis/*15*/, 8, size.width, size.height);
                 circleImage.tag = 100;
                 [cell addSubview:circleImage];
             }else{
                 circleImage = (UIImageView*)[cell viewWithTag:100];
-                circleImage.frame = CGRectMake(15, 8, size.width, size.height);
+                circleImage.frame = CGRectMake(x_Axis/*15*/, 8, size.width, size.height);
             }
             
 //            [circleImage setImageWithURL:[_items objectAtIndex:indexPath.row].imageURL ThumbImage:[_items objectAtIndex:indexPath.row].Thumb];
@@ -1205,11 +1207,12 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         if (_filterItem && [_filterItem objectAtIndex:indexPath.row].imageColor) {
             
             CGSize size = CGSizeMake(30, 30);
+            int x_Axis = isRTL ? tableView.frame.size.width - size.width - 15 : 15;
             [cell.imageView setImage:[FAPickerView imageWithColor:[UIColor clearColor] andSize:size]];
             
             UIImageView *circleImage = [UIImageView new];
             if (![cell viewWithTag:100]) {
-                circleImage.frame = CGRectMake(15, 8, size.width, size.height);
+                circleImage.frame = CGRectMake(x_Axis/*15*/, 8, size.width, size.height);
                 circleImage.tag = 100;
                 [cell addSubview:circleImage];
             }else{
@@ -1228,11 +1231,12 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         }else if (_items && [_items objectAtIndex:indexPath.row].imageColor) {
             
             CGSize size = CGSizeMake(30, 30);
+            int x_Axis = isRTL ? tableView.frame.size.width - size.width - 15 : 15;
             [cell.imageView setImage:[FAPickerView imageWithColor:[UIColor clearColor] andSize:size]];
             
             UIImageView *circleImage = [UIImageView new];
             if (![cell viewWithTag:100]) {
-                circleImage.frame = CGRectMake(15, 8, size.width, size.height);
+                circleImage.frame = CGRectMake(x_Axis/*15*/, 8, size.width, size.height);
                 circleImage.tag = 100;
                 [cell addSubview:circleImage];
             }else{
@@ -1258,6 +1262,8 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     bgColorView.backgroundColor = selectedColor ? selectedColor : selectFAPickerColor;
     [cell setSelectedBackgroundView:bgColorView];
     
+    if (isRTL)
+        cell.textLabel.textAlignment = NSTextAlignmentRight;
     
     return cell;
 }

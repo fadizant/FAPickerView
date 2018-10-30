@@ -1,5 +1,5 @@
 PODS:
-  - FAPickerView (0.1.7):
+  - FAPickerView (0.1.8):
     - SDWebImage
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
@@ -8,14 +8,18 @@ PODS:
 DEPENDENCIES:
   - FAPickerView (from `../`)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SDWebImage
+
 EXTERNAL SOURCES:
   FAPickerView:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
-  FAPickerView: d0af0474df4319935feeeffd2dc868887bd8d887
+  FAPickerView: c49c50582c063204af459fb448acceb3cd99c638
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
 
 PODFILE CHECKSUM: e1de736a60452e9f76952bd8670b222aef852662
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3

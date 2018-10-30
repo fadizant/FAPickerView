@@ -1,12 +1,12 @@
 //
-//  DRColorPicker+UIColor.h
+//  FAColorPicker+UIColor.h
 //
 //  Created by Fadi Abuzant on 3/4/18.
 //  Copyright © 2018 fadizant. All rights reserved.
 
 #import <UIKit/UIKit.h>
 
-@interface UIColor (DRColorPicker)
+@interface UIColor (FAColorPicker)
 
 // returns a hex string, i.e. #FFEEDDFF (RGBA)
 - (NSString*) hexStringFromColor;

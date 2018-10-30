@@ -1,15 +1,15 @@
 //
-//  DRColorPickerWheelView.h
+//  FAColorPickerWheelView.h
 //
 //  Created by Fadi Abuzant on 3/4/18.
 //  Copyright © 2018 fadizant. All rights reserved.
 
-#import "DRColorPickerWheelView.h"
-#import "DRColorPicker+UIColor.h"
-#import "DRColorPicker.h"
-#import "DRColorPickerStore.h"
+#import "FAColorPickerWheelView.h"
+#import "FAColorPicker+UIColor.h"
+#import "FAColorPicker.h"
+#import "FAColorPickerStore.h"
 
-@interface DRColorPickerWheelGradientView : UIView
+@interface FAColorPickerWheelGradientView : UIView
 
 @property (nonatomic, assign) CGGradientRef gradient;
 @property (nonatomic, strong) UIColor* color1;
@@ -17,7 +17,7 @@
 
 @end
 
-@implementation DRColorPickerWheelGradientView
+@implementation FAColorPickerWheelGradientView
 
 - (void) setColor1:(UIColor*)color
 {
@@ -83,21 +83,21 @@
 
 @end
 
-CGFloat const DRColorPickerWheelViewGradientViewHeight = 40.0f;
-CGFloat const DRColorPickerWheelViewGradientTopMargin = 20.0f;
-CGFloat const DRColorPickerWheelViewDefaultMargin = 10.0f;
-CGFloat const DRColorPickerWheelLabelWidth = 60.0f;
-CGFloat const DRColorPickerWheelLabelHeight = 30.0f;
-CGFloat const DRColorPickerWheelTextFieldWidth = 84.0f;
-CGFloat const DRColorPickerWheelViewBrightnessIndicatorWidth = 16.0f;
-CGFloat const DRColorPickerWheelViewBrightnessIndicatorHeight = 48.0f;
-CGFloat const DRColorPickerWheelViewCrossHairshWidthAndHeight = 38.0f;
+CGFloat const FAColorPickerWheelViewGradientViewHeight = 40.0f;
+CGFloat const FAColorPickerWheelViewGradientTopMargin = 20.0f;
+CGFloat const FAColorPickerWheelViewDefaultMargin = 10.0f;
+CGFloat const FAColorPickerWheelLabelWidth = 60.0f;
+CGFloat const FAColorPickerWheelLabelHeight = 30.0f;
+CGFloat const FAColorPickerWheelTextFieldWidth = 84.0f;
+CGFloat const FAColorPickerWheelViewBrightnessIndicatorWidth = 16.0f;
+CGFloat const FAColorPickerWheelViewBrightnessIndicatorHeight = 48.0f;
+CGFloat const FAColorPickerWheelViewCrossHairshWidthAndHeight = 38.0f;
 
-@interface DRColorPickerWheelView () <UITextFieldDelegate>
+@interface FAColorPickerWheelView () <UITextFieldDelegate>
 
-@property (nonatomic, strong) DRColorPickerWheelGradientView* brightnessView;
+@property (nonatomic, strong) FAColorPickerWheelGradientView* brightnessView;
 @property (nonatomic, strong) UIImageView* brightnessIndicator;
-@property (nonatomic, strong) DRColorPickerWheelGradientView* saturationView;
+@property (nonatomic, strong) FAColorPickerWheelGradientView* saturationView;
 @property (nonatomic, strong) UIImageView* saturationIndicator;
 @property (nonatomic, strong) UIImageView* hueImage;
 @property (nonatomic, strong) UIView* colorBubble;
@@ -111,7 +111,7 @@ CGFloat const DRColorPickerWheelViewCrossHairshWidthAndHeight = 38.0f;
 
 @end
 
-@implementation DRColorPickerWheelView
+@implementation FAColorPickerWheelView
 
 - (id) initWithFrame:(CGRect)f
 {
@@ -134,7 +134,7 @@ CGFloat const DRColorPickerWheelViewCrossHairshWidthAndHeight = 38.0f;
     _rgbLabel.textColor = UIColor.blackColor;
     _rgbLabel.shadowColor = UIColor.whiteColor;
     _rgbLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    _rgbLabel.font = [DRColorPickerFont fontWithSize:16.0f];
+    _rgbLabel.font = [FAColorPickerFont fontWithSize:16.0f];
     _rgbLabel.backgroundColor = UIColor.whiteColor;
     [self addSubview:_rgbLabel];
 
@@ -154,10 +154,10 @@ CGFloat const DRColorPickerWheelViewCrossHairshWidthAndHeight = 38.0f;
 
     _colorPreviewView = [[UIView alloc] init];
     _colorPreviewView.layer.borderWidth = 1.0f;
-    _colorPreviewView.layer.borderColor = DRColorPickerBorderColor.CGColor;
+    _colorPreviewView.layer.borderColor = FAColorPickerBorderColor.CGColor;
     [self addSubview:_colorPreviewView];
 
-    _hueImage = [[UIImageView alloc] initWithImage:[DRColorPickerStore imageNamedFromPodResources:@"colormap"]];
+    _hueImage = [[UIImageView alloc] initWithImage:[FAColorPickerStore imageNamedFromPodResources:@"colormap"]];
     _hueImage.layer.borderWidth = 1.0f;
     _hueImage.layer.borderColor = borderColor.CGColor;
     [self addSubview:_hueImage];
@@ -165,15 +165,15 @@ CGFloat const DRColorPickerWheelViewCrossHairshWidthAndHeight = 38.0f;
     _brightnessView = [self createBarViewWithBorderColor:borderColor];
     _brightnessIndicator = [self createIndicator];
 
-    if (DRColorPickerShowSaturationBar)
+    if (FAColorPickerShowSaturationBar)
     {
         _saturationView = [self createBarViewWithBorderColor:borderColor];
         _saturationIndicator = [self createIndicator];
     }
 
-    _colorBubble = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, DRColorPickerWheelViewCrossHairshWidthAndHeight, DRColorPickerWheelViewCrossHairshWidthAndHeight)];
+    _colorBubble = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, FAColorPickerWheelViewCrossHairshWidthAndHeight, FAColorPickerWheelViewCrossHairshWidthAndHeight)];
     UIColor* bubbleBorderColor = [UIColor colorWithWhite:0.9 alpha:0.8];
-    _colorBubble.layer.cornerRadius = DRColorPickerWheelViewCrossHairshWidthAndHeight * 0.5f;
+    _colorBubble.layer.cornerRadius = FAColorPickerWheelViewCrossHairshWidthAndHeight * 0.5f;
     _colorBubble.layer.borderColor = bubbleBorderColor.CGColor;
     _colorBubble.layer.borderWidth = 2;
     _colorBubble.layer.shadowColor = [UIColor blackColor].CGColor;
@@ -185,9 +185,9 @@ CGFloat const DRColorPickerWheelViewCrossHairshWidthAndHeight = 38.0f;
     [self addSubview:_colorBubble];
 }
 
-- (DRColorPickerWheelGradientView*) createBarViewWithBorderColor:(UIColor*)borderColor
+- (FAColorPickerWheelGradientView*) createBarViewWithBorderColor:(UIColor*)borderColor
 {
-    DRColorPickerWheelGradientView* v = [[DRColorPickerWheelGradientView alloc] init];
+    FAColorPickerWheelGradientView* v = [[FAColorPickerWheelGradientView alloc] init];
     v.layer.borderWidth = 1.0f;
     v.layer.borderColor = borderColor.CGColor;
     [self addSubview:v];
@@ -197,10 +197,10 @@ CGFloat const DRColorPickerWheelViewCrossHairshWidthAndHeight = 38.0f;
 
 - (UIImageView*) createIndicator
 {
-    UIImageView* indicator = [[UIImageView alloc] initWithFrame:CGRectMake(DRColorPickerWheelViewDefaultMargin, self.brightnessView.center.y,
-                                                                         DRColorPickerWheelViewBrightnessIndicatorWidth, DRColorPickerWheelViewBrightnessIndicatorHeight)];
+    UIImageView* indicator = [[UIImageView alloc] initWithFrame:CGRectMake(FAColorPickerWheelViewDefaultMargin, self.brightnessView.center.y,
+                                                                         FAColorPickerWheelViewBrightnessIndicatorWidth, FAColorPickerWheelViewBrightnessIndicatorHeight)];
     
-    indicator.image = [DRColorPickerStore imageNamedFromPodResources:@"brightnessguide"];
+    indicator.image = [FAColorPickerStore imageNamedFromPodResources:@"brightnessguide"];
     indicator.layer.shadowColor = [UIColor blackColor].CGColor;
     indicator.layer.shadowOffset = CGSizeZero;
     indicator.layer.shadowRadius = 1;
@@ -216,41 +216,41 @@ CGFloat const DRColorPickerWheelViewCrossHairshWidthAndHeight = 38.0f;
 {
     [super layoutSubviews];
 
-    self.rgbLabel.frame = CGRectMake(DRColorPickerWheelViewDefaultMargin, DRColorPickerWheelViewDefaultMargin, DRColorPickerWheelLabelWidth, DRColorPickerWheelLabelHeight);
+    self.rgbLabel.frame = CGRectMake(FAColorPickerWheelViewDefaultMargin, FAColorPickerWheelViewDefaultMargin, FAColorPickerWheelLabelWidth, FAColorPickerWheelLabelHeight);
 
-    self.rgbTextField.frame = CGRectMake(DRColorPickerWheelViewDefaultMargin + DRColorPickerWheelLabelWidth,
-                                         DRColorPickerWheelViewDefaultMargin,
-                                         DRColorPickerWheelTextFieldWidth,
-                                         DRColorPickerWheelLabelHeight);
+    self.rgbTextField.frame = CGRectMake(FAColorPickerWheelViewDefaultMargin + FAColorPickerWheelLabelWidth,
+                                         FAColorPickerWheelViewDefaultMargin,
+                                         FAColorPickerWheelTextFieldWidth,
+                                         FAColorPickerWheelLabelHeight);
 
-    CGFloat previewX = DRColorPickerWheelViewDefaultMargin + DRColorPickerWheelLabelWidth + DRColorPickerWheelViewDefaultMargin + DRColorPickerWheelTextFieldWidth;
-    self.colorPreviewView.frame = CGRectMake(previewX, DRColorPickerWheelViewDefaultMargin, self.frame.size.width - DRColorPickerWheelViewDefaultMargin - previewX, DRColorPickerWheelLabelHeight);
+    CGFloat previewX = FAColorPickerWheelViewDefaultMargin + FAColorPickerWheelLabelWidth + FAColorPickerWheelViewDefaultMargin + FAColorPickerWheelTextFieldWidth;
+    self.colorPreviewView.frame = CGRectMake(previewX, FAColorPickerWheelViewDefaultMargin, self.frame.size.width - FAColorPickerWheelViewDefaultMargin - previewX, FAColorPickerWheelLabelHeight);
 
     CGFloat hueHeight;
     if (self.saturationView == nil)
     {
-        hueHeight = CGRectGetHeight(self.frame) - DRColorPickerWheelViewGradientViewHeight - DRColorPickerWheelViewGradientTopMargin - DRColorPickerWheelViewDefaultMargin - DRColorPickerWheelViewDefaultMargin - DRColorPickerWheelLabelHeight;
+        hueHeight = CGRectGetHeight(self.frame) - FAColorPickerWheelViewGradientViewHeight - FAColorPickerWheelViewGradientTopMargin - FAColorPickerWheelViewDefaultMargin - FAColorPickerWheelViewDefaultMargin - FAColorPickerWheelLabelHeight;
     }
     else
     {
-        hueHeight = CGRectGetHeight(self.frame) - DRColorPickerWheelViewGradientViewHeight - DRColorPickerWheelViewGradientViewHeight - DRColorPickerWheelViewDefaultMargin - DRColorPickerWheelViewDefaultMargin - DRColorPickerWheelViewGradientTopMargin - DRColorPickerWheelViewDefaultMargin - DRColorPickerWheelLabelHeight;
+        hueHeight = CGRectGetHeight(self.frame) - FAColorPickerWheelViewGradientViewHeight - FAColorPickerWheelViewGradientViewHeight - FAColorPickerWheelViewDefaultMargin - FAColorPickerWheelViewDefaultMargin - FAColorPickerWheelViewGradientTopMargin - FAColorPickerWheelViewDefaultMargin - FAColorPickerWheelLabelHeight;
     }
 
-    self.hueImage.frame = CGRectMake(DRColorPickerWheelViewDefaultMargin,
-                                     _hideColorInfo ? DRColorPickerWheelViewDefaultMargin : DRColorPickerWheelViewDefaultMargin + DRColorPickerWheelViewDefaultMargin + DRColorPickerWheelLabelHeight,
-                                     CGRectGetWidth(self.frame) - (DRColorPickerWheelViewDefaultMargin * 2),
-                                     hueHeight + (_hideColorInfo ? DRColorPickerWheelViewDefaultMargin + DRColorPickerWheelLabelHeight : 0));
+    self.hueImage.frame = CGRectMake(FAColorPickerWheelViewDefaultMargin,
+                                     _hideColorInfo ? FAColorPickerWheelViewDefaultMargin : FAColorPickerWheelViewDefaultMargin + FAColorPickerWheelViewDefaultMargin + FAColorPickerWheelLabelHeight,
+                                     CGRectGetWidth(self.frame) - (FAColorPickerWheelViewDefaultMargin * 2),
+                                     hueHeight + (_hideColorInfo ? FAColorPickerWheelViewDefaultMargin + FAColorPickerWheelLabelHeight : 0));
     
-    self.saturationView.frame = CGRectMake(DRColorPickerWheelViewDefaultMargin,
-                                         CGRectGetMaxY(self.hueImage.frame) + DRColorPickerWheelViewDefaultMargin,
-                                         CGRectGetWidth(self.frame) - (DRColorPickerWheelViewDefaultMargin * 2),
-                                         DRColorPickerWheelViewGradientViewHeight);
+    self.saturationView.frame = CGRectMake(FAColorPickerWheelViewDefaultMargin,
+                                         CGRectGetMaxY(self.hueImage.frame) + FAColorPickerWheelViewDefaultMargin,
+                                         CGRectGetWidth(self.frame) - (FAColorPickerWheelViewDefaultMargin * 2),
+                                         FAColorPickerWheelViewGradientViewHeight);
 
-    CGFloat brightnessY = (self.saturationView == nil ? CGRectGetMaxY(self.hueImage.frame) + DRColorPickerWheelViewDefaultMargin : CGRectGetMaxY(self.saturationView.frame) + DRColorPickerWheelViewDefaultMargin);
-    self.brightnessView.frame = CGRectMake(DRColorPickerWheelViewDefaultMargin,
+    CGFloat brightnessY = (self.saturationView == nil ? CGRectGetMaxY(self.hueImage.frame) + FAColorPickerWheelViewDefaultMargin : CGRectGetMaxY(self.saturationView.frame) + FAColorPickerWheelViewDefaultMargin);
+    self.brightnessView.frame = CGRectMake(FAColorPickerWheelViewDefaultMargin,
                                            brightnessY,
-                                           CGRectGetWidth(self.frame) - (DRColorPickerWheelViewDefaultMargin * 2),
-                                           DRColorPickerWheelViewGradientViewHeight);
+                                           CGRectGetWidth(self.frame) - (FAColorPickerWheelViewDefaultMargin * 2),
+                                           FAColorPickerWheelViewGradientViewHeight);
 
     [self updateIndicatorsPosition];
     [self updateColorBubblePosition];

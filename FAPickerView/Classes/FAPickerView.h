@@ -6,10 +6,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "DRColorPickerWheelView.h"
-#import "DRColorPicker.h"
-#import "DRColorPickerColor.h"
-#import "DRColorPicker+UIColor.h"
+#import "FAColorPickerWheelView.h"
+#import "FAColorPicker.h"
+#import "FAColorPickerColor.h"
+#import "FAColorPicker+UIColor.h"
 
 @class FAPickerView;
 @class FAPickerItem;
@@ -378,7 +378,7 @@ CustomViewContainerHeight:(float)height
 
 /** Defualt color */
 @property UIColor *selectedColorPicker;
-@property (nonatomic, strong) DRColorPickerWheelView* wheelView;
+@property (nonatomic, strong) FAColorPickerWheelView* wheelView;
 
 /** Custom View */
 @property UIViewController *customView;

@@ -1,14 +1,14 @@
 //
-//  DRColorPickerColor.m
+//  FAColorPickerColor.m
 //
 //  Created by Fadi Abuzant on 3/4/18.
 //  Copyright © 2018 fadizant. All rights reserved.
 
-#import "DRColorPickerColor.h"
-#import "DRColorPicker+UIColor.h"
-#import "DRColorPickerStore.h"
+#import "FAColorPickerColor.h"
+#import "FAColorPicker+UIColor.h"
+#import "FAColorPickerStore.h"
 
-@implementation DRColorPickerColor
+@implementation FAColorPickerColor
 {
     UIImage* _image;
     UIImage* _thumbnailImage;
@@ -45,7 +45,7 @@
     }
 
     {
-        CGFloat size = [DRColorPickerStore thumbnailSizePixels];
+        CGFloat size = [FAColorPickerStore thumbnailSizePixels];
         _thumbnailImage = [self normalizeImage:_image size:CGSizeMake(size, size) clip:YES];
     }
 
@@ -69,7 +69,7 @@
     return self;
 }
 
-- (instancetype) initWithClone:(DRColorPickerColor*)color
+- (instancetype) initWithClone:(FAColorPickerColor*)color
 {
     if ((self = [super init]) == nil) { return nil; }
 
@@ -162,7 +162,7 @@
 {
     if (_image == nil && self.fullImageHash.length != 0)
     {
-        NSString* path = [[DRColorPickerStore sharedInstance] fullPathForColor:self];
+        NSString* path = [[FAColorPickerStore sharedInstance] fullPathForColor:self];
         return [UIImage imageWithContentsOfFile:path];
     }
 
@@ -173,7 +173,7 @@
 {
     if (_thumbnailImage == nil && self.fullImageHash.length != 0)
     {
-        NSString* path = [[DRColorPickerStore sharedInstance] thumbnailPathForColor:self];
+        NSString* path = [[FAColorPickerStore sharedInstance] thumbnailPathForColor:self];
         return [UIImage imageWithContentsOfFile:path];
     }
 

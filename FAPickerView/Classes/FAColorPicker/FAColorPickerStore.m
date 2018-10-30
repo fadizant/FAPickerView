@@ -1,28 +1,28 @@
 //
-//  DRColorPickerStore.m
+//  FAColorPickerStore.m
 //
 //  Created by Fadi Abuzant on 3/4/18.
 //  Copyright © 2018 fadizant. All rights reserved.
 
 #import <CommonCrypto/CommonDigest.h>
-#import "DRColorPickerStore.h"
-#import "DRColorPicker.h"
+#import "FAColorPickerStore.h"
+#import "FAColorPicker.h"
 #import <MobileCoreServices/MobileCoreServices.h>
 
-#define DRCOLORPICKER_FOLDER_NAME @"DRColorPicker"
+#define FAColorPICKER_FOLDER_NAME @"FAColorPicker"
 
 @import ImageIO;
 
-#define DR_COLOR_PICKER_FIND_AND_REPLACE_OPTION_GET_ONLY 0
-#define DR_COLOR_PICKER_FIND_AND_REPLACE_OPTION_MOVE_TO_FRONT 1
-#define DR_COLOR_PICKER_FIND_AND_REPLACE_OPTION_KEEP_IN_PLACE 2
-#define DR_COLOR_PICKER_FIND_AND_REPLACE_OPTION_DELETE 3
+#define FA_COLOR_PICKER_FIND_AND_REPLACE_OPTION_GET_ONLY 0
+#define FA_COLOR_PICKER_FIND_AND_REPLACE_OPTION_MOVE_TO_FRONT 1
+#define FA_COLOR_PICKER_FIND_AND_REPLACE_OPTION_KEEP_IN_PLACE 2
+#define FA_COLOR_PICKER_FIND_AND_REPLACE_OPTION_DELETE 3
 
-static DRColorPickerStore* s_instance;
+static FAColorPickerStore* s_instance;
 static CGFloat s_thumbnailSizePixels;
 static CGFloat s_thumbnailSizePoints;
 
-@interface DRColorPickerStore ()
+@interface FAColorPickerStore ()
 
 // for fast thumbnail retrieval
 @property (nonatomic, strong, readonly) NSCache* cache;
@@ -32,15 +32,15 @@ static CGFloat s_thumbnailSizePoints;
 
 @end
 
-@implementation DRColorPickerStore
+@implementation FAColorPickerStore
 
 + (void) initialize
 {
-    if (self == DRColorPickerStore.class)
+    if (self == FAColorPickerStore.class)
     {
-        s_instance = [[DRColorPickerStore alloc] initAsSingleton];
+        s_instance = [[FAColorPickerStore alloc] initAsSingleton];
 
-        s_thumbnailSizePixels = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? (UIScreen.mainScreen.scale * DRColorPickerThumbnailSizeInPointsPad) : (UIScreen.mainScreen.scale * DRColorPickerThumbnailSizeInPointsPhone));
+        s_thumbnailSizePixels = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad ? (UIScreen.mainScreen.scale * FAColorPickerThumbnailSizeInPointsPad) : (UIScreen.mainScreen.scale * FAColorPickerThumbnailSizeInPointsPhone));
         s_thumbnailSizePoints = s_thumbnailSizePixels / UIScreen.mainScreen.scale;
     }
 }
@@ -103,7 +103,7 @@ static CGFloat s_thumbnailSizePoints;
     NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString* dir = ([paths count] > 0 ? [paths objectAtIndex:0] : nil);
 
-    return [dir stringByAppendingPathComponent:DRCOLORPICKER_FOLDER_NAME];
+    return [dir stringByAppendingPathComponent:FAColorPICKER_FOLDER_NAME];
 }
 
 - (NSString*) sharedDirectory
@@ -112,9 +112,9 @@ static CGFloat s_thumbnailSizePoints;
     // technically this call could work on iOS 7, but the user defaults initWithSuitName seems to be flaky, so
     // I've blocked this from running on iOS 7 so if your app has other migration code, it will not migrate here
     // until iOS 8 either
-    if (DRColorPickerSharedAppGroup.length != 0 && [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0f && [NSFileManager instancesRespondToSelector:@selector(containerURLForSecurityApplicationGroupIdentifier:)])
+    if (FAColorPickerSharedAppGroup.length != 0 && [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0f && [NSFileManager instancesRespondToSelector:@selector(containerURLForSecurityApplicationGroupIdentifier:)])
     {
-        return [[[[NSFileManager alloc] init] containerURLForSecurityApplicationGroupIdentifier:DRColorPickerSharedAppGroup].path stringByAppendingPathComponent:DRCOLORPICKER_FOLDER_NAME];
+        return [[[[NSFileManager alloc] init] containerURLForSecurityApplicationGroupIdentifier:FAColorPickerSharedAppGroup].path stringByAppendingPathComponent:FAColorPICKER_FOLDER_NAME];
     }
     return nil;
 }
@@ -183,7 +183,7 @@ static CGFloat s_thumbnailSizePoints;
 
 #if !TARGET_IS_EXTENSION
 
-    if (DRColorPickerSharedAppGroup.length != 0)
+    if (FAColorPickerSharedAppGroup.length != 0)
     {
         NSString* sharedDir = [self sharedDirectory];
         NSString* documentsDir = [self documentsDirectory];
@@ -195,7 +195,7 @@ static CGFloat s_thumbnailSizePoints;
             // move all files from old documents directory to the new shared directory
             NSError* error = nil;
             [fileManager moveItemAtPath:documentsDir toPath:sharedDir error:&error];
-            NSAssert(error == nil, @"Error moving DRColorPicker data from %@ to %@", documentsDir, sharedDir);
+            NSAssert(error == nil, @"Error moving FAColorPicker data from %@ to %@", documentsDir, sharedDir);
         }
     }
 
@@ -215,7 +215,7 @@ static CGFloat s_thumbnailSizePoints;
         [self loadColorSettings];
         for (UIColor* color in set)
         {
-            [self createColorWithColor:color list:DRColorPickerStoreListFavorites moveToFront:NO];
+            [self createColorWithColor:color list:FAColorPickerStoreListFavorites moveToFront:NO];
         }
         self.disableSave = NO;
         [self saveColorSettings];
@@ -229,7 +229,7 @@ static CGFloat s_thumbnailSizePoints;
     [self loadColorSettings];
 }
 
-- (NSString*) fullPathForColor:(DRColorPickerColor*)color
+- (NSString*) fullPathForColor:(FAColorPickerColor*)color
 {
     return [self fullPathForHash:color.fullImageHash];
 }
@@ -254,14 +254,14 @@ static CGFloat s_thumbnailSizePoints;
     return nil;
 }
 
-- (NSString*) thumbnailPathForColor:(DRColorPickerColor*)color
+- (NSString*) thumbnailPathForColor:(FAColorPickerColor*)color
 {
     return [self thumbnailPathForHash:color.fullImageHash];
 }
 
 - (void) loadColorSettings
 {
-    NSString* settingsFilePath = [[self rootDirectory] stringByAppendingPathComponent:DR_COLOR_PICKER_SETTINGS_FILE_NAME];
+    NSString* settingsFilePath = [[self rootDirectory] stringByAppendingPathComponent:FA_COLOR_PICKER_SETTINGS_FILE_NAME];
     NSData* settings = [NSData dataWithContentsOfFile:settingsFilePath];
     _recentColors = [NSMutableArray array];
     _favoriteColors = [NSMutableArray array];
@@ -275,7 +275,7 @@ static CGFloat s_thumbnailSizePoints;
     NSDictionary* json = [NSJSONSerialization JSONObjectWithData:settings options:0 error:&error];
     if (error != nil)
     {
-        NSLog(@"Error reading DRColorPickerStore settings: %@", error);
+        NSLog(@"Error reading FAColorPickerStore settings: %@", error);
         return;
     }
 
@@ -283,13 +283,13 @@ static CGFloat s_thumbnailSizePoints;
 
     for (NSDictionary* d in recentColors)
     {
-        [(NSMutableArray*)self.recentColors addObject:[[DRColorPickerColor alloc] initWithDictionary:d]];
+        [(NSMutableArray*)self.recentColors addObject:[[FAColorPickerColor alloc] initWithDictionary:d]];
     }
 
     NSArray* favoriteColors = (NSArray*)json[@"Favorites"];
     for (NSDictionary* d in favoriteColors)
     {
-        [(NSMutableArray*)self.favoriteColors addObject:[[DRColorPickerColor alloc] initWithDictionary:d]];
+        [(NSMutableArray*)self.favoriteColors addObject:[[FAColorPickerColor alloc] initWithDictionary:d]];
     }
 }
 
@@ -301,18 +301,18 @@ static CGFloat s_thumbnailSizePoints;
     }
 
     NSMutableDictionary* json = [NSMutableDictionary dictionary];
-    NSString* settingsFilePath = [[self rootDirectory] stringByAppendingPathComponent:DR_COLOR_PICKER_SETTINGS_FILE_NAME];
+    NSString* settingsFilePath = [[self rootDirectory] stringByAppendingPathComponent:FA_COLOR_PICKER_SETTINGS_FILE_NAME];
 
     NSMutableArray* recents = [NSMutableArray array];
     json[@"Recent"] = recents;
-    for (DRColorPickerColor* c in self.recentColors)
+    for (FAColorPickerColor* c in self.recentColors)
     {
         [recents addObject:[c dictionary]];
     }
 
     NSMutableArray* favorites = [NSMutableArray array];
     json[@"Favorites"] = favorites;
-    for (DRColorPickerColor* c in self.favoriteColors)
+    for (FAColorPickerColor* c in self.favoriteColors)
     {
         [favorites addObject:[c dictionary]];
     }
@@ -330,7 +330,7 @@ static CGFloat s_thumbnailSizePoints;
     [jsonData writeToFile:settingsFilePath atomically:NO];
 }
 
-- (NSInteger) findColor:(DRColorPickerColor*)color inArray:(NSArray*)array alphaMatch:(BOOL*)alphaMatch
+- (NSInteger) findColor:(FAColorPickerColor*)color inArray:(NSArray*)array alphaMatch:(BOOL*)alphaMatch
 {
     NSAssert(alphaMatch != NULL, @"Bool pointer must be allocated");
     *alphaMatch = NO;
@@ -339,7 +339,7 @@ static CGFloat s_thumbnailSizePoints;
 
     for (NSInteger i = 0; i < array.count; i++)
     {
-        DRColorPickerColor* c = (DRColorPickerColor*)array[i];
+        FAColorPickerColor* c = (FAColorPickerColor*)array[i];
         if ((color.rgbColor != nil && c.rgbColor != nil && color.rgbColor.rgbHex == c.rgbColor.rgbHex) ||
             (color.fullImageHash.length != 0 && c.fullImageHash.length != 0 && [color.fullImageHash isEqualToString:c.fullImageHash]))
         {
@@ -358,29 +358,29 @@ static CGFloat s_thumbnailSizePoints;
     return lastNonAlphaMatch;
 }
 
-- (DRColorPickerColor*) findAndReplaceColor:(DRColorPickerColor*)color array:(NSMutableArray*)array option:(NSInteger)option
+- (FAColorPickerColor*) findAndReplaceColor:(FAColorPickerColor*)color array:(NSMutableArray*)array option:(NSInteger)option
 {
     BOOL alphaMatch;
     NSInteger i = [self findColor:color inArray:array alphaMatch:&alphaMatch];
     if (i != NSNotFound)
     {
-        DRColorPickerColor* found = (DRColorPickerColor*)array[i];
+        FAColorPickerColor* found = (FAColorPickerColor*)array[i];
         [found clearImages];
         [color clearImages];
 
         // create a copy so that changes to the color do not modify the color already in the list
-        DRColorPickerColor* clone = [[DRColorPickerColor alloc] initWithClone:color];
+        FAColorPickerColor* clone = [[FAColorPickerColor alloc] initWithClone:color];
 
         if (alphaMatch)
         {
             // we matched on alpha, this is an exact match. we will either leave the color where it is or move it to the front
-            if (option == DR_COLOR_PICKER_FIND_AND_REPLACE_OPTION_MOVE_TO_FRONT)
+            if (option == FA_COLOR_PICKER_FIND_AND_REPLACE_OPTION_MOVE_TO_FRONT)
             {
                 // move color to the front of the array
                 [array removeObjectAtIndex:i];
                 [array insertObject:clone atIndex:0];
             }
-            else if (option == DR_COLOR_PICKER_FIND_AND_REPLACE_OPTION_DELETE)
+            else if (option == FA_COLOR_PICKER_FIND_AND_REPLACE_OPTION_DELETE)
             {
                 [array removeObjectAtIndex:i];
             }
@@ -388,11 +388,11 @@ static CGFloat s_thumbnailSizePoints;
         else
         {
             // we matched, but not on alpha so we have to add a new color either at the front or at the end
-            if (option == DR_COLOR_PICKER_FIND_AND_REPLACE_OPTION_MOVE_TO_FRONT)
+            if (option == FA_COLOR_PICKER_FIND_AND_REPLACE_OPTION_MOVE_TO_FRONT)
             {
                 [array insertObject:clone atIndex:0];
             }
-            else if (option == DR_COLOR_PICKER_FIND_AND_REPLACE_OPTION_KEEP_IN_PLACE)
+            else if (option == FA_COLOR_PICKER_FIND_AND_REPLACE_OPTION_KEEP_IN_PLACE)
             {
                 [array addObject:clone];
             }
@@ -404,11 +404,11 @@ static CGFloat s_thumbnailSizePoints;
     return nil;
 }
 
-- (DRColorPickerColor*) findAndReplaceColor:(DRColorPickerColor*)color array:(NSMutableArray*)array moveToFront:(BOOL)moveToFront
+- (FAColorPickerColor*) findAndReplaceColor:(FAColorPickerColor*)color array:(NSMutableArray*)array moveToFront:(BOOL)moveToFront
 {
     // see if this color is in the desired array
-    NSInteger option = (moveToFront ? DR_COLOR_PICKER_FIND_AND_REPLACE_OPTION_MOVE_TO_FRONT : DR_COLOR_PICKER_FIND_AND_REPLACE_OPTION_KEEP_IN_PLACE);
-    DRColorPickerColor* foundColor = [self findAndReplaceColor:color array:array option:option];
+    NSInteger option = (moveToFront ? FA_COLOR_PICKER_FIND_AND_REPLACE_OPTION_MOVE_TO_FRONT : FA_COLOR_PICKER_FIND_AND_REPLACE_OPTION_KEEP_IN_PLACE);
+    FAColorPickerColor* foundColor = [self findAndReplaceColor:color array:array option:option];
 
     // if the colors is in the array, we are done
     if (foundColor != nil)
@@ -422,7 +422,7 @@ static CGFloat s_thumbnailSizePoints;
         if (otherArray != array)
         {
             // try and re-use color from this array
-            foundColor = [self findAndReplaceColor:color array:otherArray option:DR_COLOR_PICKER_FIND_AND_REPLACE_OPTION_GET_ONLY];
+            foundColor = [self findAndReplaceColor:color array:otherArray option:FA_COLOR_PICKER_FIND_AND_REPLACE_OPTION_GET_ONLY];
             if (foundColor != nil)
             {
                 break;
@@ -433,7 +433,7 @@ static CGFloat s_thumbnailSizePoints;
     // if we didn't find the color in any array, assign the passed in color
     if (foundColor == nil)
     {
-        foundColor = [[DRColorPickerColor alloc] initWithClone:color];
+        foundColor = [[FAColorPickerColor alloc] initWithClone:color];
     }
 
     // add the color to the requested array
@@ -449,20 +449,20 @@ static CGFloat s_thumbnailSizePoints;
     return color;
 }
 
-- (NSArray*) colorsForList:(DRColorPickerStoreList)list
+- (NSArray*) colorsForList:(FAColorPickerStoreList)list
 {
-    if (list == DRColorPickerStoreListRecent)
+    if (list == FAColorPickerStoreListRecent)
     {
         return self.recentColors;
     }
-    else if (list == DRColorPickerStoreListFavorites)
+    else if (list == FAColorPickerStoreListFavorites)
     {
         return self.favoriteColors;
     }
     return nil;
 }
 
-- (void) removeFiles:(DRColorPickerColor*)c
+- (void) removeFiles:(FAColorPickerColor*)c
 {
     if (c.fullImageHash.length != 0)
     {
@@ -474,27 +474,27 @@ static CGFloat s_thumbnailSizePoints;
     }
 }
 
-- (DRColorPickerColor*) createColorWithColor:(UIColor*)color list:(DRColorPickerStoreList)list moveToFront:(BOOL)moveToFront
+- (FAColorPickerColor*) createColorWithColor:(UIColor*)color list:(FAColorPickerStoreList)list moveToFront:(BOOL)moveToFront
 {
     NSAssert(color != nil, @"Color is required");
 
     // get the first array to check
     NSMutableArray* array = (NSMutableArray*)[self colorsForList:list];
-    DRColorPickerColor* drColor = [[DRColorPickerColor alloc] initWithColor:color];
+    FAColorPickerColor* FAColor = [[FAColorPickerColor alloc] initWithColor:color];
 
     // find or create the color
-    DRColorPickerColor* existing = [self findAndReplaceColor:drColor array:array moveToFront:moveToFront];
+    FAColorPickerColor* existing = [self findAndReplaceColor:FAColor array:array moveToFront:moveToFront];
 
-    while (array.count > DRColorPickerStoreMaxColors)
+    while (array.count > FAColorPickerStoreMaxColors)
     {
-        DRColorPickerColor* c = (DRColorPickerColor*)[array lastObject];
+        FAColorPickerColor* c = (FAColorPickerColor*)[array lastObject];
         [self deleteColor:c fromList:list];
     }
 
     return existing;
 }
 
-- (DRColorPickerColor*) createColorWithImage:(DRColorPickerColor*)color list:(DRColorPickerStoreList)list moveToFront:(BOOL)moveToFront
+- (FAColorPickerColor*) createColorWithImage:(FAColorPickerColor*)color list:(FAColorPickerStoreList)list moveToFront:(BOOL)moveToFront
 {
     if (color.image == nil)
     {
@@ -507,11 +507,11 @@ static CGFloat s_thumbnailSizePoints;
     // if we don't have a full image yet, make one so we can check if we already exist
     if (color.fullImageHash.length == 0)
     {
-        color.fullImageHash = [DRColorPickerStore md5Image:color.image];
+        color.fullImageHash = [FAColorPickerStore md5Image:color.image];
         NSString* fullPath = [self fullPathForHash:color.fullImageHash];
         if (![[[NSFileManager alloc] init] fileExistsAtPath:fullPath])
         {
-            if (DRColorPickerUsePNG)
+            if (FAColorPickerUsePNG)
             {
                 NSData* compressedData = UIImagePNGRepresentation(color.image);
                 [compressedData writeToFile:fullPath atomically:NO];
@@ -519,10 +519,10 @@ static CGFloat s_thumbnailSizePoints;
             else
             {
                 // since we have lossy compression, we have to re-compute the hash
-                NSData* compressedData = [DRColorPickerStore convertToJPEG2000:color.image withQuality:DRColorPickerJPEG2000Quality];
+                NSData* compressedData = [FAColorPickerStore convertToJPEG2000:color.image withQuality:FAColorPickerJPEG2000Quality];
                 UIImage* recomputeHashImage = [UIImage imageWithData:compressedData];
-                DRColorPickerColor* normalizedColor = [[DRColorPickerColor alloc] initWithImage:recomputeHashImage];
-                color.fullImageHash = [DRColorPickerStore md5Image:normalizedColor.image];
+                FAColorPickerColor* normalizedColor = [[FAColorPickerColor alloc] initWithImage:recomputeHashImage];
+                color.fullImageHash = [FAColorPickerStore md5Image:normalizedColor.image];
                 fullPath = [self fullPathForHash:color.fullImageHash];
                 if (![[[NSFileManager alloc] init] fileExistsAtPath:fullPath])
                 {
@@ -541,16 +541,16 @@ static CGFloat s_thumbnailSizePoints;
     }
 
     color = [self findAndReplaceColor:color array:array moveToFront:moveToFront];
-    while (array.count > DRColorPickerStoreMaxColors)
+    while (array.count > FAColorPickerStoreMaxColors)
     {
-        DRColorPickerColor* c = (DRColorPickerColor*)[array lastObject];
+        FAColorPickerColor* c = (FAColorPickerColor*)[array lastObject];
         [self deleteColor:c fromList:list];
     }
 
     return color;
 }
 
-- (void) upsertColor:(DRColorPickerColor*)color list:(DRColorPickerStoreList)list moveToFront:(BOOL)moveToFront
+- (void) upsertColor:(FAColorPickerColor*)color list:(FAColorPickerStoreList)list moveToFront:(BOOL)moveToFront
 {
     if (color.rgbColor == nil)
     {
@@ -562,16 +562,16 @@ static CGFloat s_thumbnailSizePoints;
     }
 }
 
-- (void) deleteColor:(DRColorPickerColor*)color fromList:(DRColorPickerStoreList)list
+- (void) deleteColor:(FAColorPickerColor*)color fromList:(FAColorPickerStoreList)list
 {
     NSArray* array = [self colorsForList:list];
-    [self findAndReplaceColor:color array:(NSMutableArray*)array option:DR_COLOR_PICKER_FIND_AND_REPLACE_OPTION_DELETE];
+    [self findAndReplaceColor:color array:(NSMutableArray*)array option:FA_COLOR_PICKER_FIND_AND_REPLACE_OPTION_DELETE];
 
     // if this was an image, we need to check if anyone else is referencing the image - if not we nuke it
     if (color.rgbColor == nil)
     {
         BOOL foundMatchingImage = NO;
-        for (DRColorPickerColor* c in [self.favoriteColors arrayByAddingObjectsFromArray:self.recentColors])
+        for (FAColorPickerColor* c in [self.favoriteColors arrayByAddingObjectsFromArray:self.recentColors])
         {
             if ([c.fullImageHash isEqualToString:color.fullImageHash])
             {
@@ -602,7 +602,7 @@ static CGFloat s_thumbnailSizePoints;
     return fileThumbnail;
 }
 
-- (UIImage*) thumbnailImageForColor:(DRColorPickerColor*)color completion:(DRColorPickerStoreThumbnailCompletionBlock)completion
+- (UIImage*) thumbnailImageForColor:(FAColorPickerColor*)color completion:(FAColorPickerStoreThumbnailCompletionBlock)completion
 {
     if (color.rgbColor != nil)
     {
