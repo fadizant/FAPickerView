@@ -7,20 +7,21 @@
 //
 
 import UIKit
-import FAPickerView
 
 class FASwiftTableViewController: UITableViewController {
-
+    
     // MARK:- UI
     
     // MARK:- Value
     var selectedItems = Array<FAPickerItem>()
     var selectedItem = FAPickerItem()
-    var selectedDate = NSDate()
+    var selectedDate = Date()
     
     enum pickerViewTypeEnum:Int {
         case single
         case multi
+        case sectionSingle
+        case sectionMulti
         case itemsWithURLImags
         case itemsWithColors
         case datepicker
@@ -40,12 +41,12 @@ class FASwiftTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch pickerViewTypeEnum.init(rawValue: indexPath.row).unsafelyUnwrapped {
@@ -56,12 +57,12 @@ class FASwiftTableViewController: UITableViewController {
             items.append(FAPickerItem.init(id: "3", title: "Title 3"))
             
             FAPickerView.setMainColor(UIColor.init(red: 0.000, green: 0.357, blue: 0.675, alpha: 1.00))
-            FAPickerView.picker().show(with: NSMutableArray(array: items),
-                                       selectedItem: selectedItem,
-                                       filter: false,
-                                       headerTitle: "Select one item",
-                                       withCompletion: { (item) in
-                                        self.selectedItem = item ?? FAPickerItem()
+            FAPickerView.showSingleSelectItem(items: NSMutableArray(array: items),
+                                              selectedItem: selectedItem,
+                                              filter: false,
+                                              headerTitle: "Select one item",
+                                              complete: { (item:FAPickerItem?) in
+                                                self.selectedItem = item ?? FAPickerItem()
             }, cancel: {
                 
             })
@@ -80,17 +81,74 @@ class FASwiftTableViewController: UITableViewController {
             items.append(FAPickerItem.init(id: "10", title: "Title 10"))
             
             FAPickerView.setMainColor(UIColor.init(red: 0.000, green: 0.357, blue: 0.675, alpha: 1.00))
-            FAPickerView.picker().show(with: NSMutableArray(array: items),
-                                       selectedItems: NSMutableArray(array: selectedItems),
-                                       filter: false,
-                                       headerTitle: "Select multi items",
-                                       cancelButtonTitle: "cancle",
-                                       confirmButtonTitle: "confirm",
-                                       withCompletion: { (items) in
-                                        if let array = items as? [FAPickerItem] {
-                                            self.selectedItems = array
-                                        }
-                                        
+            FAPickerView.showMultiSelectItems(items: NSMutableArray(array: items),
+                                              selectedItems: NSMutableArray(array: selectedItems),
+                                              filter: false,
+                                              headerTitle: "Select multi items",
+                                              cancelTitle: "cancel",
+                                              confirmTitle: "confirm",
+                                              complete: { (items:NSMutableArray?) in
+                                                if let array = items as? [FAPickerItem] {
+                                                    self.selectedItems = array
+                                                }
+            }, cancel: {
+                
+            })
+            break
+        case .sectionSingle:
+            var sections = Array<FAPickerSection>()
+            var items1 = Array<FAPickerItem>()
+            items1.append(FAPickerItem.init(id: "1", title: "Title 1"))
+            items1.append(FAPickerItem.init(id: "2", title: "Title 2"))
+            items1.append(FAPickerItem.init(id: "3", title: "Title 3"))
+            sections.append(FAPickerSection.init(title: "Section 1", items: NSMutableArray(array: items1)))
+            
+            var items2 = Array<FAPickerItem>()
+            items2.append(FAPickerItem.init(id: "4", title: "Title 1"))
+            items2.append(FAPickerItem.init(id: "5", title: "Title 2"))
+            items2.append(FAPickerItem.init(id: "6", title: "Title 3"))
+            sections.append(FAPickerSection.init(title: "Section 2", items: NSMutableArray(array: items2)))
+            
+            FAPickerView.setMainColor(UIColor.init(red: 0.000, green: 0.357, blue: 0.675, alpha: 1.00))
+            FAPickerView.showSectionsWithSingleSelectItem(sections: NSMutableArray(array: sections),
+                                                          selectedItem: selectedItem,
+                                                          headerTitle: "Select one item",
+                                                          complete: { (item:FAPickerItem?) in
+                                                            self.selectedItem = item ?? FAPickerItem()
+            }, cancel: {
+                
+            })
+            break
+        case .sectionMulti:
+            var sections = Array<FAPickerSection>()
+            var items1 = Array<FAPickerItem>()
+            items1.append(FAPickerItem.init(id: "1", title: "Title 1"))
+            items1.append(FAPickerItem.init(id: "2", title: "Title 2"))
+            items1.append(FAPickerItem.init(id: "3", title: "Title 3"))
+            sections.append(FAPickerSection.init(title: "Section 1", items: NSMutableArray(array: items1)))
+            
+            var items2 = Array<FAPickerItem>()
+            items2.append(FAPickerItem.init(id: "4", title: "Title 1"))
+            items2.append(FAPickerItem.init(id: "5", title: "Title 2"))
+            items2.append(FAPickerItem.init(id: "6", title: "Title 3"))
+            sections.append(FAPickerSection.init(title: "Section 2", items: NSMutableArray(array: items2)))
+            
+            var items3 = Array<FAPickerItem>()
+            items3.append(FAPickerItem.init(id: "7", title: "Title 1"))
+            items3.append(FAPickerItem.init(id: "8", title: "Title 2"))
+            items3.append(FAPickerItem.init(id: "9", title: "Title 3"))
+            sections.append(FAPickerSection.init(title: "Section 3", items: NSMutableArray(array: items3)))
+            
+            FAPickerView.setMainColor(UIColor.init(red: 0.000, green: 0.357, blue: 0.675, alpha: 1.00))
+            FAPickerView.showSectionsWithMultiSelectItem(sections: NSMutableArray(array: sections),
+                                                         selectedItems: NSMutableArray(array: selectedItems),
+                                                         headerTitle: "Select multi items",
+                                                         cancelTitle: "cancel",
+                                                         confirmTitle: "confirm",
+                                                         complete: { (items:NSMutableArray?) in
+                                                            if let array = items as? [FAPickerItem] {
+                                                                self.selectedItems = array
+                                                            }
             }, cancel: {
                 
             })
@@ -100,63 +158,63 @@ class FASwiftTableViewController: UITableViewController {
             items.append(FAPickerItem.init(id: "1",
                                            title: "Facebook",
                                            imageURL: "https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/facebook-icon_128x128.png",
-                                           thumb: UIImage.init(named: "Thumb"),
+                                           thumb: UIImage.init(named: "Thumb")!,
                                            circle: true))
             items.append(FAPickerItem.init(id: "2",
                                            title: "Google",
                                            imageURL: "https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/googleplus-icon_128x128.png",
-                                           thumb: UIImage.init(named: "Thumb"),
+                                           thumb: UIImage.init(named: "Thumb")!,
                                            circle: true))
             items.append(FAPickerItem.init(id: "3",
                                            title: "LinkedIn",
                                            imageURL: "https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/linkedin-icon_128x128.png",
-                                           thumb: UIImage.init(named: "Thumb"),
+                                           thumb: UIImage.init(named: "Thumb")!,
                                            circle: true))
             items.append(FAPickerItem.init(id: "4",
                                            title: "Twitter",
                                            imageURL: "https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/twitter-icon_128x128.png",
-                                           thumb: UIImage.init(named: "Thumb"),
+                                           thumb: UIImage.init(named: "Thumb")!,
                                            circle: true))
             items.append(FAPickerItem.init(id: "5",
                                            title: "Youtube",
                                            imageURL: "https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/youtube-icon_128x128.png",
-                                           thumb: UIImage.init(named: "Thumb"),
+                                           thumb: UIImage.init(named: "Thumb")!,
                                            circle: true))
             items.append(FAPickerItem.init(id: "6",
                                            title: "Skype",
                                            imageURL: "https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/skype-icon_128x128.png",
-                                           thumb: UIImage.init(named: "Thumb"),
+                                           thumb: UIImage.init(named: "Thumb")!,
                                            circle: true))
             items.append(FAPickerItem.init(id: "7",
                                            title: "Pinterest",
                                            imageURL: "https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/pinterest-icon_128x128.png",
-                                           thumb: UIImage.init(named: "Thumb"),
+                                           thumb: UIImage.init(named: "Thumb")!,
                                            circle: true))
             items.append(FAPickerItem.init(id: "8",
                                            title: "Instagram",
                                            imageURL: "https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/instagram-icon_128x128.png",
-                                           thumb: UIImage.init(named: "Thumb"),
+                                           thumb: UIImage.init(named: "Thumb")!,
                                            circle: true))
             items.append(FAPickerItem.init(id: "9",
                                            title: "Vimeo",
                                            imageURL: "https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/vimeo-icon_128x128.png",
-                                           thumb: UIImage.init(named: "Thumb"),
+                                           thumb: UIImage.init(named: "Thumb")!,
                                            circle: true))
             items.append(FAPickerItem.init(id: "10",
                                            title: "Flickr",
                                            imageURL: "https://68ef2f69c7787d4078ac-7864ae55ba174c40683f10ab811d9167.ssl.cf1.rackcdn.com/flickr-icon_128x128.png",
-                                           thumb: UIImage.init(named: "Thumb"),
+                                           thumb: UIImage.init(named: "Thumb")!,
                                            circle: true))
             
             FAPickerView.setMainColor(UIColor.init(red: 0.000, green: 0.357, blue: 0.675, alpha: 1.00))
-            FAPickerView.picker().show(with: NSMutableArray(array:items),
-                                       selectedItems: nil,
-                                       filter: true,
-                                       headerTitle: "Select item with image",
-                                       cancelButtonTitle: "cancle",
-                                       confirmButtonTitle: "confirm",
-                                       withCompletion: { (items) in
-                                        
+            FAPickerView.showSingleSelectItem(items: NSMutableArray(array:items),
+                                              selectedItem: nil,
+                                              filter: true,
+                                              headerTitle: "Select item with image",
+                                              cancelTitle: "cancel",
+                                              confirmTitle: "confirm",
+                                              complete: { (items:FAPickerItem?) in
+                                                
             }, cancel: {
                 
             })
@@ -172,12 +230,14 @@ class FASwiftTableViewController: UITableViewController {
             items.append(FAPickerItem.init(id: "7", title: "Brown", titleColor: .brown, imageColor: .brown, circle: true))
             
             FAPickerView.setMainColor(UIColor.init(red: 0.000, green: 0.357, blue: 0.675, alpha: 1.00))
-            FAPickerView.picker().show(with: NSMutableArray(array:items) ,
-                                       filter: false,
-                                       selectedItemWithTitle: "",
-                                       headerTitle: "Select item with color",
-                                       withCompletion: { (item) in
-                                        
+            FAPickerView.showSingleSelectItem(items: NSMutableArray(array:items),
+                                              selectedItemTitle: nil,
+                                              filter: false,
+                                              headerTitle: "Select item with color",
+                                              cancelTitle: "cancel",
+                                              confirmTitle: "confirm",
+                                              complete: { (item:FAPickerItem?) in
+                                                
             }, cancel: {
                 
             })
@@ -185,12 +245,12 @@ class FASwiftTableViewController: UITableViewController {
         case .datepicker:
             FAPickerView.setMainColor(UIColor.init(red: 0.000, green: 0.675, blue: 0.357, alpha: 1.00))
             FAPickerView.setDateTimeLocalized("en_USA")
-            FAPickerView.picker().show(withSelectedDate: selectedDate as Date?,
-                                       headerTitle: "Select Date",
-                                       cancelButtonTitle: "Cancel",
-                                       confirmButtonTitle: "Confirm",
-                                       withCompletion: { (date) in
-                                        self.selectedDate = date! as NSDate
+            FAPickerView.showDate(selectedDate: selectedDate,
+                                  headerTitle: "Select Date",
+                                  cancelTitle: "cancel",
+                                  confirmTitle: "confirm",
+                                  complete: { (date:Date?) in
+                                    self.selectedDate = date!
             }, cancel: {
                 
             })
@@ -198,12 +258,12 @@ class FASwiftTableViewController: UITableViewController {
         case .dateArabic:
             FAPickerView.setMainColor(UIColor.init(red: 0.000, green: 0.675, blue: 0.357, alpha: 1.00))
             FAPickerView.setDateTimeLocalized("ar_KSA")
-            FAPickerView.picker().show(withSelectedDate: selectedDate as Date?,
-                                       headerTitle: "اختر التاريخ",
-                                       cancelButtonTitle: "الغاء",
-                                       confirmButtonTitle: "موافق",
-                                       withCompletion: { (date) in
-                                        self.selectedDate = date! as NSDate
+            FAPickerView.showDate(selectedDate: selectedDate,
+                                  headerTitle: "اختر التاريخ",
+                                  cancelTitle: "الغاء",
+                                  confirmTitle: "موافق",
+                                  complete: { (date:Date?) in
+                                    self.selectedDate = date!
             }, cancel: {
                 
             })
@@ -211,13 +271,13 @@ class FASwiftTableViewController: UITableViewController {
         case .timepicker:
             FAPickerView.setMainColor(UIColor.init(red: 0.000, green: 0.675, blue: 0.357, alpha: 1.00))
             FAPickerView.setDateTimeLocalized("en_USA")
-            FAPickerView.picker().show(withSelectedDate: selectedDate as Date?,
-                                       dateFormat:.time,
-                                       headerTitle: "Select Date",
-                                       cancelButtonTitle: "Cancel",
-                                       confirmButtonTitle: "Confirm",
-                                       withCompletion: { (date) in
-                                        self.selectedDate = date! as NSDate
+            FAPickerView.showDate(selectedDate: selectedDate,
+                                  datePickerMode: .time,
+                                  headerTitle: "Select Date",
+                                  cancelTitle: "cancel",
+                                  confirmTitle: "confirm",
+                                  complete: { (date:Date?) in
+                                    self.selectedDate = date!
             }, cancel: {
                 
             })
@@ -233,14 +293,14 @@ class FASwiftTableViewController: UITableViewController {
             
             FAPickerView.setMainColor(UIColor.init(red: 0.000, green: 0.675, blue: 0.357, alpha: 1.00))
             FAPickerView.setDateTimeLocalized("en_USA")
-            FAPickerView.picker().show(withSelectedDate: selectedDate as Date?,
-                                       maximumDate: maxDate,
-                                       minimumDate: minDate,
-                                       headerTitle: "Select Date with range",
-                                       cancelButtonTitle: "Cancel",
-                                       confirmButtonTitle: "Confirm",
-                                       withCompletion: { (date) in
-                                        self.selectedDate = date! as NSDate
+            FAPickerView.showDateWithRange(selectedDate: selectedDate,
+                                           maximumDate: maxDate ?? Date(),
+                                           minimumDate: minDate ?? Date(),
+                                           headerTitle: "Select Date with range",
+                                           cancelTitle: "cancel",
+                                           confirmTitle: "confirm",
+                                           complete: { (date:Date?) in
+                                            self.selectedDate = date!
             }, cancel: {
                 
             })
@@ -256,79 +316,74 @@ class FASwiftTableViewController: UITableViewController {
             
             FAPickerView.setMainColor(UIColor.init(red: 0.000, green: 0.675, blue: 0.357, alpha: 1.00))
             FAPickerView.setDateTimeLocalized("en_USA")
-            FAPickerView.picker().show(withSelectedDate: selectedDate as Date?,
-                                       dateFormat:.dateAndTime,
-                                       maximumDate: maxDate,
-                                       minimumDate: minDate,
-                                       headerTitle: "Select Time with range",
-                                       cancelButtonTitle: "Cancel",
-                                       confirmButtonTitle: "Confirm",
-                                       withCompletion: { (date) in
-                                        self.selectedDate = date! as NSDate
+            FAPickerView.showDateWithRange(selectedDate: selectedDate,
+                                           datePickerMode: .dateAndTime,
+                                           maximumDate: maxDate ?? Date(),
+                                           minimumDate: minDate ?? Date(),
+                                           headerTitle: "Select Datetime with range",
+                                           cancelTitle: "cancel",
+                                           confirmTitle: "confirm",
+                                           complete: { (date:Date?) in
+                                            self.selectedDate = date!
             }, cancel: {
                 
             })
             break
         case .colorPicker:
-            FAPickerView.picker().show(withSelectedColor: tableView.cellForRow(at: indexPath)?.textLabel?.textColor,
-                                       headerTitle: "Select color",
-                                       cancelButtonTitle: "Cancel",
-                                       confirmButtonTitle: "Confirm",
-                                       withCompletion: { (color) in
-                                        tableView.cellForRow(at: indexPath)?.textLabel?.textColor = color
-                                        tableView.cellForRow(at: indexPath)?.detailTextLabel?.text = color?.hexStringFromColorNoAlpha()
+            FAPickerView.showColor(selectedColor: tableView.cellForRow(at: indexPath)?.textLabel?.textColor ?? UIColor.white,
+                                   headerTitle: "Select color",
+                                   cancelTitle: "cancel",
+                                   confirmTitle: "confirm",
+                                   complete: { (color:UIColor?) in
+                                    tableView.cellForRow(at: indexPath)?.textLabel?.textColor = color
+                                    tableView.cellForRow(at: indexPath)?.detailTextLabel?.text = color?.hexStringFromColorNoAlpha()
             }, cancel: {
                 
             })
             break
         case .customView:
             FAPickerView.setMainColor(UIColor.init(red: 0.99, green: 0.49, blue: 0.32, alpha: 1.00))
-            FAPickerView.picker().show(withCustomView: self.storyboard?.instantiateViewController(withIdentifier: "FACustomViewController"),
-                                       headerTitle: "Custom View",
-                                       confirmButtonTitle: "Done",
-                                       cancelButtonTitle:"Cancel",
-                                       withCompletion: { (button) in
-                                        
-            })
+            FAPickerView.showCustomContainerView(viewController: (self.storyboard?.instantiateViewController(withIdentifier: "FACustomViewController"))!,
+                                                 headerTitle: "Custom View",
+                                                 confirmTitle: "Done",
+                                                 cancelTitle: "Cancel") { (button:FAPickerCustomViewButton) in
+                                                    
+            }
             break
         case .customPicker:
             if let view = self.storyboard?.instantiateViewController(withIdentifier: "FACustomViewController") as? FACustomViewController {
                 view.isCustomPicker = true
-                FAPickerView.picker().show(withCustomPickerView: view)
+                FAPickerView.showCustomPickerView(viewController: view, isCancelable: false)
             }
             break
         case .alertOne:
             FAPickerView.setMainColor(UIColor.init(red: 0.675, green: 0.000, blue: 0.357, alpha: 1.00))
-            FAPickerView.picker().show(withMessage: "One Button .......",
-                                       headerTitle: "Alert !",
-                                       confirmButtonTitle: "Done",
-                                       withCompletion: { (button) in
-                                        
-            })
+            FAPickerView.showAlert(message: "One Button .......",
+                                   headerTitle: "Alert !",
+                                   confirmTitle: "Done") { (button:FAPickerAlertButton) in
+                                    
+            }
             break
         case .alertTwo:
             FAPickerView.setMainColor(UIColor.init(red: 0.675, green: 0.000, blue: 0.357, alpha: 1.00))
-            FAPickerView.picker().show(withMessage: "Two Button .......",
-                                       headerTitle: "Alert !",
-                                       confirmButtonTitle: "Confirm",
-                                       cancelButtonTitle: "Cancel",
-                                       withCompletion: { (button) in
-                                        
-            })
+            FAPickerView.showAlert(message: "Two Button .......",
+                                   headerTitle: "Alert !",
+                                   confirmTitle: "Confirm",
+                                   cancelTitle: "Cancel") { (button:FAPickerAlertButton) in
+                                    
+            }
             break
         case .alertThree:
             FAPickerView.setMainColor(UIColor.init(red: 0.675, green: 0.000, blue: 0.357, alpha: 1.00))
-            FAPickerView.picker().show(withMessage: "Three Buttons .......",
-                                       headerTitle: "Alert !",
-                                       confirmButtonTitle: "Yes",
-                                       cancelButtonTitle: "No",
-                                       thirdButtonTitle: "Cancel",
-                                       withCompletion: { (button) in
-                                        
-            })
+            FAPickerView.showAlert(message: "Three Buttons .......",
+                                   headerTitle: "Alert !",
+                                   confirmTitle: "Yes",
+                                   cancelTitle: "No",
+                                   thirdOptionTitle: "Cancel") { (button:FAPickerAlertButton) in
+                                    
+            }
             break
         }
     }
-
-
+    
 }

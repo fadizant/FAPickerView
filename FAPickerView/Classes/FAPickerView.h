@@ -10,78 +10,11 @@
 #import "FAColorPicker.h"
 #import "FAColorPickerColor.h"
 #import "FAColorPicker+UIColor.h"
+#import "FAPickerItem.h"
+#import "FAPickerSection.h"
 
-@class FAPickerView;
-@class FAPickerItem;
-
-@protocol FAPickerViewDataSource <NSObject>
-
-@required
-
-@optional
-/* number of items for picker */
-- (NSInteger)numberOfRowsInPickerView:(FAPickerView *)pickerView;
-
-/*
- Implement at least one of the following method,
- FAPickerView:(FAPickerView *)pickerView
- attributedTitleForRow:(NSInteger)row has higer priority
- */
-
-/* attributed picker item title for each row */
-- (NSAttributedString *)fapickerView:(FAPickerView *)pickerView
-               attributedTitleForRow:(NSInteger)row;
-
-/* picker item title for each row */
-- (NSString *)fapickerView:(FAPickerView *)pickerView
-               titleForRow:(NSInteger)row;
-
-/* picker item image for each row */
-- (UIImage *)fapickerView:(FAPickerView *)pickerView imageForRow:(NSInteger)row;
-
-@end
-
-@protocol FAPickerViewDelegate <NSObject>
-
-@optional
-
-/** delegate method for picking one item */
-- (void)fapickerView:(FAPickerView *)pickerView
-didConfirmWithItemAtRow:(NSInteger)row;
-
-- (void)fapickerView:(FAPickerView *)pickerView
-  didConfirmWithItem:(FAPickerItem*)item;
-
-- (void)fapickerView:(FAPickerView *)pickerView
-  didConfirmWithDate:(NSDate*)date;
-
-/*
- delegate method for picking multiple items,
- implement this method if allowMultipleSelection is YES,
- rows is an array of NSNumbers
- */
-- (void)fapickerView:(FAPickerView *)pickerView
-didConfirmWithItemsAtRows:(NSArray *)rows;
-
-- (void)fapickerView:(FAPickerView *)pickerView
-didConfirmWithItemsAtItems:(NSMutableArray <FAPickerItem*> *)items;
-
-/** delegate method for canceling */
-- (void)fapickerViewDidClickCancelButton:(FAPickerView *)pickerView;
-
-/* picker will show */
-- (void)fapickerViewWillDisplay:(FAPickerView *)pickerView;
-
-/* picker did show */
-- (void)fapickerViewDidDisplay:(FAPickerView *)pickerView;
-
-/* picker will dismiss */
-- (void)fapickerViewWillDismiss:(FAPickerView *)pickerView;
-
-/* picker did dismiss */
-- (void)fapickerViewDidDismiss:(FAPickerView *)pickerView;
-
-@end
+//@class FAPickerView;
+//@class FAPickerItem;
 
 #pragma mark - Block declear
 //Alert
@@ -98,8 +31,8 @@ typedef NS_ENUM(NSInteger, FAPickerCustomViewButton) {
 };
 
 typedef void (^completedWithItem)(FAPickerItem* item);
-typedef void (^completedWithDate)(NSDate* date);
 typedef void (^completedWithItemsAtItems)(NSMutableArray <FAPickerItem*> *items);
+typedef void (^completedWithDate)(NSDate* date);
 typedef void (^completedWithAlert)(FAPickerAlertButton button);
 typedef void (^completedWithColor)(UIColor* color);
 typedef void (^completedWithCustomView)(FAPickerCustomViewButton button);
@@ -156,15 +89,6 @@ confirmButtonTitle:(NSString *)confirmButtonTitle;
 /** set pre-selected items, items should be array of FAPickerItem. */
 - (void)setSelectedItems:(NSMutableArray <FAPickerItem*> *)items;
 
-/** return previously selected row, in array of NSNumber form. */
-- (NSArray *)selectedRows;
-
-/** set pre-selected rows, rows should be array of NSNumber. */
-- (void)setSelectedRows: (NSArray *)rows;
-
-/** unselect all rows */
-- (void)unselectAll;
-
 #pragma mark - block methods
 #pragma mark Items with single selctor
 -(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
@@ -205,6 +129,42 @@ selectedItemWithTitle:(NSString *)title
          HeaderTitle:(NSString *)headerTitle
       WithCompletion:(completedWithItem)complete cancel:(cancel)cancel;
 
+    
+#pragma mark Sections with single selctor
+-(void)showWithSections:(NSMutableArray<FAPickerSection *>*)sections
+           selectedItem:(FAPickerItem *)item
+            HeaderTitle:(NSString *)headerTitle
+      cancelButtonTitle:(NSString *)cancelButtonTitle
+     confirmButtonTitle:(NSString *)confirmButtonTitle
+         WithCompletion:(completedWithItem)complete cancel:(cancel)cancel;
+    
+    -(void)showWithSections:(NSMutableArray<FAPickerSection *>*)sections
+      selectedItemWithTitle:(NSString *)title
+                HeaderTitle:(NSString *)headerTitle
+          cancelButtonTitle:(NSString *)cancelButtonTitle
+         confirmButtonTitle:(NSString *)confirmButtonTitle
+             WithCompletion:(completedWithItem)complete cancel:(cancel)cancel;
+
+#pragma mark Sections with multi selctor
+-(void)showWithSections:(NSMutableArray<FAPickerSection *>*)sections
+          selectedItems:(NSMutableArray<FAPickerItem *>*)selectedItems
+            HeaderTitle:(NSString *)headerTitle
+      cancelButtonTitle:(NSString *)cancelButtonTitle
+     confirmButtonTitle:(NSString *)confirmButtonTitle
+         WithCompletion:(completedWithItemsAtItems)complete cancel:(cancel)cancel;
+    
+#pragma mark Sections with single selctor Without footer
+-(void)showWithSections:(NSMutableArray<FAPickerSection *>*)sections
+           selectedItem:(FAPickerItem *)item
+            HeaderTitle:(NSString *)headerTitle
+         WithCompletion:(completedWithItem)complete cancel:(cancel)cancel;
+    
+-(void)showWithSections:(NSMutableArray<FAPickerSection *>*)sections
+  selectedItemWithTitle:(NSString *)title
+            HeaderTitle:(NSString *)headerTitle
+         WithCompletion:(completedWithItem)complete cancel:(cancel)cancel;
+    
+    
 #pragma mark Date
 
 -(void)showWithSelectedDate:(NSDate *)date
@@ -306,11 +266,7 @@ CustomViewContainerHeight:(float)height
       CustomViewContainerHeight:(float)height
                   CancelGesture:(BOOL)cancelGesture;
 
-#pragma mark - delegate
-
-@property id<FAPickerViewDelegate> delegate;
-
-@property id<FAPickerViewDataSource> dataSource;
+#pragma mark - Style
 
 /** whether to show footer (including confirm and cancel buttons), default NO */
 @property BOOL needFooterView;
@@ -363,6 +319,9 @@ CustomViewContainerHeight:(float)height
 
 /** items of picker */
 @property NSMutableArray <FAPickerItem*> *items;
+    
+/** items of picker */
+@property NSMutableArray <FAPickerSection*> *sections;
 
 /** items of picker */
 @property BOOL Filter;
@@ -396,56 +355,4 @@ CustomViewContainerHeight:(float)height
 @property cancel cancel;
 @end
 
-@interface FAPickerItem : NSObject
 
-@property (nonatomic,retain) NSString* Id;
-@property (nonatomic,retain) NSString* title;
-@property (nonatomic,retain) UIColor* titleColor;
-@property (nonatomic,retain) UIColor* imageColor;
-@property (nonatomic,retain) UIImage* image;
-@property (nonatomic,retain) NSString* imageURL;
-@property (nonatomic,retain) UIImage* Thumb;
-@property (nonatomic) float widthRatio;
-@property (nonatomic) BOOL circleImage;
-@property (nonatomic) BOOL selected;
-
-- (instancetype)initWithID:(NSString*)ID
-                     Title:(NSString*)title;
-
-- (instancetype)initWithID:(NSString*)ID
-                     Title:(NSString*)title
-                TitleColor:(UIColor*)titleColor;
-
-- (instancetype)initWithID:(NSString*)ID
-                     Title:(NSString*)title
-                     Image:(UIImage*)image;
-
-- (instancetype)initWithID:(NSString*)ID
-                     Title:(NSString*)title
-                  ImageURL:(NSString*)URL
-                     Thumb:(UIImage*)thumb;
-
-- (instancetype)initWithID:(NSString*)ID
-                     Title:(NSString*)title
-                  ImageURL:(NSString*)URL
-                     Thumb:(UIImage*)thumb
-                WidthRatio:(float)widthRatio;
-
-- (instancetype)initWithID:(NSString*)ID
-                     Title:(NSString*)title
-                  ImageURL:(NSString*)URL
-                     Thumb:(UIImage*)thumb
-                    Circle:(BOOL)isCircle;
-
-- (instancetype)initWithID:(NSString*)ID
-                     Title:(NSString*)title
-                ImageColor:(UIColor*)imageColor
-                    Circle:(BOOL)isCircle;
-
-- (instancetype)initWithID:(NSString*)ID
-                     Title:(NSString*)title
-                TitleColor:(UIColor*)titleColor
-                ImageColor:(UIColor*)imageColor
-                    Circle:(BOOL)isCircle;
-
-@end

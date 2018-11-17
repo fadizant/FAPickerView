@@ -1,7 +1,7 @@
 {
   "name": "FAPickerView",
-  "version": "0.1.8",
-  "summary": "replace FAImageView to SDWebImage",
+  "version": "0.2.0",
+  "summary": "Refactor swift methods naming + add sections + static access + fix selected items",
   "homepage": "https://github.com/fadizant/FAPickerView",
   "license": {
     "type": "MIT",
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/fadizant/FAPickerView.git",
-    "tag": "0.1.8"
+    "tag": "0.2.0"
   },
   "platforms": {
     "ios": "9.0"

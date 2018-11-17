@@ -9,6 +9,7 @@
 #import "FATableViewController.h"
 #import "FACustomViewController.h"
 
+
 @interface FATableViewController ()
 
 @end
@@ -35,16 +36,16 @@
             [items addObject:[[FAPickerItem alloc]initWithID:@"3" Title:@"Title 3"]];
             
             [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.357 blue:0.675 alpha:1.00]];
-            [[FAPickerView picker] showWithItems:items
-                                    selectedItem:selectedItem
-                                          filter:NO
-                                     HeaderTitle:@"Select one item"
-                                  WithCompletion:^(FAPickerItem *item) {
-                                      NSLog(@"selected item = %@",item.title);
-                                      self->selectedItem = item;
-                                  } cancel:^{
-                                      NSLog(@"Cancel");
-                                  }];
+            [FAPickerView showWithItems:items
+                           selectedItem:selectedItem
+                                 filter:NO
+                            HeaderTitle:@"Select one item"
+                         WithCompletion:^(FAPickerItem *item) {
+                             NSLog(@"selected item = %@",item.title);
+                             self->selectedItem = item;
+                         } cancel:^{
+                             NSLog(@"Cancel");
+                         }];
         }
             break;
         case pickerViewTypeEnumMulti:
@@ -62,22 +63,87 @@
             [items addObject:[[FAPickerItem alloc]initWithID:@"10" Title:@"Title 10"]];
             
             [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.357 blue:0.675 alpha:1.00]];
-            [[FAPickerView picker] showWithItems:items
-                                   selectedItems:selectedItems
-                                          filter:NO
-                                     HeaderTitle:@"Select multi items"
-                               cancelButtonTitle:@"cancle"
-                              confirmButtonTitle:@"confirm"
-                                  WithCompletion:^(NSMutableArray<FAPickerItem *> *items) {
-                                      for (FAPickerItem* item in items) {
-                                          NSLog(@"selected item = %@",item.title);
-                                      }
-                                      self->selectedItems = items;
-                                  } cancel:^{
-                                      NSLog(@"Cancel");
-                                  }];
+            [FAPickerView showWithItems:items
+                          selectedItems:selectedItems
+                                 filter:NO
+                            HeaderTitle:@"Select multi items"
+                      cancelButtonTitle:@"cancle"
+                     confirmButtonTitle:@"confirm"
+                         WithCompletion:^(NSMutableArray<FAPickerItem *> *items) {
+                             for (FAPickerItem* item in items) {
+                                 NSLog(@"selected item = %@",item.title);
+                             }
+                             self->selectedItems = items;
+                         } cancel:^{
+                             NSLog(@"Cancel");
+                         }];
+            
         }
             break;
+        case pickerViewTypeEnumSectionSingle: {
+            NSMutableArray <FAPickerSection*> *sections = [NSMutableArray new];
+            
+            NSMutableArray <FAPickerItem*> *items1 = [NSMutableArray new];
+            [items1 addObject:[[FAPickerItem alloc]initWithID:@"1" Title:@"Title 1"]];
+            [items1 addObject:[[FAPickerItem alloc]initWithID:@"2" Title:@"Title 2"]];
+            [items1 addObject:[[FAPickerItem alloc]initWithID:@"3" Title:@"Title 3"]];
+            [sections addObject:[[FAPickerSection alloc]initWithTitle:@"Section 1" Items:items1]];
+            
+            NSMutableArray <FAPickerItem*> *items2 = [NSMutableArray new];
+            [items2 addObject:[[FAPickerItem alloc]initWithID:@"4" Title:@"Title 1"]];
+            [items2 addObject:[[FAPickerItem alloc]initWithID:@"5" Title:@"Title 2"]];
+            [items2 addObject:[[FAPickerItem alloc]initWithID:@"6" Title:@"Title 3"]];
+            [sections addObject:[[FAPickerSection alloc]initWithTitle:@"Section 2" Items:items2]];
+            
+            [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.357 blue:0.675 alpha:1.00]];
+            [FAPickerView showWithSections:sections
+                              selectedItem:sectionSelectedItem
+                               HeaderTitle:@"Select one item"
+                            WithCompletion:^(FAPickerItem *item) {
+                                NSLog(@"selected item = %@",item.title);
+                                self->sectionSelectedItem = item;
+                            } cancel:^{
+                                NSLog(@"Cancel");
+                            }];
+            break;
+        }
+        case pickerViewTypeEnumSectionMulti: {
+            NSMutableArray <FAPickerSection*> *sections = [NSMutableArray new];
+            
+            NSMutableArray <FAPickerItem*> *items1 = [NSMutableArray new];
+            [items1 addObject:[[FAPickerItem alloc]initWithID:@"1" Title:@"Title 1"]];
+            [items1 addObject:[[FAPickerItem alloc]initWithID:@"2" Title:@"Title 2"]];
+            [items1 addObject:[[FAPickerItem alloc]initWithID:@"3" Title:@"Title 3"]];
+            [sections addObject:[[FAPickerSection alloc]initWithTitle:@"Section 1" Items:items1]];
+            
+            NSMutableArray <FAPickerItem*> *items2 = [NSMutableArray new];
+            [items2 addObject:[[FAPickerItem alloc]initWithID:@"4" Title:@"Title 1"]];
+            [items2 addObject:[[FAPickerItem alloc]initWithID:@"5" Title:@"Title 2"]];
+            [items2 addObject:[[FAPickerItem alloc]initWithID:@"6" Title:@"Title 3"]];
+            [sections addObject:[[FAPickerSection alloc]initWithTitle:@"Section 2" Items:items2]];
+            
+            NSMutableArray <FAPickerItem*> *items3 = [NSMutableArray new];
+            [items3 addObject:[[FAPickerItem alloc]initWithID:@"7" Title:@"Title 1"]];
+            [items3 addObject:[[FAPickerItem alloc]initWithID:@"8" Title:@"Title 2"]];
+            [items3 addObject:[[FAPickerItem alloc]initWithID:@"9" Title:@"Title 3"]];
+            [sections addObject:[[FAPickerSection alloc]initWithTitle:@"Section 3" Items:items3]];
+            
+            [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.357 blue:0.675 alpha:1.00]];
+            [FAPickerView showWithSections:sections
+                             selectedItems:sectionSelectedItems
+                               HeaderTitle:@"Select multi items"
+                         cancelButtonTitle:@"cancel"
+                        confirmButtonTitle:@"confirm"
+                            WithCompletion:^(NSMutableArray<FAPickerItem *> *items) {
+                                for (FAPickerItem* item in items) {
+                                    NSLog(@"selected item = %@",item.title);
+                                }
+                                self->sectionSelectedItems = items;
+                            } cancel:^{
+                                NSLog(@"Cancel");
+                            }];
+            break;
+        }
         case pickerViewTypeEnumItemsWithURLImags:
         {
             NSMutableArray <FAPickerItem*> *items = [NSMutableArray new];
@@ -134,17 +200,20 @@
             
             
             [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.357 blue:0.675 alpha:1.00]];
-            [[FAPickerView picker] showWithItems:items
-                                   selectedItem:nil
-                                          filter:YES
-                                     HeaderTitle:@"Select item with image"
-                               cancelButtonTitle:@"cancle"
-                              confirmButtonTitle:@"confirm"
-                                  WithCompletion:^(FAPickerItem *item) {
-                                          NSLog(@"selected item = %@",item.title);
-                                  } cancel:^{
-                                      NSLog(@"Cancel");
-                                  }];
+            [FAPickerView showWithItems:items
+                           selectedItem:nil
+                                 filter:YES
+                            HeaderTitle:@"Select multi items"
+                      cancelButtonTitle:@"cancel"
+                     confirmButtonTitle:@"confirm"
+                         WithCompletion:^(FAPickerItem *item) {
+                             for (FAPickerItem* item in items) {
+                                 NSLog(@"selected item = %@",item.title);
+                             }
+                             self->selectedItems = items;
+                         } cancel:^{
+                             NSLog(@"Cancel");
+                         }];
         }
             break;
         case pickerViewTypeEnumItemsWithColors:
@@ -160,65 +229,65 @@
             [items addObject:[[FAPickerItem alloc]initWithID:@"7" Title:@"Brown" TitleColor:[UIColor brownColor] ImageColor:[UIColor brownColor] Circle:YES]];
             
             [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.357 blue:0.675 alpha:1.00]];
-            [[FAPickerView picker] showWithItems:items
-                                          filter:NO
-                           selectedItemWithTitle:@""
-                                     HeaderTitle:@"Select item with color"
-                                  WithCompletion:^(FAPickerItem *items) {
-                                        NSLog(@"selected item = %@",item.title);
-                                  } cancel:^{
-                                      NSLog(@"Cancel");
-                                  }];
+            [FAPickerView showWithItems:items
+                  selectedItemWithTitle:@""
+                                 filter:NO
+                            HeaderTitle:@"Select item with color"
+                         WithCompletion:^(FAPickerItem *items) {
+                             NSLog(@"selected item = %@",item.title);
+                         } cancel:^{
+                             NSLog(@"Cancel");
+                         }];
         }
             break;
-            case pickerViewTypeEnumDatepicker:
+        case pickerViewTypeEnumDatepicker:
         {
             [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.675 blue:0.357 alpha:1.00]];
             [FAPickerView setDateTimeLocalized:@"en_USA"];
-            [[FAPickerView picker] showWithSelectedDate:selectedDate
-                                        HeaderTitle:@"Select Date"
-                                  cancelButtonTitle:@"Cancel"
-                                 confirmButtonTitle:@"Confirm"
-                                     WithCompletion:^(NSDate *date) {
-                                         NSLog(@"selected date = %@",date.description);
-                                         self->selectedDate = date;
-                                     } cancel:^{
-                                         NSLog(@"Cancel");
-                                     }];
+            [FAPickerView showWithSelectedDate:selectedDate
+                                   HeaderTitle:@"Select Date"
+                             cancelButtonTitle:@"Cancel"
+                            confirmButtonTitle:@"Confirm"
+                                WithCompletion:^(NSDate *date) {
+                                    NSLog(@"selected date = %@",date.description);
+                                    self->selectedDate = date;
+                                } cancel:^{
+                                    NSLog(@"Cancel");
+                                }];
         }
             break;
-            case pickerViewTypeEnumDateArabic:
+        case pickerViewTypeEnumDateArabic:
         {
             [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.675 blue:0.357 alpha:1.00]];
             [FAPickerView setDateTimeLocalized:@"ar_KSA"];
-            [[FAPickerView picker] showWithSelectedDate:selectedDate
-                                        HeaderTitle:@"اختر التاريخ"
-                                  cancelButtonTitle:@"الغاء"
-                                 confirmButtonTitle:@"موافق"
-                                     WithCompletion:^(NSDate *date) {
-                                         NSLog(@"selected date = %@",date.description);
-                                         self->selectedDate = date;
-                                     } cancel:^{
-                                         NSLog(@"Cancel");
-                                     }];
+            [FAPickerView showWithSelectedDate:selectedDate
+                                   HeaderTitle:@"اختر التاريخ"
+                             cancelButtonTitle:@"الغاء"
+                            confirmButtonTitle:@"موافق"
+                                WithCompletion:^(NSDate *date) {
+                                    NSLog(@"selected date = %@",date.description);
+                                    self->selectedDate = date;
+                                } cancel:^{
+                                    NSLog(@"Cancel");
+                                }];
         }
-
+            
             break;
-            case pickerViewTypeEnumTimepicker:
+        case pickerViewTypeEnumTimepicker:
         {
             [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.675 blue:0.357 alpha:1.00]];
             [FAPickerView setDateTimeLocalized:@"en_USA"];
-            [[FAPickerView picker] showWithSelectedDate:selectedDate
-                                         DateFormat:UIDatePickerModeTime
-                                        HeaderTitle:@"Select Time"
-                                  cancelButtonTitle:@"Cancel"
-                                 confirmButtonTitle:@"Confirm"
-                                     WithCompletion:^(NSDate *date) {
-                                         NSLog(@"selected date = %@",date.description);
-                                         self->selectedDate = date;
-                                     } cancel:^{
-                                         NSLog(@"Cancel");
-                                     }];
+            [FAPickerView showWithSelectedDate:selectedDate
+                                    DateFormat:UIDatePickerModeTime
+                                   HeaderTitle:@"Select Time"
+                             cancelButtonTitle:@"Cancel"
+                            confirmButtonTitle:@"Confirm"
+                                WithCompletion:^(NSDate *date) {
+                                    NSLog(@"selected date = %@",date.description);
+                                    self->selectedDate = date;
+                                } cancel:^{
+                                    NSLog(@"Cancel");
+                                }];
         }
             break;
         case pickerViewTypeEnumDatepickerRange:
@@ -233,18 +302,18 @@
             
             [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.675 blue:0.357 alpha:1.00]];
             [FAPickerView setDateTimeLocalized:@"en_USA"];
-            [[FAPickerView picker] showWithSelectedDate:[NSDate date]
-                                        MaximumDate:maxDate
-                                        MinimumDate:minDate
-                                        HeaderTitle:@"Select Date with range"
-                                  cancelButtonTitle:@"Cancel"
-                                 confirmButtonTitle:@"Confirm"
-                                     WithCompletion:^(NSDate *date) {
-                                         NSLog(@"selected date = %@",date.description);
-                                         self->selectedDate = date;
-                                     } cancel:^{
-                                         NSLog(@"Cancel");
-                                     }];
+            [FAPickerView showWithSelectedDate:[NSDate date]
+                                   MaximumDate:maxDate
+                                   MinimumDate:minDate
+                                   HeaderTitle:@"Select Date with range"
+                             cancelButtonTitle:@"Cancel"
+                            confirmButtonTitle:@"Confirm"
+                                WithCompletion:^(NSDate *date) {
+                                    NSLog(@"selected date = %@",date.description);
+                                    self->selectedDate = date;
+                                } cancel:^{
+                                    NSLog(@"Cancel");
+                                }];
         }
             break;
         case pickerViewTypeEnumTimepickerRange:
@@ -259,45 +328,45 @@
             
             [FAPickerView setMainColor:[UIColor colorWithRed:0.000 green:0.675 blue:0.357 alpha:1.00]];
             [FAPickerView setDateTimeLocalized:@"en_USA"];
-            [[FAPickerView picker] showWithSelectedDate:[NSDate date]
-                                         DateFormat:UIDatePickerModeDateAndTime
-                                        MaximumDate:maxDate
-                                        MinimumDate:minDate
-                                        HeaderTitle:@"Select Time with range"
-                                  cancelButtonTitle:@"Cancel"
-                                 confirmButtonTitle:@"Confirm"
-                                     WithCompletion:^(NSDate *date) {
-                                         NSLog(@"selected date = %@",date.description);
-                                         self->selectedDate = date;
-                                     } cancel:^{
-                                         NSLog(@"Cancel");
-                                     }];
+            [FAPickerView showWithSelectedDate:[NSDate date]
+                                    DateFormat:UIDatePickerModeDateAndTime
+                                   MaximumDate:maxDate
+                                   MinimumDate:minDate
+                                   HeaderTitle:@"Select Time with range"
+                             cancelButtonTitle:@"Cancel"
+                            confirmButtonTitle:@"Confirm"
+                                WithCompletion:^(NSDate *date) {
+                                    NSLog(@"selected date = %@",date.description);
+                                    self->selectedDate = date;
+                                } cancel:^{
+                                    NSLog(@"Cancel");
+                                }];
         }
             break;
-            case pickerViewTypeEnumColorPicker:
+        case pickerViewTypeEnumColorPicker:
         {
-            [[FAPickerView picker] showWithSelectedColor:[tableView cellForRowAtIndexPath:indexPath].textLabel.textColor
-                                             HeaderTitle:@"Select color"
-                                       cancelButtonTitle:@"Cancel"
-                                      confirmButtonTitle:@"Confirm"
-                                          WithCompletion:^(UIColor *color) {
-                                              [tableView cellForRowAtIndexPath:indexPath].textLabel.textColor = color;
-                                              [tableView cellForRowAtIndexPath:indexPath].detailTextLabel.text = color.hexStringFromColorNoAlpha;
-                                          } cancel:^{
-                                              
-                                          }];
+            [FAPickerView showWithSelectedColor:[tableView cellForRowAtIndexPath:indexPath].textLabel.textColor
+                                    HeaderTitle:@"Select color"
+                              cancelButtonTitle:@"Cancel"
+                             confirmButtonTitle:@"Confirm"
+                                 WithCompletion:^(UIColor *color) {
+                                     [tableView cellForRowAtIndexPath:indexPath].textLabel.textColor = color;
+                                     [tableView cellForRowAtIndexPath:indexPath].detailTextLabel.text = color.hexStringFromColorNoAlpha;
+                                 } cancel:^{
+                                     
+                                 }];
         }
             break;
         case pickerViewTypeEnumCustomView:
         {
             [FAPickerView setMainColor:[UIColor colorWithRed:0.99 green:0.49 blue:0.32 alpha:1.0]];
-            [[FAPickerView picker] showWithCustomView:[self.storyboard instantiateViewControllerWithIdentifier:@"FACustomViewController"]
-                                          headerTitle:@"Custom View"
-                                    confirmButtonTitle:@"Done"
-                                     cancelButtonTitle:@"Cancel"
-                                        WithCompletion:^(FAPickerCustomViewButton button) {
-                                            
-                                        }];
+            [FAPickerView showWithCustomView:[self.storyboard instantiateViewControllerWithIdentifier:@"FACustomViewController"]
+                                 headerTitle:@"Custom View"
+                          confirmButtonTitle:@"Done"
+                           cancelButtonTitle:@"Cancel"
+                              WithCompletion:^(FAPickerCustomViewButton button) {
+                                  
+                              }];
         }
             break;
         case pickerViewTypeEnumCustomPicker:
@@ -305,47 +374,44 @@
             [FAPickerView setMainColor:[UIColor colorWithRed:0.99 green:0.49 blue:0.32 alpha:1.0]];
             FACustomViewController * view = [self.storyboard instantiateViewControllerWithIdentifier:@"FACustomViewController"];
             view.isCustomPicker = YES;
-            [[FAPickerView picker] showWithCustomPickerView:view
-                                              CancelGesture:NO];
+            [FAPickerView showWithCustomPickerView:view CancelGesture:NO];
         }
             break;
-            case pickerViewTypeEnumAlertOne:
+        case pickerViewTypeEnumAlertOne:
         {
             [FAPickerView setMainColor:[UIColor colorWithRed:0.675 green:0.000 blue:0.357 alpha:1.00]];
-            [[FAPickerView picker] showWithMessage:@"One Button ......."
-                                       headerTitle:@"Alert !"
-                                    confirmButtonTitle:@"Done"
-                                        WithCompletion:^(FAPickerAlertButton button) {
-                                            NSLog(@"Button pressed : %i",(int)button);
-                                        }];
+            [FAPickerView showWithMessage:@"One Button ......."
+                              headerTitle:@"Alert !"
+                       confirmButtonTitle:@"Done"
+                           WithCompletion:^(FAPickerAlertButton button) {
+                               NSLog(@"Button pressed : %i",(int)button);
+                           }];
         }
             break;
-            case pickerViewTypeEnumAlertTwo:
+        case pickerViewTypeEnumAlertTwo:
         {
             [FAPickerView setMainColor:[UIColor colorWithRed:0.675 green:0.000 blue:0.357 alpha:1.00]];
-            [[FAPickerView picker] showWithMessage:@"Two Button ......."
-                                           headerTitle:@"Alert !"
-                                    confirmButtonTitle:@"Confirm"
-                                     cancelButtonTitle:@"Cancel"
-                                        WithCompletion:^(FAPickerAlertButton button) {
-                                            NSLog(@"Button pressed : %i",(int)button);
-                                        }];
+            [FAPickerView showWithMessage:@"Two Button ......."
+                              headerTitle:@"Alert !"
+                       confirmButtonTitle:@"Confirm"
+                        cancelButtonTitle:@"Cancel"
+                           WithCompletion:^(FAPickerAlertButton button) {
+                               NSLog(@"Button pressed : %i",(int)button);
+                           }];
         }
             break;
-            case pickerViewTypeEnumAlertThree:
+        case pickerViewTypeEnumAlertThree:
         {
             [FAPickerView setMainColor:[UIColor colorWithRed:0.675 green:0.000 blue:0.357 alpha:1.00]];
-            [[FAPickerView picker] showWithMessage:@"Three Buttons ......."
-                                           headerTitle:@"Alert !"
-                                    confirmButtonTitle:@"Yes"
-                                     cancelButtonTitle:@"No"
-                                      thirdButtonTitle:@"Cancel"
-                                        WithCompletion:^(FAPickerAlertButton button) {
-                                            NSLog(@"Button pressed : %i",(int)button);
-                                        }];
+            [FAPickerView showWithMessage:@"Three Buttons ......."
+                              headerTitle:@"Alert !"
+                       confirmButtonTitle:@"Yes"
+                        cancelButtonTitle:@"No"
+                         thirdButtonTitle:@"Cancel"
+                           WithCompletion:^(FAPickerAlertButton button) {
+                               NSLog(@"Button pressed : %i",(int)button);
+                           }];
         }
-            break;
-        default:
             break;
     }
 }

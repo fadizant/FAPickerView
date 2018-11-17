@@ -1,5 +1,5 @@
 PODS:
-  - FAPickerView (0.1.8):
+  - FAPickerView (0.2.0):
     - SDWebImage
   - SDWebImage (4.4.2):
     - SDWebImage/Core (= 4.4.2)
@@ -17,7 +17,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  FAPickerView: c49c50582c063204af459fb448acceb3cd99c638
+  FAPickerView: c5511630fc13437cc12cce74e7a227f9ceb29ad6
   SDWebImage: 624d6e296c69b244bcede364c72ae0430ac14681
 
 PODFILE CHECKSUM: e1de736a60452e9f76952bd8670b222aef852662

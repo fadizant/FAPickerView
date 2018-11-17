@@ -15,6 +15,9 @@
 #import "FAColorPickerColor.h"
 #import "FAColorPickerStore.h"
 #import "FAColorPickerWheelView.h"
+#import "FAPickerItem.h"
+#import "FAPickerSection.h"
+#import "FAPickerView+StaticShow.h"
 #import "FAPickerView.h"
 
 FOUNDATION_EXPORT double FAPickerViewVersionNumber;
