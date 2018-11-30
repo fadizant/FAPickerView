@@ -11,8 +11,8 @@
 
 #pragma mark - Block
 #pragma mark Items with single selctor
-+(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
-        selectedItem:(nullable FAPickerItem *)item
++(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
+        selectedItem:(nullable FAPickerItem*)item
               filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
    cancelButtonTitle:(NSString *)cancelButtonTitle
@@ -28,7 +28,7 @@
                           WithCompletion:complete cancel:cancel];
 }
 
-+(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
++(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
 selectedItemWithTitle:(nullable NSString *)title
               filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
@@ -46,8 +46,8 @@ selectedItemWithTitle:(nullable NSString *)title
 }
 
 #pragma mark Items with multi selctor
-+(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
-       selectedItems:(nullable NSMutableArray<FAPickerItem *>*)selectedItems
++(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
+       selectedItems:(nullable NSMutableArray<FAPickerItem*>*)selectedItems
               filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
    cancelButtonTitle:(NSString *)cancelButtonTitle
@@ -64,8 +64,8 @@ selectedItemWithTitle:(nullable NSString *)title
 }
 
 #pragma mark Items with single selctor Without footer
-+(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
-        selectedItem:(nullable FAPickerItem *)item
++(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
+        selectedItem:(nullable FAPickerItem*)item
               filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
       WithCompletion:(completedWithItem)complete cancel:(cancel)cancel
@@ -77,7 +77,7 @@ selectedItemWithTitle:(nullable NSString *)title
                           WithCompletion:complete cancel:cancel];
 }
 
-+(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
++(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
 selectedItemWithTitle:(nullable NSString *)title
               filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
@@ -92,7 +92,7 @@ selectedItemWithTitle:(nullable NSString *)title
     
 #pragma mark Sections with single selctor
 +(void)showWithSections:(NSMutableArray<FAPickerSection *>*)sections
-           selectedItem:(FAPickerItem *)item
+           selectedItem:(FAPickerItem*)item
             HeaderTitle:(NSString *)headerTitle
       cancelButtonTitle:(NSString *)cancelButtonTitle
      confirmButtonTitle:(NSString *)confirmButtonTitle
@@ -121,7 +121,7 @@ selectedItemWithTitle:(nullable NSString *)title
     
 #pragma mark Sections with multi selctor
 +(void)showWithSections:(NSMutableArray<FAPickerSection *>*)sections
-          selectedItems:(NSMutableArray<FAPickerItem *>*)selectedItems
+          selectedItems:(NSMutableArray<FAPickerItem*>*)selectedItems
             HeaderTitle:(NSString *)headerTitle
       cancelButtonTitle:(NSString *)cancelButtonTitle
      confirmButtonTitle:(NSString *)confirmButtonTitle
@@ -136,7 +136,7 @@ selectedItemWithTitle:(nullable NSString *)title
     
 #pragma mark Sections with single selctor Without footer
 +(void)showWithSections:(NSMutableArray<FAPickerSection *>*)sections
-           selectedItem:(FAPickerItem *)item
+           selectedItem:(FAPickerItem*)item
             HeaderTitle:(NSString *)headerTitle
          WithCompletion:(completedWithItem)complete cancel:(cancel)cancel{
     [[FAPickerView picker] showWithSections:sections
@@ -331,6 +331,34 @@ CustomViewContainerHeight:(float)height
                                WithCompletion:complete];
 }
 
++(void)showWithCustomView:(UIViewController *)view
+            BottomPadding:(float)bottomPadding
+              headerTitle:(NSString *)headerTitle
+       confirmButtonTitle:(NSString *)confirmButtonTitle
+           WithCompletion:(completedWithCustomView)complete{
+    
+    [[FAPickerView picker] showWithCustomView:view
+                                BottomPadding:bottomPadding
+                                  headerTitle:headerTitle
+                           confirmButtonTitle:confirmButtonTitle
+                               WithCompletion:complete];
+}
+
++(void)showWithCustomView:(UIViewController *)view
+            BottomPadding:(float)bottomPadding
+              headerTitle:(NSString *)headerTitle
+       confirmButtonTitle:(NSString *)confirmButtonTitle
+        cancelButtonTitle:(NSString *)cancelButtonTitle
+           WithCompletion:(completedWithCustomView)complete{
+    
+    [[FAPickerView picker] showWithCustomView:view
+                                BottomPadding:bottomPadding
+                                  headerTitle:headerTitle
+                           confirmButtonTitle:confirmButtonTitle
+                            cancelButtonTitle:cancelButtonTitle
+                               WithCompletion:complete];
+}
+
 #pragma mark Custom Picker
 
 +(void)showWithCustomPickerView:(UIViewController *)view{
@@ -359,4 +387,17 @@ CustomViewContainerHeight:(float)height
                                       CancelGesture:cancelGesture];
 }
 
++(void)showWithCustomPickerView:(UIViewController *)view
+                  BottomPadding:(float)bottomPadding{
+    [[FAPickerView picker] showWithCustomPickerView:view
+                                      BottomPadding:bottomPadding];
+}
+
++(void)showWithCustomPickerView:(UIViewController *)view
+                  BottomPadding:(float)bottomPadding
+                  CancelGesture:(BOOL)cancelGesture{
+    [[FAPickerView picker] showWithCustomPickerView:view
+                                      BottomPadding:bottomPadding
+                                      CancelGesture:cancelGesture];
+}
 @end

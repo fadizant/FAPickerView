@@ -7,8 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @interface FAPickerItem : NSObject
 
 @property (nonatomic,retain) NSString* Id;
@@ -62,5 +60,3 @@ NS_ASSUME_NONNULL_BEGIN
                     Circle:(BOOL)isCircle;
 
 @end
-
-NS_ASSUME_NONNULL_END

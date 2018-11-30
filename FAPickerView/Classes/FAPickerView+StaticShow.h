@@ -13,15 +13,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark + block methods
 #pragma mark Items with single selctor
-+(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
-        selectedItem:(nullable FAPickerItem *)item
++(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
+        selectedItem:(nullable FAPickerItem*)item
               filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
    cancelButtonTitle:(NSString *)cancelButtonTitle
   confirmButtonTitle:(NSString *)confirmButtonTitle
       WithCompletion:(completedWithItem)complete cancel:(cancel)cancel NS_SWIFT_NAME(showSingleSelectItem(items:selectedItem:filter:headerTitle:cancelTitle:confirmTitle:complete:cancel:));
 
-+(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
++(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
 selectedItemWithTitle:(nullable NSString *)title
               filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
@@ -30,8 +30,8 @@ selectedItemWithTitle:(nullable NSString *)title
       WithCompletion:(completedWithItem)complete cancel:(cancel)cancel NS_SWIFT_NAME(showSingleSelectItem(items:selectedItemTitle:filter:headerTitle:cancelTitle:confirmTitle:complete:cancel:));
 
 #pragma mark Items with multi selctor
-+(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
-       selectedItems:(nullable NSMutableArray<FAPickerItem *>*)selectedItems
++(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
+       selectedItems:(nullable NSMutableArray<FAPickerItem*>*)selectedItems
               filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
    cancelButtonTitle:(NSString *)cancelButtonTitle
@@ -39,13 +39,13 @@ selectedItemWithTitle:(nullable NSString *)title
       WithCompletion:(completedWithItemsAtItems)complete cancel:(cancel)cancel NS_SWIFT_NAME(showMultiSelectItems(items:selectedItems:filter:headerTitle:cancelTitle:confirmTitle:complete:cancel:));
 
 #pragma mark Items with single selctor Without footer
-+(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
-        selectedItem:(nullable FAPickerItem *)item
++(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
+        selectedItem:(nullable FAPickerItem*)item
               filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
       WithCompletion:(completedWithItem)complete cancel:(cancel)cancel NS_SWIFT_NAME(showSingleSelectItem(items:selectedItem:filter:headerTitle:complete:cancel:));
 
-+(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
++(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
 selectedItemWithTitle:(nullable NSString *)title
               filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
@@ -53,7 +53,7 @@ selectedItemWithTitle:(nullable NSString *)title
 
 #pragma mark Sections with single selctor
 +(void)showWithSections:(NSMutableArray<FAPickerSection *>*)sections
-           selectedItem:(FAPickerItem *)item
+           selectedItem:(FAPickerItem*)item
             HeaderTitle:(NSString *)headerTitle
       cancelButtonTitle:(NSString *)cancelButtonTitle
      confirmButtonTitle:(NSString *)confirmButtonTitle
@@ -68,7 +68,7 @@ selectedItemWithTitle:(nullable NSString *)title
     
 #pragma mark Sections with multi selctor
 +(void)showWithSections:(NSMutableArray<FAPickerSection *>*)sections
-          selectedItems:(NSMutableArray<FAPickerItem *>*)selectedItems
+          selectedItems:(NSMutableArray<FAPickerItem*>*)selectedItems
             HeaderTitle:(NSString *)headerTitle
       cancelButtonTitle:(NSString *)cancelButtonTitle
      confirmButtonTitle:(NSString *)confirmButtonTitle
@@ -76,7 +76,7 @@ selectedItemWithTitle:(nullable NSString *)title
     
 #pragma mark Sections with single selctor Without footer
 +(void)showWithSections:(NSMutableArray<FAPickerSection *>*)sections
-           selectedItem:(FAPickerItem *)item
+           selectedItem:(FAPickerItem*)item
             HeaderTitle:(NSString *)headerTitle
          WithCompletion:(completedWithItem)complete cancel:(cancel)cancel NS_SWIFT_NAME(showSectionsWithSingleSelectItem(sections:selectedItem:headerTitle:complete:cancel:));
     
@@ -172,6 +172,19 @@ CustomViewContainerHeight:(float)height
         cancelButtonTitle:(NSString *)cancelButtonTitle
            WithCompletion:(completedWithCustomView)complete NS_SWIFT_NAME(showCustomContainerViewWithHeight(viewController:height:headerTitle:confirmTitle:cancelTitle:complete:));
 
++(void)showWithCustomView:(UIViewController *)view
+            BottomPadding:(float)bottomPadding
+              headerTitle:(NSString *)headerTitle
+       confirmButtonTitle:(NSString *)confirmButtonTitle
+           WithCompletion:(completedWithCustomView)complete NS_SWIFT_NAME(showCustomContainerViewWithBottomPadding(viewController:bottomPadding:headerTitle:confirmTitle:complete:));
+
++(void)showWithCustomView:(UIViewController *)view
+            BottomPadding:(float)bottomPadding
+              headerTitle:(NSString *)headerTitle
+       confirmButtonTitle:(NSString *)confirmButtonTitle
+        cancelButtonTitle:(NSString *)cancelButtonTitle
+           WithCompletion:(completedWithCustomView)complete NS_SWIFT_NAME(showCustomContainerViewWithBottomPadding(viewController:bottomPadding:headerTitle:confirmTitle:cancelTitle:complete:));
+
 #pragma mark Custom Picker
 
 +(void)showWithCustomPickerView:(UIViewController *)view NS_SWIFT_NAME(showCustomPickerView(viewController:));
@@ -186,6 +199,12 @@ CustomViewContainerHeight:(float)height
       CustomViewContainerHeight:(float)height
                   CancelGesture:(BOOL)cancelGesture NS_SWIFT_NAME(showCustomPickerViewWithHeight(viewController:height:isCancelable:));
 
++(void)showWithCustomPickerView:(UIViewController *)view
+                  BottomPadding:(float)bottomPadding NS_SWIFT_NAME(showCustomPickerViewWithBottomPadding(viewController:bottomPadding:));
+
++(void)showWithCustomPickerView:(UIViewController *)view
+                  BottomPadding:(float)bottomPadding
+                  CancelGesture:(BOOL)cancelGesture NS_SWIFT_NAME(showCustomPickerViewWithBottomPadding(viewController:bottomPadding:isCancelable:));
 @end
 
 NS_ASSUME_NONNULL_END

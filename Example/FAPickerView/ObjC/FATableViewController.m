@@ -40,7 +40,7 @@
                            selectedItem:selectedItem
                                  filter:NO
                             HeaderTitle:@"Select one item"
-                         WithCompletion:^(FAPickerItem *item) {
+                         WithCompletion:^(FAPickerItem*item) {
                              NSLog(@"selected item = %@",item.title);
                              self->selectedItem = item;
                          } cancel:^{
@@ -69,7 +69,7 @@
                             HeaderTitle:@"Select multi items"
                       cancelButtonTitle:@"cancle"
                      confirmButtonTitle:@"confirm"
-                         WithCompletion:^(NSMutableArray<FAPickerItem *> *items) {
+                         WithCompletion:^(NSMutableArray<FAPickerItem*> *items) {
                              for (FAPickerItem* item in items) {
                                  NSLog(@"selected item = %@",item.title);
                              }
@@ -99,7 +99,7 @@
             [FAPickerView showWithSections:sections
                               selectedItem:sectionSelectedItem
                                HeaderTitle:@"Select one item"
-                            WithCompletion:^(FAPickerItem *item) {
+                            WithCompletion:^(FAPickerItem*item) {
                                 NSLog(@"selected item = %@",item.title);
                                 self->sectionSelectedItem = item;
                             } cancel:^{
@@ -134,7 +134,7 @@
                                HeaderTitle:@"Select multi items"
                          cancelButtonTitle:@"cancel"
                         confirmButtonTitle:@"confirm"
-                            WithCompletion:^(NSMutableArray<FAPickerItem *> *items) {
+                            WithCompletion:^(NSMutableArray<FAPickerItem*> *items) {
                                 for (FAPickerItem* item in items) {
                                     NSLog(@"selected item = %@",item.title);
                                 }
@@ -206,7 +206,7 @@
                             HeaderTitle:@"Select multi items"
                       cancelButtonTitle:@"cancel"
                      confirmButtonTitle:@"confirm"
-                         WithCompletion:^(FAPickerItem *item) {
+                         WithCompletion:^(FAPickerItem*item) {
                              for (FAPickerItem* item in items) {
                                  NSLog(@"selected item = %@",item.title);
                              }
@@ -219,7 +219,7 @@
         case pickerViewTypeEnumItemsWithColors:
         {
             NSMutableArray <FAPickerItem*> *items = [NSMutableArray new];
-            FAPickerItem *item = [FAPickerItem new];
+            FAPickerItem*item = [FAPickerItem new];
             [items addObject:[[FAPickerItem alloc]initWithID:@"1" Title:@"Red" TitleColor:[UIColor redColor] ImageColor:[UIColor redColor] Circle:YES]];
             [items addObject:[[FAPickerItem alloc]initWithID:@"2" Title:@"Blue" TitleColor:[UIColor blueColor] ImageColor:[UIColor blueColor] Circle:YES]];
             [items addObject:[[FAPickerItem alloc]initWithID:@"3" Title:@"Green" TitleColor:[UIColor greenColor] ImageColor:[UIColor greenColor] Circle:NO]];
@@ -233,7 +233,7 @@
                   selectedItemWithTitle:@""
                                  filter:NO
                             HeaderTitle:@"Select item with color"
-                         WithCompletion:^(FAPickerItem *items) {
+                         WithCompletion:^(FAPickerItem*items) {
                              NSLog(@"selected item = %@",item.title);
                          } cancel:^{
                              NSLog(@"Cancel");
@@ -361,6 +361,7 @@
         {
             [FAPickerView setMainColor:[UIColor colorWithRed:0.99 green:0.49 blue:0.32 alpha:1.0]];
             [FAPickerView showWithCustomView:[self.storyboard instantiateViewControllerWithIdentifier:@"FACustomViewController"]
+                               BottomPadding:15
                                  headerTitle:@"Custom View"
                           confirmButtonTitle:@"Done"
                            cancelButtonTitle:@"Cancel"

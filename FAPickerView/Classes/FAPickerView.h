@@ -91,15 +91,15 @@ confirmButtonTitle:(NSString *)confirmButtonTitle;
 
 #pragma mark - block methods
 #pragma mark Items with single selctor
--(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
-        selectedItem:(FAPickerItem *)item
+-(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
+        selectedItem:(FAPickerItem*)item
               filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
    cancelButtonTitle:(NSString *)cancelButtonTitle
   confirmButtonTitle:(NSString *)confirmButtonTitle
       WithCompletion:(completedWithItem)complete cancel:(cancel)cancel;
 
--(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
+-(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
 selectedItemWithTitle:(NSString *)title
               filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
@@ -108,8 +108,8 @@ selectedItemWithTitle:(NSString *)title
       WithCompletion:(completedWithItem)complete cancel:(cancel)cancel;
 
 #pragma mark Items with multi selctor
--(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
-       selectedItems:(NSMutableArray<FAPickerItem *>*)selectedItems
+-(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
+       selectedItems:(NSMutableArray<FAPickerItem*>*)selectedItems
               filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
    cancelButtonTitle:(NSString *)cancelButtonTitle
@@ -117,13 +117,13 @@ selectedItemWithTitle:(NSString *)title
       WithCompletion:(completedWithItemsAtItems)complete cancel:(cancel)cancel;
 
 #pragma mark Items with single selctor Without footer
--(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
-        selectedItem:(FAPickerItem *)item
+-(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
+        selectedItem:(FAPickerItem*)item
               filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
       WithCompletion:(completedWithItem)complete cancel:(cancel)cancel;
 
--(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
+-(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
               filter:(BOOL)filter
 selectedItemWithTitle:(NSString *)title
          HeaderTitle:(NSString *)headerTitle
@@ -132,7 +132,7 @@ selectedItemWithTitle:(NSString *)title
     
 #pragma mark Sections with single selctor
 -(void)showWithSections:(NSMutableArray<FAPickerSection *>*)sections
-           selectedItem:(FAPickerItem *)item
+           selectedItem:(FAPickerItem*)item
             HeaderTitle:(NSString *)headerTitle
       cancelButtonTitle:(NSString *)cancelButtonTitle
      confirmButtonTitle:(NSString *)confirmButtonTitle
@@ -147,7 +147,7 @@ selectedItemWithTitle:(NSString *)title
 
 #pragma mark Sections with multi selctor
 -(void)showWithSections:(NSMutableArray<FAPickerSection *>*)sections
-          selectedItems:(NSMutableArray<FAPickerItem *>*)selectedItems
+          selectedItems:(NSMutableArray<FAPickerItem*>*)selectedItems
             HeaderTitle:(NSString *)headerTitle
       cancelButtonTitle:(NSString *)cancelButtonTitle
      confirmButtonTitle:(NSString *)confirmButtonTitle
@@ -155,7 +155,7 @@ selectedItemWithTitle:(NSString *)title
     
 #pragma mark Sections with single selctor Without footer
 -(void)showWithSections:(NSMutableArray<FAPickerSection *>*)sections
-           selectedItem:(FAPickerItem *)item
+           selectedItem:(FAPickerItem*)item
             HeaderTitle:(NSString *)headerTitle
          WithCompletion:(completedWithItem)complete cancel:(cancel)cancel;
     
@@ -252,6 +252,19 @@ CustomViewContainerHeight:(float)height
         cancelButtonTitle:(NSString *)cancelButtonTitle
            WithCompletion:(completedWithCustomView)complete;
 
+-(void)showWithCustomView:(UIViewController *)view
+            BottomPadding:(float)bottomPadding
+              headerTitle:(NSString *)headerTitle
+       confirmButtonTitle:(NSString *)confirmButtonTitle
+           WithCompletion:(completedWithCustomView)complete;
+
+-(void)showWithCustomView:(UIViewController *)view
+            BottomPadding:(float)bottomPadding
+              headerTitle:(NSString *)headerTitle
+       confirmButtonTitle:(NSString *)confirmButtonTitle
+        cancelButtonTitle:(NSString *)cancelButtonTitle
+           WithCompletion:(completedWithCustomView)complete;
+
 #pragma mark Custom Picker
 
 -(void)showWithCustomPickerView:(UIViewController *)view;
@@ -264,6 +277,13 @@ CustomViewContainerHeight:(float)height
 
 -(void)showWithCustomPickerView:(UIViewController *)view
       CustomViewContainerHeight:(float)height
+                  CancelGesture:(BOOL)cancelGesture;
+
+-(void)showWithCustomPickerView:(UIViewController *)view
+                  BottomPadding:(float)bottomPadding;
+
+-(void)showWithCustomPickerView:(UIViewController *)view
+                  BottomPadding:(float)bottomPadding
                   CancelGesture:(BOOL)cancelGesture;
 
 #pragma mark - Style
@@ -343,6 +363,7 @@ CustomViewContainerHeight:(float)height
 @property UIViewController *customView;
 @property (nonatomic) float customViewHeight;
 @property (nonatomic) float customContainerViewHeight;
+@property (nonatomic) float customViewBottomPadding;
 
 
 #pragma mark - block value

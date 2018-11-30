@@ -62,7 +62,9 @@ class FASwiftTableViewController: UITableViewController {
                                               filter: false,
                                               headerTitle: "Select one item",
                                               complete: { (item:FAPickerItem?) in
-                                                self.selectedItem = item ?? FAPickerItem()
+                                                if let item = item {
+                                                    self.selectedItem = item
+                                                }
             }, cancel: {
                 
             })
@@ -114,7 +116,9 @@ class FASwiftTableViewController: UITableViewController {
                                                           selectedItem: selectedItem,
                                                           headerTitle: "Select one item",
                                                           complete: { (item:FAPickerItem?) in
-                                                            self.selectedItem = item ?? FAPickerItem()
+                                                            if let item = item {
+                                                                self.selectedItem = item
+                                                            }
             }, cancel: {
                 
             })
@@ -343,11 +347,12 @@ class FASwiftTableViewController: UITableViewController {
             break
         case .customView:
             FAPickerView.setMainColor(UIColor.init(red: 0.99, green: 0.49, blue: 0.32, alpha: 1.00))
-            FAPickerView.showCustomContainerView(viewController: (self.storyboard?.instantiateViewController(withIdentifier: "FACustomViewController"))!,
-                                                 headerTitle: "Custom View",
-                                                 confirmTitle: "Done",
-                                                 cancelTitle: "Cancel") { (button:FAPickerCustomViewButton) in
-                                                    
+            FAPickerView.showCustomContainerViewWithBottomPadding(viewController: (self.storyboard?.instantiateViewController(withIdentifier: "FACustomViewController"))!,
+                                                                  bottomPadding: 15,
+                                                                  headerTitle: "Custom View",
+                                                                  confirmTitle: "Done",
+                                                                  cancelTitle: "Cancel") { (button:FAPickerCustomViewButton) in
+                                                                    
             }
             break
         case .customPicker:

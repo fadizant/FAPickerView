@@ -458,10 +458,11 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     CGRect newRect = CGRectApplyAffineTransform(self.frame, transform);
     CGRect tableRect;
     float heightOffset = FA_HEADER_HEIGHT + FA_FOOTER_HEIGHT;
-    float height = _customViewHeight + 10;
+    float bottomPadding = _customViewBottomPadding ? _customViewBottomPadding : 10;
+    float height = _customViewHeight + bottomPadding;
     height = height > newRect.size.height - heightOffset ? newRect.size.height -heightOffset : height;
     tableRect = CGRectMake(0, 44.0, newRect.size.width, height);
-    CGRect customRect = CGRectMake(0, 0, newRect.size.width, (height > getHeight + 10) ? height : (getHeight + 10)  ) ;
+    CGRect customRect = CGRectMake(0, 0, newRect.size.width, (height > getHeight + bottomPadding) ? height : (getHeight + bottomPadding)  ) ;
     
     UIView *view = [[UIView alloc]initWithFrame:tableRect];
     //    UIScrollView *view = [[UIScrollView alloc]initWithFrame:tableRect];
@@ -502,10 +503,11 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     CGRect newRect = CGRectApplyAffineTransform(self.frame, transform);
     CGRect tableRect;
     float heightOffset = 0;
-    float height = _customViewHeight + 10;
+    float bottomPadding = _customViewBottomPadding ? _customViewBottomPadding : 10;
+    float height = _customViewHeight + bottomPadding;
     height = height > newRect.size.height - heightOffset ? newRect.size.height -heightOffset : height;
     tableRect = CGRectMake(0, 0, newRect.size.width, height);
-    CGRect customRect = CGRectMake(0, 0, newRect.size.width, (height > getHeight + 10) ? height : (getHeight + 10));
+    CGRect customRect = CGRectMake(0, 0, newRect.size.width, (height > getHeight + bottomPadding) ? height : (getHeight + bottomPadding));
     
     UIView *view = [[UIView alloc]initWithFrame:tableRect];
     //    UIScrollView *view = [[UIScrollView alloc]initWithFrame:tableRect];
@@ -852,7 +854,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         _searchText = [NSMutableString stringWithString:textField.text];
         [_searchText replaceCharactersInRange:range withString:string];
         if (_searchText && ![_searchText isEqualToString:@""]) {
-            NSPredicate *firstNamePredicate = [NSPredicate predicateWithFormat:@"self.title beginswith[cd]%@",_searchText];
+            NSPredicate *firstNamePredicate = [NSPredicate predicateWithFormat:@"self.title CONTAINS[cd]%@",_searchText];
             
             self.filterItem = [[NSMutableArray alloc]initWithArray:[_items filteredArrayUsingPredicate:firstNamePredicate]];
         } else {
@@ -996,7 +998,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     
 - (void)setSelectedItems:(NSMutableArray <FAPickerItem*> *)items{
     if (_sections) {
-        for (FAPickerItem *item in items) {
+        for (FAPickerItem*item in items) {
             for (FAPickerSection *section in _sections) {
                 NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title == %@ AND Id == %@", item.title , item.Id];
                 NSArray *filteredArray = [section.items filteredArrayUsingPredicate:predicate];
@@ -1010,7 +1012,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
 
     }
     else {
-        for (FAPickerItem *item in items) {
+        for (FAPickerItem*item in items) {
             
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"title == %@ AND Id == %@", item.title , item.Id];
             NSArray *filteredArray = [_items filteredArrayUsingPredicate:predicate];
@@ -1119,7 +1121,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     BOOL isRTL = self.semanticContentAttribute == UISemanticContentAttributeForceRightToLeft ||
     [UIApplication sharedApplication].userInterfaceLayoutDirection == UIUserInterfaceLayoutDirectionRightToLeft;
     
-    FAPickerItem * item;
+    FAPickerItem* item;
     
     if (_filterItem) {
         item = [_filterItem objectAtIndex:indexPath.row];
@@ -1243,12 +1245,12 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         [_tableView reloadData];
     } else { //single selection mode
         if (_items) {
-            for (FAPickerItem *item in _items) {
+            for (FAPickerItem*item in _items) {
                 item.selected = NO;
             }
             
             if (_filterItem && _filterItem.count) {
-                for (FAPickerItem *item in _filterItem) {
+                for (FAPickerItem*item in _filterItem) {
                     item.selected = NO;
                 }
                 
@@ -1269,7 +1271,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         
         if (_sections) {
             for (FAPickerSection *section in _sections) {
-                for (FAPickerItem *item in section.items) {
+                for (FAPickerItem*item in section.items) {
                     item.selected = NO;
                 }
             }
@@ -1351,8 +1353,8 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
     
 #pragma mark - Block
 #pragma mark Items with single selctor
--(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
-        selectedItem:(FAPickerItem *)item
+-(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
+        selectedItem:(FAPickerItem*)item
               filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
    cancelButtonTitle:(NSString *)cancelButtonTitle
@@ -1374,7 +1376,7 @@ confirmButtonTitle:(NSString *)confirmButtonTitle{
         [self show];
     }
     
--(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
+-(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
 selectedItemWithTitle:(NSString *)title
               filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
@@ -1398,8 +1400,8 @@ selectedItemWithTitle:(NSString *)title
     }
     
 #pragma mark Items with multi selctor
--(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
-       selectedItems:(NSMutableArray<FAPickerItem *>*)selectedItems
+-(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
+       selectedItems:(NSMutableArray<FAPickerItem*>*)selectedItems
               filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
    cancelButtonTitle:(NSString *)cancelButtonTitle
@@ -1423,8 +1425,8 @@ selectedItemWithTitle:(NSString *)title
     }
     
 #pragma mark Items with single selctor Without footer
--(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
-        selectedItem:(FAPickerItem *)item
+-(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
+        selectedItem:(FAPickerItem*)item
               filter:(BOOL)filter
          HeaderTitle:(NSString *)headerTitle
       WithCompletion:(completedWithItem)complete cancel:(cancel)cancel
@@ -1443,7 +1445,7 @@ selectedItemWithTitle:(NSString *)title
         [self show];
     }
     
--(void)showWithItems:(NSMutableArray<FAPickerItem *>*)items
+-(void)showWithItems:(NSMutableArray<FAPickerItem*>*)items
               filter:(BOOL)filter
 selectedItemWithTitle:(NSString *)title
          HeaderTitle:(NSString *)headerTitle
@@ -1470,7 +1472,7 @@ selectedItemWithTitle:(NSString *)title
     
 #pragma mark Sections with single selctor
 -(void)showWithSections:(NSMutableArray<FAPickerSection *>*)sections
-        selectedItem:(FAPickerItem *)item
+        selectedItem:(FAPickerItem*)item
          HeaderTitle:(NSString *)headerTitle
    cancelButtonTitle:(NSString *)cancelButtonTitle
   confirmButtonTitle:(NSString *)confirmButtonTitle
@@ -1515,7 +1517,7 @@ selectedItemWithTitle:(NSString *)title
 
 #pragma mark Sections with multi selctor
 -(void)showWithSections:(NSMutableArray<FAPickerSection *>*)sections
-       selectedItems:(NSMutableArray<FAPickerItem *>*)selectedItems
+       selectedItems:(NSMutableArray<FAPickerItem*>*)selectedItems
          HeaderTitle:(NSString *)headerTitle
    cancelButtonTitle:(NSString *)cancelButtonTitle
   confirmButtonTitle:(NSString *)confirmButtonTitle
@@ -1539,7 +1541,7 @@ selectedItemWithTitle:(NSString *)title
 
 #pragma mark Sections with single selctor Without footer
 -(void)showWithSections:(NSMutableArray<FAPickerSection *>*)sections
-        selectedItem:(FAPickerItem *)item
+        selectedItem:(FAPickerItem*)item
          HeaderTitle:(NSString *)headerTitle
       WithCompletion:(completedWithItem)complete cancel:(cancel)cancel
     {
@@ -1815,7 +1817,44 @@ CustomViewContainerHeight:(float)height
     _completedWithCustomView = complete;
     [self show];
 }
-    
+
+-(void)showWithCustomView:(UIViewController *)view
+            BottomPadding:(float)bottomPadding
+              headerTitle:(NSString *)headerTitle
+       confirmButtonTitle:(NSString *)confirmButtonTitle
+           WithCompletion:(completedWithCustomView)complete{
+    [self initViewWithType:FAPickerTypeCustomView
+               HeaderTitle:headerTitle
+         cancelButtonTitle:@""
+        confirmButtonTitle:confirmButtonTitle];
+    _customView = view;
+    _customViewHeight = 0;
+    _needFooterView = YES;
+    _Filter = NO;
+    _completedWithCustomView = complete;
+    _customViewBottomPadding = bottomPadding;
+    [self show];
+}
+
+-(void)showWithCustomView:(UIViewController *)view
+            BottomPadding:(float)bottomPadding
+              headerTitle:(NSString *)headerTitle
+       confirmButtonTitle:(NSString *)confirmButtonTitle
+        cancelButtonTitle:(NSString *)cancelButtonTitle
+           WithCompletion:(completedWithCustomView)complete{
+    [self initViewWithType:FAPickerTypeCustomView
+               HeaderTitle:headerTitle
+         cancelButtonTitle:cancelButtonTitle
+        confirmButtonTitle:confirmButtonTitle];
+    _customView = view;
+    _customViewHeight = 0;
+    _needFooterView = YES;
+    _Filter = NO;
+    _completedWithCustomView = complete;
+    _customViewBottomPadding = bottomPadding;
+    [self show];
+}
+
 #pragma mark Custom Picker
     
 -(void)showWithCustomPickerView:(UIViewController *)view{
@@ -1873,6 +1912,35 @@ CustomViewContainerHeight:(float)height
     _tapBackgroundToDismiss = cancelGesture;
     [self show];
 }
+
+-(void)showWithCustomPickerView:(UIViewController *)view
+                  BottomPadding:(float)bottomPadding{
+    [self initViewWithType:FAPickerTypeCustomPicker
+               HeaderTitle:@""
+         cancelButtonTitle:@""
+        confirmButtonTitle:@""];
+    _customView = view;
+    _needFooterView = NO;
+    _Filter = NO;
+    _customViewBottomPadding = bottomPadding;
+    [self show];
+}
+
+-(void)showWithCustomPickerView:(UIViewController *)view
+                  BottomPadding:(float)bottomPadding
+                  CancelGesture:(BOOL)cancelGesture{
+    [self initViewWithType:FAPickerTypeCustomPicker
+               HeaderTitle:@""
+         cancelButtonTitle:@""
+        confirmButtonTitle:@""];
+    _customView = view;
+    _needFooterView = NO;
+    _Filter = NO;
+    _tapBackgroundToDismiss = cancelGesture;
+    _customViewBottomPadding = bottomPadding;
+    [self show];
+}
+
     
 #pragma mark init View
     
